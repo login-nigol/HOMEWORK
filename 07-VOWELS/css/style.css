@@ -3,3 +3,7 @@ body {
   text-align: center;
   font-family: Courier, monospace;
 }
+
+a {
+  text-decoration: none;
+}
