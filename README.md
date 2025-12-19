@@ -1,4 +1,4 @@
-#### 🚀 Homework Projects
+#### Homework Projects
 
 Учебные проекты по фронтенд-разработке. Практическое применение JavaScript, HTML и CSS.
 
