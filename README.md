@@ -7,6 +7,7 @@
 3 - <a href="https://login-nigol.github.io/HOMEWORK/07-VOWELS/">07-VOWELS</a><br>
 4 - <a href="https://login-nigol.github.io/HOMEWORK/10-MOOD/">10-MOOD</a><br>
 5 - <a href="https://login-nigol.github.io/HOMEWORK/13-DRINKS_OBJ_FUNK/">13-DRINKS_OBJ_FUNK</a><br>
+6 - <a href="https://github.com/login-nigol/HOMEWORK/blob/master/14-DRINKS_OBJ_CLASS/js/script.js">14-DRINKS_OBJ_CLASS</a><br>
 
 Цели:
 - Закрепление теории на практике
