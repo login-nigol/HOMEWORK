@@ -5,14 +5,17 @@ body {
 }
 
 .container {
-  display: inline-block;
+  /* display: inline-block; */
+  width: 40em;
+  margin: 0 auto;
 
   /* border: dotted 1px red; */
 }
 
 button {
   display: block;
-  width: 30em;
+  margin: 0 auto;
+  width: 20em;
   padding: 1em;
   margin-bottom: 1em;
 
