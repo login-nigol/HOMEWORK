@@ -6,11 +6,13 @@ body {
 
 .container {
   display: inline-block;
+
+  /* border: dotted 1px red; */
 }
 
 button {
   display: block;
-  width: 20em;
+  width: 30em;
   padding: 1em;
   margin-bottom: 1em;
 
@@ -50,4 +52,8 @@ button {
 #drinksList {
   padding-left: 20px;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
