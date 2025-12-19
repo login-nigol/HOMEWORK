@@ -6,6 +6,7 @@
 2 - <a href="https://login-nigol.github.io/HOMEWORK/05-TREESUM/">05-TREESUM</a><br>
 3 - <a href="https://login-nigol.github.io/HOMEWORK/07-VOWELS/">07-VOWELS</a><br>
 4 - <a href="https://login-nigol.github.io/HOMEWORK/10-MOOD/">10-MOOD</a><br>
+5 - <a href="https://login-nigol.github.io/HOMEWORK/13-DRINKS_OBJ_FUNK/">13-DRINKS_OBJ_FUNK</a><br>
 
 Цели:
 - Закрепление теории на практике
