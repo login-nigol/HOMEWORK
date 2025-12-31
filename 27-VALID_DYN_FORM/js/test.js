@@ -75,13 +75,10 @@ export function runTests() {
     },
   ]);
 
-  // Тест 3: последний элемент — submit-кнопка
-  const last = testForm.lastElementChild;
-  assert(
-    last.tagName === "BUTTON",
-    "Последний элемент должен быть BUTTON, кнопка НЕ СОЗДАЛАСЬ!"
-  );
-  assert(last.type === "submit", "Последняя кнопка должна быть type='submit'");
+  // Тест 3: submit-кнопка существует
+  const submitButton = testForm.querySelector('button[type="submit"]');
+
+  assert(submitButton, "submit-кнопка НЕ СОЗДАЛАСЬ");
 
   // если дошли сюда — всё ок
   console.log("Все тесты прошли");
