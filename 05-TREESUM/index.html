@@ -1,0 +1,100 @@
+<!--
+Автор: Вадим Антипов
+Дата: 03.12.2025
+Проект: TREE SUM - рекурсивная сумма массива
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TREE SUM - Рекурсивная сумма массива</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Шапка -->
+      <header class="header">
+        <h1>🌳 Домашнее задание #5</h1>
+        <p class="subtitle">Рекурсивная функция <strong>treeSum</strong></p>
+      </header>
+
+      <!-- Основной контент -->
+      <main class="main">
+        <!-- Левая колонка - задание -->
+        <section class="task">
+          <h2>📝 Задание</h2>
+          <div class="task-content">
+            <p>
+              Разработать «чистую» функцию <code>treeSum</code>, которая
+              получает массив, элементы которого могут быть числами или снова
+              массивами, и так до любого уровня.
+            </p>
+            <p>
+              Функция должна рассчитать и вернуть сумму всех числовых элементов
+              массива со всех уровней, используя <strong>рекурсию</strong>.
+            </p>
+            <p>
+              <strong>Требование:</strong> не описывать внутри функции
+              каких-либо вложенных функций.
+            </p>
+
+            <div class="repo-link">
+              <p><strong>🔗 Репозиторий проекта:</strong></p>
+              <a
+                href="https://github.com/login-nigol/HOMEWORK/blob/master/05-TREESUM/js/script.js"
+                target="treeSum"                
+              >
+                05-TREESUM
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Правая колонка - выполнение -->
+        <section class="execution">
+          <h2>⚡ Выполнение</h2>
+
+          <!-- Блок с кодом -->
+          <div class="code-block">
+            <h3>📜 Код функции:</h3>
+            <pre><code>function treeSum(arr) {
+  let sum = 0;
+
+  for (let s = 0; s < arr.length; s++) {
+    let element = arr[s];
+
+    if (Array.isArray(element)) {
+      sum = sum + treeSum(element);
+    } else if (typeof element === "number") {
+      sum = sum + element;
+    }
+  }
+  return sum;
+}</code></pre>
+          </div>
+
+          <!-- Результаты тестирования -->
+          <div class="test-results">
+            <h3>🧪 Результаты тестирования:</h3>
+            <div id="results">
+              <!-- Результаты появятся здесь -->
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Подвал -->
+      <footer class="footer">
+        <p>JavaScript • Рекурсия • Функции • Массивы</p>
+        <p class="footer-note">© 2025 | Проект TREE SUM</p>
+      </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

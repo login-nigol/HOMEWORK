@@ -1,0 +1,62 @@
+/*  */
+body {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.container {
+  /* display: inline-block; */
+  width: 40em;
+  margin: 0 auto;
+
+  /* border: dotted 1px red; */
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: 20em;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  /* border: dotted 1px red; */
+}
+
+.info {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  display: none;
+}
+
+#drinkInfo {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.show {
+  display: block !important;
+}
+
+.ollDrinks {
+  display: none;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+.ollDrinks h3 {
+  margin-top: 0;
+}
+
+#drinksList {
+  padding-left: 20px;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

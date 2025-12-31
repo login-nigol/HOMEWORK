@@ -1,0 +1,61 @@
+<!--
+Автор: Вадим Антипов
+Дата: 21.12.25
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1"
+    />
+    <title>DYN_FORM</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <h2>Динамические формы</h2>
+      <p>
+        <b>Проект DYN_FORM:</b> Генерация форм из JavaScript-массивов.<br />
+        Форма 1 — данные сайта, форма 2 — регистрация.
+      </p>
+
+      <div class="buttons">
+        <button id="createForm1">Создать форму 1</button>
+        <button id="createForm2">Создать форму 2</button>
+      </div>
+
+      <a
+        href="https://github.com/login-nigol/HOMEWORK/tree/master/23-DYN_FORM"
+        target="_blank"
+        >Репозиторий проекта</a
+      ><br />
+      <div class="test-button">
+        <button onclick="runTests()">Запустить авто-тесты</button>
+        <script type="module">
+          import { runTests } from "./js/test.js";
+          window.runTests = runTests; // делаем функцию глобальной для кнопки
+        </script>
+      </div>
+    </header>
+
+    <!-- <div id="form"></div> -->
+    <form
+      id="form"
+      action="https://fe.it-academy.by/TestForm.php"
+      method="post"
+      target="_blank"
+    >
+      <!-- поля будут вставлены скриптом -->
+    </form>
+
+    <dialog id="modal">
+      <p>Функция ещё в разработке!</p>
+      <button id="closeModal">Закрыть</button>
+    </dialog>
+
+    <script type="module" src="js/test.js"></script>
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>

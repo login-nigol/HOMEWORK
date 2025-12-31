@@ -1,0 +1,292 @@
+/* RESET ==================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Courier New", Courier, monospace;
+
+  /* outline: solid 1px red; */
+  /* ========================================= */
+}
+
+/* MAIN STYLES =============================== */
+
+header {
+  text-align: center;
+  padding: 0.5em 2em;
+  background: #f0f0f0;
+  color: #424242;
+  margin-bottom: 5em;
+
+  outline: solid 2px #ccc;
+}
+header p {
+  margin-bottom: 1em;
+}
+header a {
+  text-decoration: none;
+  color: #2023f294;
+  font-weight: bold;
+}
+.mobile-form-title {
+  display: none;
+}
+.test-link {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5em;
+}
+
+/* окно всей формы =========================== */
+.page {
+  max-width: 800px;
+  margin: 0em auto;
+  padding: 1.5em;
+  background: #f0f0f0;
+  border-radius: 0.5em;
+
+  /* border: dotted 2px green; */
+}
+
+/* кнопки ==================================== */
+button {
+  padding: 0.3em 1em;
+  border-radius: 0.5em;
+  font-weight: bold;
+  color: #424242;
+  cursor: pointer;
+}
+
+/* FORM: поля формы ========================== */
+.form-row {
+  display: grid;
+  grid-template-columns: 13em 1fr;
+  /* grid-template-columns: 13em (0, 1fr);  */
+  margin-bottom: 0.5em;
+
+  /* border: dotted 1px blue; */
+}
+
+/* обёртка вокруг контрола + иконки ошибки === */
+.input-wrap {
+  position: relative; /* якорь для INSIDE */
+}
+/* общие стили для input и textarea */
+.input-wrap input,
+.input-wrap textarea {
+  width: 100%;
+  padding: 0.3em;
+}
+/* textarea — только специфичное */
+.input-wrap textarea {
+  min-height: 6em;
+  resize: none;
+}
+/* ограничиваем ширину некоторых полей (вместе с ошибкой) */
+.form-row-url .input-wrap,
+.form-row-email .input-wrap {
+  width: 100%;
+  max-width: 20em;
+}
+/* поле DATE уже */
+.form-row-date .input-wrap {
+  max-width: 7em;
+}
+.form-row-date input {
+  padding-right: 0.3em;
+}
+/* поле VISITORS уже */
+.form-row-visitors .input-wrap {
+  max-width: 5em;
+}
+
+/* значок ошибки: только внешний вид, без позиционирования */
+.form-error {
+  width: 1em;
+  height: 1em;
+  background: #ccc;
+  border-radius: 50%;
+
+  color: red;
+  /* font-size: 1.1em; */
+  /* вертикальный центр рамки(круга) */
+  line-height: 1.1em;
+  font-weight: bolder;
+  text-align: center;
+
+  cursor: help;
+  /*  появится при ошибке - показываем из JS */
+  display: none;
+  /* значок ошибки не сжимается в flex-контейнере */
+  flex-shrink: 0;
+}
+/* текст справа от занчка */
+.form-error::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.5em); /* OUTSIDE: текст справа */
+  transform: translateY(-50%);
+
+  font-size: 0.7em;
+  color: red;
+  white-space: nowrap;
+
+  opacity: 1; /* всегда видно */
+  pointer-events: none; /* не мешает клику */
+  line-height: normal; /* <-- КЛЮЧ */
+}
+.form-row--error-inside .form-error {
+  position: absolute;
+  top: 50%;
+  right: 0.3em; /* внутри поля справа */
+  transform: translateY(-50%);
+}
+/* текст слева от значка */
+.form-row--error-inside .form-error::after {
+  left: auto;
+  right: 3em;
+}
+/* OUTSIDE: значок справа от поля (в потоке) */
+.form-row--error-outside .input-wrap {
+  display: flex; /* поле + значок в одну линию */
+  align-items: center;
+  gap: 0.5em; /* расстояние от поля до значка */
+}
+/* якорь для ::after (позиционирование текста относительно значка) */
+.form-row--error-outside .form-error {
+  position: relative;
+}
+
+/* SPECIAL FIELDS ============================ */
+
+/* select: компактнее паддинг */
+.form-row-catalog select {
+  padding: 0.27em;
+  cursor: pointer;
+}
+
+/* радио-группа */
+.form-row-radio .input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.radio-group input[type="radio"] {
+  width: auto; /* переопределяем общее width:100% */
+  transform: scale(1.2); /* чуть крупнее */
+  cursor: pointer;
+}
+
+/* checkbox */
+.form-row-checkbox .input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  /* чтобы grid не растягивал */
+  width: fit-content;
+}
+.form-row-checkbox .input-wrap input[type="checkbox"] {
+  width: auto; /* переопределяем общее width:100% */
+  transform: scale(1.2); /* крупнее "птичка" */
+  cursor: pointer;
+}
+
+/* textarea: строка в одну колонку, label снизу (если так задумано) */
+.form-row-textarea {
+  grid-template-columns: 1fr;
+}
+.form-row-textarea .input-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative; /* якорь для INSIDE-ошибки */
+}
+/* само поле textarea */
+.form-row-textarea textarea {
+  width: 100%;
+  min-height: 6em;
+  resize: none;
+}
+/* значок ошибки внутри textarea, у нижнего края */
+.form-row-textarea.form-row--error-inside .form-error {
+  position: absolute;
+  top: auto; /* не по центру */
+  bottom: 0.4em; /* прижимаем к низу textarea */
+  right: 0.3em; /* справа внутри поля */
+  transform: none;
+}
+
+/* текст ошибки рядом со значком, тоже внизу */
+.form-row-textarea.form-row--error-inside .form-error::after {
+  top: auto;
+  bottom: 0; /* на уровне значка */
+  transform: none;
+}
+
+/* MOBILE ==================================== */
+/* базовый вариант: label над полем */
+@media (max-width: 700px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  header{
+    margin-bottom: 0.4em;
+
+  }
+
+  header h2,
+  header p,
+  header .buttons,
+  header .test-link {
+    display: none;
+  }
+
+  /* показываем короткий заголовок */
+  header .mobile-form-title {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    color: #424242;
+  }
+
+  body {
+    /* font-size: 1.1em; */
+  }
+
+  .form-row label {
+    margin-bottom: 0.4em; /* мягкий вертикальный отступ */
+  }
+
+  .radio-group {
+    display: grid;
+    grid-template-columns: auto 1fr; /* radio | текст */
+    column-gap: 0.5em;
+    row-gap: 0.6em;
+    align-items: center;
+  }
+  .radio-group input[type="radio"] {
+    transform: scale(1.6); /* увеличиваем */
+  }
+
+  .form-row-checkbox input[type="checkbox"] {
+    zoom: 1.4;
+  }
+
+  button {
+  padding: 0.8em 1.4em;
+  /* font-size: 1.1em; */
+
+  display: block;
+  margin: 0 auto;      /* центрируем */
+  margin-top: 2em;
+}
+}

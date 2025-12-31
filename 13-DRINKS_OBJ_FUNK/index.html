@@ -1,0 +1,51 @@
+<!--
+Автор: Вадим Антипов
+Дата: 19.12.25
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1"
+    />
+    <title>DRINKS_OBJ_FUNK</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+  <body>
+    <h1>Бар</h1>
+
+    <div class="container">
+      <button id="addBtn">Ввод информации о напитке</button>
+      <button id="getBtn">Получение информации о напитке</button>
+      <button id="deleteBtn">Удаление информации о напитке</button>
+      <button id="allBtn">Перечень всех напитков</button>
+
+      <a
+        href="https://github.com/login-nigol/HOMEWORK/blob/master/13-DRINKS_OBJ_FUNK/js/script.js"
+        target="repo"
+        >Репозиторий</a
+      ><br><br>
+      <a
+        href="https://github.com/login-nigol/HOMEWORK/blob/master/14-DRINKS_OBJ_CLASS/js/script.js"
+        target="repo"
+        >N.14 Класс ObjStorageClass в ES6-стиле</a
+      >
+    </div>
+
+    <div id="drinkInfo" class="info">
+      <h3>Информация о напитке:</h3>
+      <p><strong>Название:</strong> <span id="infoName"></span></p>
+      <p><strong>Алкогольный:</strong> <span id="infoAlco"></span></p>
+      <p><strong>Рецепт:</strong> <span id="infoRecipe"></span></p>
+    </div>
+
+    <div id="allDrinksList" class="ollDrinks">
+      <h3>Перечень всех напитков:</h3>
+      <ul id="drinksList"></ul>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!--
+Автор: Вадим Антипов
+Дата: 05.12.2025
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title></title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="button">
+        <h1>🔍 Проверка палиндрома</h1>
+        <button id="checkBtn">Проверить фразу</button>
+      </div>
+      <div class="task-container">
+        <h2>Задание:</h2>
+        <p>
+          Написать чистую функцию, проверяющую, что переданная ей фраза является
+          палиндромом, с использованием рекурсии.
+        </p>
+        <p>
+          Не надо строку очищать от игнорируемых символов с помощью рекурсии,
+          рекурсию нужно применять только при проверке, является ли очищенная
+          строка палиндромом!
+        </p>
+        <p>
+          При проверке игнорируются: регистр, пробелы, знаки препинания, ъ/ь,
+          разница между "е" и "ё".
+        </p>
+      </div>
+      <div class="content">
+        <div class="code">
+          <pre><code>              
+    function cleanPhrase(phrase) {
+        return phrase
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+        .replace(/[ъь\s\p{P}\p{Z}]/gu, '');
+    }
+    
+    function isPalindromeRecursive(str) {
+        if (str.length <= 1) return true;
+        return str[0] === str[str.length - 1] && 
+        isPalindromeRecursive(str.slice(1, -1));
+    }
+
+    function checkPalindrome(phrase) {
+    const cleaned = cleanPhrase(phrase);
+    return isPalindromeRecursive(cleaned);
+    }
+            </code></pre>
+        </div>
+        <div class="explanation">
+          <h3>Как это работает:</h3>
+          <ol>
+            <li>
+              <strong>cleanPhrase()</strong> - очищает строку от лишних символов
+            </li>
+            <li>
+              <strong>isPalindromeRecursive()</strong> - рекурсивно сравнивает
+              символы
+            </li>
+            <li><strong>checkPalindrome()</strong> - объединяет обе функции</li>
+          </ol>
+          <p>
+            Рекурсия работает по принципу: сравниваем первый и последний символ,
+            затем убираем их и проверяем оставшуюся строку.
+          </p>
+          <a
+            href="https://github.com/login-nigol/HOMEWORK/blob/master/05-TREESUM/A4-Recursion/js/script.js"
+            target="a4"
+            >Репозиторий проекта</a
+          >
+        </div>
+      </div>
+      <!-- <div id="result" class="result"></div> -->
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

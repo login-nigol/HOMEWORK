@@ -1,0 +1,157 @@
+/*  */
+header {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  padding-bottom: 1em;
+  border-bottom: dotted 0.3em gray;
+
+  /* border: dotted 1px red; */
+}
+
+.buttons {
+  margin-bottom: 1em;
+}
+
+.buttons button {
+  margin: 0 0.5em;
+  padding: 0.3em 0.8em;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+}
+
+a:active {
+  color: green;
+}
+
+#form {
+  display: none;
+  max-width: 40em;
+  margin: 6em auto;
+  padding: 1em;
+  background: #f0f0f0;
+  border-radius: 1em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  /* border: dotted 1px red; */
+}
+
+.form-row:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.form-row {
+  white-space: nowrap;
+  margin-bottom: 0.5em;
+}
+
+label {
+  display: inline-block;
+  width: 10em;
+  text-align: left;
+  padding-right: 1em;
+  vertical-align: middle;
+}
+
+input[type="text"] {
+  width: 20em;
+  padding: 0.3em;
+}
+
+input[type="number"] {
+  width: 5em;
+  padding: 0.3em;
+  text-align: center;
+}
+
+select {
+  padding: 0.3em;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+}
+
+.radio-group {
+  display: inline-flex;
+
+  /* border: dotted 1px red; */
+}
+
+.radio-option {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.7em;
+
+  /* border: dotted 1px red; */
+}
+
+.radio-option label {
+  width: auto;
+  margin-left: 0.3em;
+}
+
+input[type="checkbox"] {
+  /* выравниваем по центру относительно текста */
+  vertical-align: middle;
+}
+
+.form-row label[for="description"] {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.form-row textarea {
+  width: 95%;
+  display: block;
+  margin: 0 auto 0 auto;
+  padding: 0.5em;
+}
+
+input[type="submit"] {
+  margin-top: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em 1.5em;
+  background: #c9c9c9;
+  border: none;
+  border-radius: 0.5em;
+
+  /* border:  dotted 1px red; */
+}
+
+input[type="submit"]:active {
+  background: green;
+  color: white;
+  border-radius: 0.5em;
+}
+
+dialog {
+  border: none;
+  border-radius: 1em;
+  padding: 1em 2em;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.3em;
+  }
+}

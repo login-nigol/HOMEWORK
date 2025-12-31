@@ -1,0 +1,60 @@
+<!--
+Автор: Вадим Антипов
+Дата: 28.12.2025
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1"
+    />
+    <title>VALID-DYN-FORM</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <h2>Динамическая валидированная форма</h2>
+      <p>
+        <strong>Проект VALID_FORM:</strong> форма с динамической генерацией и
+        валидацией
+      </p>
+
+      <div class="mobile-form-title">Заполните пожалуйста форму</div>
+
+      <div class="buttons">
+        <button id="createForm">Создать форму</button>
+      </div>
+
+      <div class="test-link">
+        <a
+          href="https://github.com/login-nigol/HOMEWORK/tree/master/23-DYN_FORM"
+          target="git"
+          >Репозиторий проекта</a
+        >
+        <div class="test-button">
+          <button onclick="runTests()">Запустить авто-тесты</button>
+          <script type="module">
+            import { runTests } from "./js/test.js";
+            window.runTests = runTests; // делаем функцию глобальной для кнопки
+          </script>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <form
+        id="catalogForm"
+        action="https://fe.it-academy.by/TestForm.php"
+        method="post"
+        target="form"
+      ></form>
+    </main>
+
+    <script src="js/validator.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/creator.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
