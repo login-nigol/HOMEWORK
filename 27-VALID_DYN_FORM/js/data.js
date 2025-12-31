@@ -35,5 +35,5 @@ const formDef = [
   { type: "checkbox", name: "reviews", label: "Разрешить отзывы:" },
   { type: "textarea", name: "description", label: "Описание сайта:" },
 
-  { type: "submit", text: "Отправить" },
+  // { type: "submit", text: "Отправить" },
 ];

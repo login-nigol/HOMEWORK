@@ -8,13 +8,15 @@
 4 - <a href="https://login-nigol.github.io/HOMEWORK/10-MOOD/">10-MOOD</a><br>
 5 - <a href="https://login-nigol.github.io/HOMEWORK/13-DRINKS_OBJ_FUNK/">13-DRINKS_OBJ_FUNK</a><br>
 6 - <a href="https://login-nigol.github.io/HOMEWORK/14-DRINKS_OBJ_CLASS/">14-DRINKS_OBJ_CLASS</a><br>
-7 - 17-VOWELS_ARR    В процессе!<br>
-8 - 20-ROOTS    В процессе!<br>
+7 - 17-VOWELS_ARR В процессе!<br>
+8 - 20-ROOTS В процессе!<br>
 9 - <a href="https://login-nigol.github.io/HOMEWORK/23-DYN_FORM/">23-DYN_FORM</a><br>
+10 - <a href="https://login-nigol.github.io/HOMEWORK/27-VALID-DYN_FORM/">27-VALID_DYN_FORM</a><br>
 
 Цели:
+
 - Закрепление теории на практике
 - Развитие навыков чистого кода
 - Освоение современных подходов
-  
-*Обучение через практику!* ✨
+
+_Обучение через практику!_ ✨

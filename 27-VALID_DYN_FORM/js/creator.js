@@ -1,14 +1,15 @@
 // creator
-const fieldDev = formDef[0]; // первое поле: developers
-const fieldSiteTitle = formDef[1];
-const fieldUrl = formDef[2];
-const fieldDate = formDef[3];
-const fieldVisitors = formDef[4];
-const fieldEmail = formDef[5];
-const fieldCatalog = formDef[6];
-const fieldPlacement = formDef[7];
-const fieldReviews = formDef[8];
-const fieldDescription = formDef[9]; // описание сайта
+// первое поле: developers
+// const fieldDev = formDef[0];
+// const fieldSiteTitle = formDef[1];
+// const fieldUrl = formDef[2];
+// const fieldDate = formDef[3];
+// const fieldVisitors = formDef[4];
+// const fieldEmail = formDef[5];
+// const fieldCatalog = formDef[6];
+// const fieldPlacement = formDef[7];
+// const fieldReviews = formDef[8];
+// const fieldDescription = formDef[9];
 
 function createFormRow(field) {
   // создаём форму - form-row
@@ -20,7 +21,13 @@ function createFormRow(field) {
   label.textContent = field.label;
 
   // режим вывода ошибки
-  const insideErrorNames = ["developers", "siteName", "siteUrl", "email", "description"];
+  const insideErrorNames = [
+    "developers",
+    "siteName",
+    "siteUrl",
+    "email",
+    "description",
+  ];
   // inside — значок внутри поля (absolute)
   if (insideErrorNames.includes(field.name)) {
     row.classList.add("form-row--error-inside");
@@ -147,18 +154,43 @@ submit.type = "submit";
 submit.textContent = "Опубликовать";
 
 function buildForm(form) {
-  form.append(
-    createFormRow(fieldDev),
-    createFormRow(fieldSiteTitle),
-    createFormRow(fieldUrl),
-    createFormRow(fieldDate),
-    createFormRow(fieldVisitors),
-    createFormRow(fieldEmail),
-    createFormRow(fieldCatalog),
-    createFormRow(fieldPlacement),
-    createFormRow(fieldReviews),
-    createFormRow(fieldDescription),
+  // генерируем поля формы из data.js
+  formDef.forEach((field) => {
+    form.append(createFormRow(field));
+  });
 
-    submit
-  );
+  // контейнер для кнопок
+  const actions = document.createElement("div");
+  actions.className = "form-actions";
+
+  // кнопка отправки формы
+  const submit = document.createElement("button");
+  submit.type = "submit";
+  submit.textContent = "Опубликовать";
+
+  // reset
+  const reset = document.createElement("button");
+  reset.type = "reset";
+  reset.textContent = "Очистить форму";
+
+  // добавляем кнопки в контейнер
+  actions.append(submit, reset);
+
+  // добавляем контейнер в форму
+  form.append(actions);
 }
+
+// form.append(
+//   createFormRow(fieldDev),
+//   createFormRow(fieldSiteTitle),
+//   createFormRow(fieldUrl),
+//   createFormRow(fieldDate),
+//   createFormRow(fieldVisitors),
+//   createFormRow(fieldEmail),
+//   createFormRow(fieldCatalog),
+//   createFormRow(fieldPlacement),
+//   createFormRow(fieldReviews),
+//   createFormRow(fieldDescription),
+
+// submit
+// );

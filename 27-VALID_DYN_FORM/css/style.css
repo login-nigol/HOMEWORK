@@ -39,6 +39,11 @@ header a {
   margin-top: 0.5em;
 }
 
+/* utils */
+.is-hidden {
+  display: none;
+}
+
 /* окно всей формы =========================== */
 .page {
   max-width: 800px;
@@ -57,6 +62,12 @@ button {
   font-weight: bold;
   color: #424242;
   cursor: pointer;
+}
+
+/* form actions */
+.form-actions {
+  display: flex;
+  gap: 12px; /* отступ между кнопками */
 }
 
 /* FORM: поля формы ========================== */
@@ -238,9 +249,8 @@ button {
     grid-template-columns: 1fr;
   }
 
-  header{
+  header {
     margin-bottom: 0.4em;
-
   }
 
   header h2,
@@ -256,10 +266,6 @@ button {
     font-weight: bold;
     text-align: center;
     color: #424242;
-  }
-
-  body {
-    /* font-size: 1.1em; */
   }
 
   .form-row label {
@@ -282,11 +288,11 @@ button {
   }
 
   button {
-  padding: 0.8em 1.4em;
-  /* font-size: 1.1em; */
+    padding: 0.8em 1.4em;
+    /* font-size: 1.1em; */
 
-  display: block;
-  margin: 0 auto;      /* центрируем */
-  margin-top: 2em;
-}
+    display: block;
+    margin: 0 auto; /* центрируем */
+    margin-top: 2em;
+  }
 }
