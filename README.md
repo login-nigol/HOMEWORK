@@ -11,7 +11,7 @@
 7 - 17-VOWELS_ARR В процессе!<br>
 8 - 20-ROOTS В процессе!<br>
 9 - <a href="https://login-nigol.github.io/HOMEWORK/23-DYN_FORM/">23-DYN_FORM</a><br>
-10 - <a href="https://login-nigol.github.io/HOMEWORK/27-VALID-DYN_FORM/">27-VALID_DYN_FORM</a><br>
+10 - <a href="https://login-nigol.github.io/HOMEWORK/27-VALID_DYN_FORM/">27-VALID_DYN_FORM</a><br>
 
 Цели:
 
