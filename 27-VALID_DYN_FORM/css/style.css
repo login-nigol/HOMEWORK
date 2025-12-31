@@ -255,7 +255,7 @@ button {
 
   header h2,
   header p,
-  header .buttons,
+  /* header .buttons, */
   header .test-link {
     display: none;
   }
