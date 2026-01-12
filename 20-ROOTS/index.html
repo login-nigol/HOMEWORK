@@ -1,0 +1,53 @@
+<!--
+Автор: Вадим Антипов
+Дата: 12.01.2026
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1">
+    <title>ROOTS</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <header>
+        <h2>N.20 Домашнее задание ROOTS</h2>
+        <p>
+            Найти ошибку в функции нахождения корней квадратного уравнения
+        </p>
+    </header>
+
+    <main>
+        <div>
+            <input type=button value='корни' onclick='ttt()'>
+            <input type=button value='авто-тесты' onclick='squareRootsTests()'>
+        </div>
+
+        <p>
+            В функции <code>squareRoots</code> была доработана обработка
+            вырожденных случаев.
+            В первом случае, когда <code>a = 0</code> и <code>b ≠ 0</code>,
+            уравнение становится линейным
+            (<code>b·x + c = 0</code>), и функция возвращает единственный корень
+            <code>-c / b</code> в виде массива.
+        </p>
+        <p>
+            Во втором случае, когда <code>a = 0</code>, <code>b = 0</code> и
+            <code>c = 0</code>,
+            уравнение имеет бесконечно много решений, поэтому корректное
+            значение вернуть невозможно;
+            в этом случае функция выбрасывает исключение, которое обрабатывается
+            с помощью
+            <code>try/catch</code>.
+        </p>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/test.js"></script>
+</body>
+
+</html>

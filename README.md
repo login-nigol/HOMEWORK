@@ -9,7 +9,7 @@
 5 - <a href="https://login-nigol.github.io/HOMEWORK/13-DRINKS_OBJ_FUNK/">13-DRINKS_OBJ_FUNK</a><br>
 6 - <a href="https://login-nigol.github.io/HOMEWORK/14-DRINKS_OBJ_CLASS/">14-DRINKS_OBJ_CLASS</a><br>
 7 - <a href="https://login-nigol.github.io/HOMEWORK/17-VOWELS_ARR/">17-VOWELS_ARR</a><br>
-8 - 20-ROOTS В процессе!<br>
+8 - <a href="https://login-nigol.github.io/HOMEWORK/20-ROOTS/">20-ROOTS</a><br>
 9 - <a href="https://login-nigol.github.io/HOMEWORK/23-DYN_FORM/">23-DYN_FORM</a><br>
 10 - <a href="https://login-nigol.github.io/HOMEWORK/27-VALID_DYN_FORM/">27-VALID_DYN_FORM</a><br>
 11 - <a href="https://login-nigol.github.io/HOMEWORK/30-DRAGNDROP/">30-DRAGNDROP</a><br>
