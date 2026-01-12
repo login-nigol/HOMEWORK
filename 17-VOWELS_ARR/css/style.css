@@ -1,0 +1,30 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New' }
+
+/* ===== MAIN STYLES ===== */
+header {
+    text-align: center;
+    padding: 0.5em 0;
+    background: #f0f0f0;
+    color: #424242;
+    margin-bottom: 5em;
+
+    outline: solid 2px #ccc;
+}
+
+main {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* outline: 1px dotted red; */
+}
+
+main input {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+}
