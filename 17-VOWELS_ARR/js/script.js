@@ -7,10 +7,15 @@ const vowelsArr = [...vowelsStr];
 const textInput = document.getElementById('textInput');
 const resultElement = document.getElementById('result');
 
-function countVowelsForEach(letters) {
+// ===== forEach =====
+function countVowelsForEach(str) {
+    // строку превращаем в массив ВНУТРИ функции
+    const letters = [...str];
+
     let count = 0;
 
     letters.forEach(char => {
+        // если символ есть в списке гласных — увеличиваем счётчик
         if ( vowelsArr.includes(char) ) {
             count++;
         }
@@ -19,17 +24,23 @@ function countVowelsForEach(letters) {
     return count;
 }
 
-function countVowelsFilter(letters) {
+// ===== filter =====
+function countVowelsFilter(str) {
+    const letters = [...str];
+
     return letters
     // filter(...) — оставляет только гласные
     .filter( char => vowelsArr.includes(char) )
     .length; // их количество
 }
 
+// ===== reduce =====
 // reduce проходит по массиву и накапливает результат
 // если символ — гласная → увеличиваем счётчик
 // 0 — начальное значение счётчика
-function countVowelsReduce(letters) {
+function countVowelsReduce(str) {
+    const letters = [...str];
+
     return letters.reduce( (sum, char) => {
         return vowelsArr.includes(char) ? sum + 1 : sum;
     }, 0);
@@ -39,11 +50,11 @@ function countVowelsReduce(letters) {
 textInput.addEventListener('keydown', (event) => {
     if ( event.key !== 'Enter') return; // реагируем только на энтер
 
-    const letters = [...textInput.value]; // берём текст из input
+    const userText = textInput.value; // берём текст из input, строка от пользователя
 
-    const resultForEach = countVowelsForEach(letters);
-    const resultFilter = countVowelsFilter(letters);
-    const resultReduce = countVowelsReduce(letters);
+    const resultForEach = countVowelsForEach(userText);
+    const resultFilter = countVowelsFilter(userText);
+    const resultReduce = countVowelsReduce(userText);
 
     resultElement.innerHTML = 
     `1. Результат функции forEach<br>Гласных букв: ${resultForEach}<hr><br>` +
