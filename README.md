@@ -13,6 +13,7 @@
 9 - <a href="https://login-nigol.github.io/HOMEWORK/23-DYN_FORM/">23-DYN_FORM</a><br>
 10 - <a href="https://login-nigol.github.io/HOMEWORK/27-VALID_DYN_FORM/">27-VALID_DYN_FORM</a><br>
 11 - <a href="https://login-nigol.github.io/HOMEWORK/30-DRAGNDROP/">30-DRAGNDROP</a><br>
+12 - <a href="https://login-nigol.github.io/HOMEWORK/33-CLOCK_DOM/">33-CLOCK_DOM</a><br>
 
 Цели:
 

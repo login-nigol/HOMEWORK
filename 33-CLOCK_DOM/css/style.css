@@ -1,0 +1,111 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+header {
+      text-align: center;
+      padding: 0.5em 2em;
+      background: #f0f0f0;
+      color: #424242;
+      margin-bottom: 1em;
+      outline: solid 2px #ccc;
+    }
+
+/* ===== MAIN STYLES ===== */
+
+body { font-family: 'Courier New'; text-align: center; }
+
+#controls { margin-bottom: 2em; }
+
+#controls label, #controls input, #controls button {
+    display: block;
+    margin: 0 auto;    
+    padding: 0.2em;
+}
+#controls input { max-width: 4em; margin-bottom: 0.6em; }
+
+/* ===== */
+
+/* циферблат 😎 */ 
+.clock {
+/* делаю контейнер для привязки размера дигитальных часов */
+container-type: inline-size; 
+
+    position: relative;
+    margin: 0 auto 0;
+    z-index: 1;
+
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    /* width: 40em; */
+    /* height: 40em; */
+
+    outline: 0.3em solid #ccc;
+    border-radius: 50%;
+    background: #999;
+}
+
+/* равняю стрелки */
+.hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+
+    transform-origin: bottom center;
+    transform: translateX(-50%);
+
+    z-index: 8;
+    
+    background: #424242;
+    opacity: 0.9;
+}
+
+/* стрелки */
+.hour { width: 3%; height: 30%; border: solid 0.3em #424242; background-color: transparent; border-radius: 0.5em; }
+.minute { width: 2%; height: 38%; border-radius: 0.4em; }
+.second { width: 1%; height: 45%; border-radius: 0.3em; background: #ff0000; }
+.bolt { width: 4.5%; height: 4.5%; border-radius: 50%; background: #ff0000; transform: translate(-50%, 50%); opacity: 1; }
+
+/* цифры на циферблате */
+.clockNumber {
+    width: 100%; 
+    height: 100%;
+    
+    position: absolute;
+    inset: 0; /* растягиваем всг на весь циферблат */
+
+    display: block;   /* убираем inline-зазоры */
+    border: 0;        /* гарантируем отсутствие рамки */
+    overflow: hidden; /* режем всё, что вылезет за круг */
+
+    z-index: 1;
+    /* pointer-events: none; ??? */
+}
+
+.digital-clock {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 25%;
+    z-index: 5;
+    
+    min-width: 35%;
+    background: #777ccc;
+    box-shadow: 0 0 0.2em #333 inset;
+    padding: 0.15em 0.4em;
+    border-radius: 0.2em;
+    /* opacity: 0.9; */
+
+    font-family: 'Orbitron';
+    font-size: 6cqw; /* % от ширины .clock */
+    font-weight: bold;
+    color: #424242;
+    text-shadow: 0 0 0.1em #333;
+    letter-spacing: 0.1em;
+    
+}
+
+
+/* outline: 1px dotted blue; */
+
+
+

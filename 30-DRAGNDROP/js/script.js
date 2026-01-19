@@ -61,16 +61,6 @@ window.addEventListener('load', () => {
     eo.preventDefault();
   }
 
-  function onMove(eo) {
-    // иначе будет ошибка до первого mousedown
-    if (!drag) return;
-    eo = eo || window.event;
-
-    // двигаем ровно настолько, насколько двинулась мышь
-    drag.style.left = ( eo.pageX - shiftX ) + 'px';
-    drag.style.top = ( eo.pageY - shiftY ) + 'px';
-  }
-
   function onUp() {
     if (!drag) return;    
 
@@ -80,5 +70,15 @@ window.addEventListener('load', () => {
     // снимаем обработчики — производительно
     document.removeEventListener('mousemove', onMove, false);
     document.removeEventListener('mouseup', onUp, false);
+  }
+
+  function onMove(eo) {
+    // иначе будет ошибка до первого mousedown
+    if (!drag) return;
+    eo = eo || window.event;
+
+    // двигаем ровно настолько, насколько двинулась мышь
+    drag.style.left = ( eo.pageX - shiftX ) + 'px';
+    drag.style.top = ( eo.pageY - shiftY ) + 'px';
   }
 });
