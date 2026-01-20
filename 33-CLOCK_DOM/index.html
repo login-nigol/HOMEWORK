@@ -1,6 +1,6 @@
 <!--
 Автор: Вадим Антипов
-Дата: 17.01.2026
+Дата: 20.01.2026
 -->
 <!DOCTYPE html>
 <html lang="ru">
@@ -18,38 +18,34 @@
         <h2>N.33 Домашнее задание CLOCK_DOM</h2>
     </header>
 
-    <div id="controls">
+    <div id="controls" class="controls">
         <label for="diametrInput">
-            Введите диаметр часов от 12 до 50(em)
+            Введите диаметр часов от 200 до 800(px)
         </label>
         <!-- фиксируем курсор на инпуте -->
         <input type="number" id="diametrInput" autofocus>
         <button id="buildBtn">Собрать часы</button>
     </div>
 
-    <!-- hidden - скрываю часы до сборки, hidden -->
-    <div id="clock" class="clock" hidden>
-        
-        <div id="digital-clock" class="digital-clock">00:00:00</div>
-
-        <!-- цифры -->
-        <object id="clockNumber" class="clockNumber" type="image/svg+xml"
-            data="img/clock-numbers.svg">
-        </object>
-
+    <!-- механические часы - hidden ??? -->
+    <div id="mechanical-clock" class="mechanical-clock" hidden>
+               
         <!-- стрелки -->
         <div class="hand hour"></div>
         <div class="hand minute"></div>
         <div class="hand second"></div>
         <div class="hand bolt"></div>
-
+        
+        <!-- цифры -->
+        <div id="numbers" class="numbers"></div>
+       
+        <!-- дигитальные часы -->
+        <div id="digital-clock" class="digital-clock">00:00:00</div>
 
     </div>
 
     <script type="module" src="js/script.js"></script>
-    <!-- этот файл — ES-модуль (defer) -->
     <!-- type="module" = можно использовать import / export -->
-    <!-- говорит браузеру: «загрузи скрипт, но выполни его после HTML» -->
 </body>
 
 </html>
