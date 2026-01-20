@@ -97,6 +97,8 @@ body {
     border-radius: 0.4em;
 }
 
+.second::before { background: #ff0000; }
+
 /* болт */
 .bolt { width: 4.5%; height: 4.5%; border-radius: 50%; background: #ff0000; transform: translate(-50%, 50%); }
 .bolt::before{ content: none; }
