@@ -1,0 +1,99 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+header {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background: #f0f0f0;
+    color: #424242;
+    outline: solid 2px #ccc;
+}
+
+/* === основные стили === */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    gap: 0.5em;
+
+    font-family: 'Courier New' monospace;
+}
+/* === блок управления === */
+.controls input, .controls button {
+    display: block;
+    margin: 0.5em auto;
+    padding: 0.2em 0.4em;
+}
+.controls input {
+    width: 4.5em;
+    text-align: center;
+}
+
+/* === окружность-циферблат === */
+.clock-face { 
+    fill: transparent;
+    stroke: #999;
+}
+
+.secondHand { 
+    stroke: #ff0000;
+    stroke-linecap: round;
+    /* pointer-events: stroke; */
+}
+
+.minuteHand {
+    stroke: #999;
+    opacity: 0.9;
+    stroke-linecap: round;
+    /* pointer-events: stroke; */
+}
+
+.hourHand {
+    stroke: #999;
+    stroke-width: 1.6%;
+    opacity: 0.9;
+    fill: transparent;
+}
+
+.bolt {
+    fill: #ff0000;
+}
+
+.clock-number-ring {
+    stroke: #999;
+    fill: transparent;
+}
+
+.clock-number-text {
+    fill: #999;
+}
+
+.digital-box {
+    fill: transparent;
+    stroke: #999;
+}
+
+.digital-clock {
+    font-family: 'Orbitron', monospace;
+    font-weight: 800;
+    fill: #424242;
+    opacity: 0.8;
+}
+
+.clock {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1300ms ease, transform 500ms ease;
+}
+
+.clock.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.clock-star {
+    fill: transparent;
+    stroke: #ff0000;
+    stroke-width: 0.6;
+}
