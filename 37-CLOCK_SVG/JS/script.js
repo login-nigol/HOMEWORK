@@ -41,6 +41,7 @@ document.body.appendChild(clock);
 let timerId = null;
 
 function updateTime() {
+    if ( !clockObj ) return; // защита от вызова до сборки
     const timeNow = new Date();
 
     const second = timeNow.getSeconds();
@@ -51,7 +52,7 @@ function updateTime() {
     const secAngle = second * SECOND_DEG;
     // плавность движения минутной стрелки, обновляется каждую сек
     const minAngle = (minute + second / 60) * MINUTE_DEG;
-    const hourAngle = (hour + minute / 60) * HOUR_DEG;
+    const hourAngle = (hour % 12 + minute / 60) * HOUR_DEG;
 
     // вращаем стрелки
     clockObj.secondHand.setAttribute(
@@ -126,15 +127,17 @@ buildBtn.addEventListener('click', () => {
 
 // === автозапуск только для мобилы ===
 
-const isMobile = window.innerWidth < 768;
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-if (isMobile) {
+if ( isMobile ) {
   const screenSize = Math.min(window.innerWidth, window.innerHeight);
   let startSize = Math.floor(screenSize * 0.95); // 95% от ширены экрана
 
+  // защита диапозона
   if (startSize < MIN_DIAMETER) startSize = MIN_DIAMETER;
   if (startSize > MAX_DIAMETER) startSize = MAX_DIAMETER;
 
+  // переиспользую существующую логику
   diametrInput.value = startSize;
   buildBtn.click(); // автосборка только на мобиле
 }

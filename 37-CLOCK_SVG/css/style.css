@@ -97,3 +97,8 @@ body {
     stroke: #ff0000;
     stroke-width: 0.6;
 }
+
+@media ( max-width: 768px ) {
+    header { font-size: 0.6em; }
+    .clock { margin-top: 5em; }
+}

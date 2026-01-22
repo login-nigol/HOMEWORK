@@ -3,8 +3,9 @@ import { formatDateTime } from './formatDateTime.js';
 
 // 1 - константы
 // 2 - DOM селекторы
-// 3 - функции
-// 4 - навешивание обработчиков
+// 3 - Создание динамических элементов
+// 4 - функции
+// 5 - навешивание обработчиков
 
 // SECOND_DEG - градус поворота секундной стрелки 6° = 360° / 60 секунд, частота секунда
 // MINUTES_DEG = 6° (частота обновления минута)
@@ -55,9 +56,9 @@ function updateTime() {
 
     // обновляем цифровое время на циферблате
     digitalClock.textContent =
-        String(hour).padStart(2, '0') + ':' +
-        String(minute).padStart(2, '0') + ':' +
-        String(second).padStart(2, '0');
+    String(hour).padStart(2, '0') + ':' +
+    String(minute).padStart(2, '0') + ':' +
+    String(second).padStart(2, '0');
 }
 
 // коофиценты для разметки цифр от радиуса циферблата
@@ -164,11 +165,3 @@ diametrInput.addEventListener('keydown', (e) => {
         buildBtn.click();
     }
 });
-
-// === проверка вращения === //
-// let angleSec = 0;
-// setInterval(()=> {
-//     angleSec +=6; 
-//     secondHand.style.transform = 
-//     `translateX(-50%) rotate(${angleSec}deg)`;
-// }, 1000);
