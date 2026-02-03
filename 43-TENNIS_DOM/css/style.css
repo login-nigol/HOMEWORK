@@ -1,0 +1,77 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New' monospace }
+
+/* ===== MAIN STYLES ===== */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background: #f0f0f0;
+    color: #424242;
+    outline: solid 2px #ccc;
+}
+
+.app {
+    max-width: 40em;
+    margin: 3em auto;
+
+    /* border: dotted red; */
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.score {
+    font-size: 2em;
+}
+
+.btn-start {
+    padding: 0.3em 1em;
+    cursor: pointer;
+}
+
+/* поле */
+.field {
+    position: relative;
+    width: 40em;
+    height: 20em;
+
+    background-color: lightgreen;
+    overflow: hidden;
+
+    outline: solid #333;
+}
+
+/* ракетки */
+.racket {
+    position: absolute;
+    width: 1em;
+    height: 5em;
+    background-color: #333;
+}
+
+.racket--left {
+    left: 0.1em;
+    top: 7.5em;
+}
+
+.racket--right {
+    right: 0.1em;
+    top: 7.5em;
+}
+
+/* мяч */
+.ball {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: red;
+    /* left: 19.5em; */
+    /* top: 9.5em; */
+}
