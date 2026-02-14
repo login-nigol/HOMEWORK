@@ -1,0 +1,36 @@
+<!--
+Автор: Вадим Антипов
+Дата: 14.02.2026
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1">
+    <title>TENNIS-CANVAS</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <header>
+        <h3>N.50 Домашнее задание TENNIS_CANVAS</h3>
+    </header>
+
+    <main class="app">
+        <section class="scoreboard" aria-label="Счёт">
+            <span class="score score--left" aria-label="Счёт слева">0</span>
+
+            <button class="btn-start" type="button">старт!</button>
+
+            <span class="score score--right" aria-label="Счёт справа">0</span>
+        </section>
+
+        <canvas class="field" id="game"></canvas>
+    </main>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
