@@ -65,7 +65,7 @@ function updateTime() {
 const NUMBERS_RADIUS_K = 0.85;  // позиционирование от центра
 const NUM_CIRCLE_DIAM_K = 0.22; // размер кружков цифр
 const NUM_FONT_SIZE_K = 0.13;   // размер цифр
-const NUM_TEXT_OFFSET_K = 0.05; // вертикальный микросдвиг цифр
+const NUM_TEXT_OFFSET_K = 0.05; // вертикальный микросдвиг цифр(падинг)
 
 // Функция-обработчик:
 // встраиваю DOM-цифры в сборку часов
