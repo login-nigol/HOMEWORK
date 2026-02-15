@@ -1,0 +1,74 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===== MAIN STYLES ===== */
+body { 
+    font-family: 'Courier New, monospace';
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background: #f0f0f0;
+    color: #424242;
+    outline: solid 2px #ccc;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 1em 0 2em;
+    color: #444444;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    gap: 2em;
+}
+
+.drinks, .food {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    
+    padding: 1em;
+    border: solid 1px #ccc;
+    background: #fafafa;
+    border-radius: 0.5em;
+}
+
+h2 {
+    text-align: center;
+    color: #434343;
+}
+
+button {
+    padding: 0.2em;
+    cursor: pointer;
+}
+
+@media ( max-width: 760px ) {
+    header {
+        display: none;
+    }
+    
+    h1 {
+        font-size: 1.3em;
+        margin: 0.5em 0 0.7em;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+
+        font-size: 0.8em;
+    }
+
+    button {
+        margin-bottom: 0.7em;
+    }
+}
