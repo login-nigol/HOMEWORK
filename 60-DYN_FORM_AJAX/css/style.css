@@ -1,0 +1,77 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: 'Courier New' }
+
+/* ===== MAIN STYLES ===== */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background: #f0f0f0;
+    color: #424242;
+    outline: solid 2px #ccc;
+}
+
+.page {
+    max-width:40em;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.forms {
+    display: grid;
+    gap: 2em;
+}
+
+.form {
+    padding: 1em;
+    border: solid 1px #ddd;
+    border-radius: 0.5em;
+}
+
+.form__row {
+    display: grid;
+    grid-template-columns: 13em 1fr;
+    gap: 1em;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+
+
+/* кнопки отправки */
+.form__actions {
+    text-align: right;
+}
+
+.form select {
+    max-width: 10em;
+}
+
+/* радио кнопки */
+.form div label {
+    margin-right: 0.5em;
+}
+
+/* радио кнопки */
+.form label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2em;
+}
+
+/* чекбокс */
+.form input[type="checkbox"] {
+    /* justify-self: start; */
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.form__row input[type="number"] {
+    width: 5em;
+}
+
+textarea {
+    resize: none;
+}

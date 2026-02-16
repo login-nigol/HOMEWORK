@@ -18,6 +18,7 @@
 14 - <a href="https://login-nigol.github.io/HOMEWORK/43-TENNIS_DOM/">43-TENNIS_DOM</a><br>
 15 - <a href="https://login-nigol.github.io/HOMEWORK/50-TENNIS_CANVAS/">50-TENNIS_CANVAS</a><br>
 16 - <a href="https://login-nigol.github.io/HOMEWORK/53-DRINKS_LOC_STORAGE/">53-DRINKS_LOC_STORAGE</a><br>
+17 - <a href="https://login-nigol.github.io/HOMEWORK/60-DYN_FORM_AJAX/">60-DYN_FORM_AJAX</a><br>
 
 
 
