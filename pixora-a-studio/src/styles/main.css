@@ -1,0 +1,59 @@
+/* === Base === */
+
+/* 
+border-box - применяю ко всем элементам 
+width включает padding и border
+псевдоэлементы не наследуют box-sizing автоматически
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* нативный вид под каждую OS */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* === Layout: desctop -> mobile === */
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.toolbar {
+    padding: 1em 1.2em;
+    border-bottom: 1px solid #ddd;
+}
+
+.workspace {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 25em; /* stage + panel */
+    gap: 1em;
+    padding: 1em;
+}
+
+.stage {
+    border: 1px solid #ddd;
+    border-radius: 0.5em;
+    overflow: hidden;
+}
+
+/* canvas layers live here (absolut stack) */
+.stage__stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 60vh;
+}
+
+.panel {
+    border: 1px solid #ddd;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
