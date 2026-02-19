@@ -52,6 +52,12 @@ body {
     min-height: 60vh;
 }
 
+/* чтобы абсолютные canvas не вылазили и не ловили выделение */
+.stage__stack canvas {
+    display: block;
+    touch-action: none; /* важный задел под pointer events */
+}
+
 .panel {
     border: 1px solid #ddd;
     border-radius: 0.5em;
