@@ -1,6 +1,6 @@
+'use strict';
 // форматирование даты (утилита)
 // форматирует дату-время в формате дд.мм.гггг чч:мм:сс
-'use strict';
 
 export function formatDateTime(dt) {
 
@@ -20,3 +20,6 @@ export function formatDateTime(dt) {
         String(seconds).padStart(2,"0")
     );
 }
+
+// === импорт утилиты ===
+// import { formatDateTime } from './formatDateTime.js';
