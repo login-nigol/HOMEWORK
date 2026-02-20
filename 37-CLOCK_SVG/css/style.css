@@ -100,5 +100,6 @@ body {
 
 @media ( max-width: 768px ) {
     header { font-size: 0.6em; }
+    .controls { display: none; }
     .clock { margin-top: 5em; }
 }
