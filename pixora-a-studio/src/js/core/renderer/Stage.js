@@ -3,40 +3,38 @@
 // отвечает только за "сцену": создание и управление canvas-слоями
 export class Stage {
     constructor($container) {
+        // ссылка на DOM-контейнер куда будут сохраняться слои
         this.$container = $container;
 
         this.layers = [];     // список canvas-слоёв
-        this.layerIndex = 0; // для уникальных id
+        this.layerIndex = 0; // счётчик для уникальных id
     }
 
     // создаёт новый canvas-слой и добавляет в стек
     addLayer({ width = 800, height = 600, type = 'draw' } = {}) {
         this.layerIndex += 1;
 
-        // создаём canvas
+        // создаём canvas элемент
         const canvas = document.createElement('canvas');
-        canvas.width = width;
+        canvas.width = width; // реальный размер в писелях
         canvas.height = height;
 
-        // canvas лежит поверх других слоёв
-        canvas.style.position = 'absolute';
-        canvas.style.inset = '0';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
+        // всё позиционирование через CSS-класс
+        canvas.classList.add('layer');
 
-        // canvas API: получаю контекст для рисования
+        // получаем 2D-контекст для рисования
         const ctx = canvas.getContext('2d');
 
-        // JS-модель слоя (источник правды)
+        // JS-модель слоя - источник правды о слое
         const layer = {
             id: `layer-${this.layerIndex}`, // уникальный id
-            type,                            // 'drow' | 'image' (будет расширен)
+            type,                            // 'draw' | 'image' (будет расширен)
             canvas,                          // ссылка на DOM-элемент
             ctx,                             // контекст рисования
             visible: true                    // можно скрывать/показывать
         };
 
-        // добавляем в DOM и в модель
+        // добавляем canvas в DOM и слой в массив
         this.$container.append(canvas);
         this.layers.push(layer);
 

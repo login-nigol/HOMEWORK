@@ -20,9 +20,18 @@ body {
 /* === Layout: desctop -> mobile === */
 
 .app {
+    max-width: 90em;
+    margin: 0 auto;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(15em, 25em) 1fr; /* резина + холст */
+    gap: 1em;
+    padding: 1em;
 }
 
 .toolbar {
@@ -30,13 +39,6 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
-.workspace {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 25em; /* stage + panel */
-    gap: 1em;
-    padding: 1em;
-}
 
 .stage {
     border: 1px solid #ddd;
@@ -58,7 +60,17 @@ body {
     touch-action: none; /* важный задел под pointer events */
 }
 
-.panel {
+/* каждый canvas-слой абсолютно позиционирован внутри стека */
+.layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+ /* панель слоёв */
+.layers-panel {
+    min-width: 15em;
+
     border: 1px solid #ddd;
     border-radius: 0.5em;
     padding: 0.5em;

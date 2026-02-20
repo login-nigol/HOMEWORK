@@ -16,23 +16,22 @@
 <body>
   <!-- App shell -->
   <div class="app">
-    <!-- Top toolbar -->
+    <!-- Top toolbar - глобальные действия -->
     <header class="toolbar" aria-label="Toolbar">Toolbar</header>
+
+    <!-- панель инструментов -->
+     <nav class="tools-panel" aria-label="Tools panel"></nav>
 
     <!-- Main area -->
      <main class="workspace">
+       <!-- side panel - панель слоёв -->
+        <aside class="layers-panel" aria-label="Layers panel">Layers</aside>
 
-      <!-- Stage (canvs area) -->
+      <!-- Stage (canvs area) - холст -->
        <section class="stage" aria-label="Canvas stage">
-        <div class="stage__stack">
-          <!-- canvas will be appended here later -->
-        </div>
+        <div class="stage__stack"></div>
        </section>
 
-       <!-- side panel -->
-        <aside class="panel" aria-label="Layers panel">
-          Panel
-        </aside>
      </main>
   </div>
 

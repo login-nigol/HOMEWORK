@@ -1,16 +1,21 @@
 'use strict';
 
 import { $stageStack  } from "./dom.js";
-import { Stage } from "./core/Stage.js";
+import { Stage } from "./core/renderer/Stage.js";
+import { DrawLayer } from "./core/layers/DrawLayer.js"
+import { BrushTool } from "./core/tools/BrushTool.js";
 
-// точка входа
+// точка входа - создаём сцену
 const stage = new Stage($stageStack)
 
-// MVP: создаём один слой (пока фиксированый размер)
-// stage.addLayer({ width: 1200, height: 800 });
+// создаём слой для рисования
+const layerData = stage.addLayer({ width:1200, height: 800, type: 'draw'});
 
-const layer = stage.addLayer({ width:1200, height: 800, type: 'draw'});
-layer.ctx.fillStyle = 'red';
-layer.ctx.fillRect(50, 50, 150, 100);
+// создаём DrawLayer и передаём canvas и ctx
+const drawLayer = new DrawLayer(layerData.canvas, layerData.ctx);
 
-console.log(layer.id, stage.layers.length);
+// создаём кисть и активируем на слое
+const bruch = new BrushTool(drawLayer);
+bruch.activate();
+
+console.log(layerData.id, stage.layers.length);
