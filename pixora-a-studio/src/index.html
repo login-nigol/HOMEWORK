@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-    content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1">
+    content="width=device-width, height=device-height, initial-scale=1">
   <title>Pixora A. Studio</title>
   <link rel="stylesheet" href="./styles/main.css" type="text/css">
 </head>
@@ -16,23 +16,42 @@
 <body>
   <!-- App shell -->
   <div class="app">
+
     <!-- Top toolbar - глобальные действия -->
     <header class="toolbar" aria-label="Toolbar">Toolbar</header>
 
     <!-- панель инструментов -->
-     <nav class="tools-panel" aria-label="Tools panel"></nav>
+    <nav class="tools-panel" aria-label="Tools panel">
+      <!-- выбор инструмента -->
+      <button class="tool-btn tool-btn--active" data-tool="brush"
+        title="Кисть">🖌️</button>
+      <button class="tool-btn" data-tool="eraser" title="Ластик">🧹</button>
 
-    <!-- Main area -->
-     <main class="workspace">
-       <!-- side panel - панель слоёв -->
-        <aside class="layers-panel" aria-label="Layers panel">Layers</aside>
+      <!-- подменю активного инструмента (показываем/скрываем) -->
+      <div class="tools-panel--submenu" data-submenu="brush">
+        <label class="tool-label">
+          <input class="tool-color" type="color" value="#000000" title="Цвет">
+        </label>
+
+        <label class="tool-label">
+          <input class="tool-size" type="range" min="1" max="50" value="5"
+            title="Размер">
+        </label>
+      </div>
+    </nav>
+
+    <!-- Main area - основная панель -->
+    <main class="workspace">
+
+      <!-- side panel - панель слоёв -->
+      <aside class="layers-panel" aria-label="Layers panel">Layers</aside>
 
       <!-- Stage (canvs area) - холст -->
-       <section class="stage" aria-label="Canvas stage">
+      <section class="stage" aria-label="Canvas stage">
         <div class="stage__stack"></div>
-       </section>
+      </section>
 
-     </main>
+    </main>
   </div>
 
   <script type="module" src="./js/main.js"></script>

@@ -1,21 +1,59 @@
 'use strict';
 
-import { $stageStack  } from "./dom.js";
+import { $stageStack, $toolColor, $toolSize, $toolBtns  } from "./dom.js";
 import { Stage } from "./core/renderer/Stage.js";
-import { DrawLayer } from "./core/layers/DrawLayer.js"
 import { BrushTool } from "./core/tools/BrushTool.js";
+import { EraserTool } from "./core/tools/EraserTool.js";
+
+
+// === Инициализация ===
 
 // точка входа - создаём сцену
 const stage = new Stage($stageStack)
 
 // создаём слой для рисования
-const layerData = stage.addLayer({ width:1200, height: 800, type: 'draw'});
+const drawLayer = stage.addLayer({ type: 'draw'});
 
-// создаём DrawLayer и передаём canvas и ctx
-const drawLayer = new DrawLayer(layerData.canvas, layerData.ctx);
 
-// создаём кисть и активируем на слое
-const bruch = new BrushTool(drawLayer);
-bruch.activate();
+// создаём инструменты
+const tools = {
+    brush: new BrushTool(drawLayer),
+    eraser: new EraserTool(drawLayer),
+};
 
-console.log(layerData.id, stage.layers.length);
+// текущий активный инструмент
+let activeTool = tools.brush;
+activeTool.activate();
+
+// === Обработчики ===
+
+// переключение инструментов
+$toolBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        const toolName = e.currentTarget.dataset.tool;
+
+        // если кликнули на уже активный - ничего не делаем
+        if ( tools[toolName] === activeTool ) return;
+
+        // деактивируем старый, активируем новый
+        activeTool.deactivate();
+        activeTool = tools[toolName];
+        activeTool.activate();
+
+        // переключаем визуальный класс
+        $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
+        e.currentTarget.classList.add('tool-btn--active');
+    });
+});
+
+// смена цвета кисти
+$toolColor.addEventListener('input', (e) => {
+    tools.brush.color = e.target.value;
+});
+
+// смена размера (для инсрументов)
+$toolSize.addEventListener('input', (e) => {
+    activeTool.size = Number(e.target.value);
+});
+
+console.log(drawLayer.id, stage.layers.length);

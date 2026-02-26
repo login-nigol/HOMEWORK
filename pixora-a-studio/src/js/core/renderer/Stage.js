@@ -1,5 +1,7 @@
 'use strict';
 
+import { DrawLayer } from "../layers/DrawLayer.js";
+
 // отвечает только за "сцену": создание и управление canvas-слоями
 export class Stage {
     constructor($container) {
@@ -11,33 +13,35 @@ export class Stage {
     }
 
     // создаёт новый canvas-слой и добавляет в стек
-    addLayer({ width = 800, height = 600, type = 'draw' } = {}) {
+    addLayer({ type = 'draw' } = {}) {
         this.layerIndex += 1;
+
+        // реальные размеры контейнера в пикселях
+        const width = this.$container.clientWidth;
+        const height = this.$container.clientHeight;
 
         // создаём canvas элемент
         const canvas = document.createElement('canvas');
         canvas.width = width; // реальный размер в писелях
         canvas.height = height;
-
         // всё позиционирование через CSS-класс
         canvas.classList.add('layer');
 
         // получаем 2D-контекст для рисования
         const ctx = canvas.getContext('2d');
 
-        // JS-модель слоя - источник правды о слое
-        const layer = {
-            id: `layer-${this.layerIndex}`, // уникальный id
-            type,                            // 'draw' | 'image' (будет расширен)
-            canvas,                          // ссылка на DOM-элемент
-            ctx,                             // контекст рисования
-            visible: true                    // можно скрывать/показывать
-        };
+        // создаём слой нужного типа
+        let layer;
 
-        // добавляем canvas в DOM и слой в массив
+        if ( type === 'draw') {
+            layer = new DrawLayer(canvas, ctx, `layer-${this.layerIndex}`);
+        } else {
+            throw new Error(`Неизвестный тип слоя: ${type}`);
+        }
+
+        // добавляем в DOM и массив
         this.$container.append(canvas);
         this.layers.push(layer);
-
         return layer;
     }
 }

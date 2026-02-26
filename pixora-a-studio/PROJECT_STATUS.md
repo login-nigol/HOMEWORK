@@ -18,13 +18,14 @@
 - [x] DrawLayer.js — слой для рисования
 - [x] BrushTool.js — кисть с Pointer Events API
 - [x] Рисование мышью/тачем/стилусом на canvas
+- [x] ToolBase — базовый класс инструментов
+- [x] BrushTool / EraserTool — наследование от ToolBase
+- [x] Панель инструментов (кисть, ластик, цвет, размер)
+- [x] Переключение инструментов с деактивацией
 
 ## В работе
-- [ ] перенос Stage.js в js/core/renderer/
-- [ ] CSS-класс .layer вместо инлайн-стилей в Stage.js
 
 ## Следующий шаг
-Перенос Stage.js в js/core/renderer/ + обновление пути в main.js
 
 ---
 

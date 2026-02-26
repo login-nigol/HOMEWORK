@@ -1,12 +1,17 @@
 'use strict';
 
 // DrawLayer - слой для рисования кистью
-// наследует базовые свойства от Stage, управляет своиим canvas
+// Управляет рисованием на конкретном canvas-слое
 export class DrawLayer {
-    constructor(canvas, ctx) {
+    constructor(canvas, ctx, id) {
         // ссылки на canvas и контекст рисования
         this.canvas = canvas;
         this.ctx = ctx;
+
+        // идентификация слоя
+        this.id = id;
+        this.type = 'draw';
+        this.visible = true;
 
         // флаг: сейчас рисуем или нет
         this.isDrawing = false;

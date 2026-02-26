@@ -34,11 +34,66 @@ body {
     padding: 1em;
 }
 
+/* === Tools panel === */
+
 .toolbar {
     padding: 1em 1.2em;
     border-bottom: 1px solid #ddd;
 }
 
+/* горизонтальная панель инструментов */
+.tools-panel {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    padding: 0.5em 1.2em;
+    border-bottom: 1px solid #ddd;
+}
+
+/* группа кнопок */
+.tools-panel__buttons {
+    display: flex;
+    gap: 0.4em;
+}
+
+/* кнопка инструмента */
+.tool-btn {
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 1.1em;
+    border: 2px solid transparent;
+    border-radius: 0.4em;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+/* активный инструмент */
+.tool-btn--active {
+    border-color: #4a90d9;
+    background: #e8f0fe;
+}
+
+/* поодменю - inline рядом с кнопками */
+.tools-panel__submenu {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding-left: 0.8em;
+    border-left: 1px solid #ddd;
+}
+
+/* цвет */
+.tool-color {
+    width: 2.2em;
+    height: 2.2em;
+    border: none;
+    cursor: pointer;
+}
+
+/* размер кисти */
+.tool-size {
+    width: 6em;
+}
 
 .stage {
     border: 1px solid #ddd;

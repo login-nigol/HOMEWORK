@@ -3,4 +3,7 @@
 
 export const SELECTORS = {
     stageStack: '.stage__stack',
+    toolColor: '.tool-color',
+    toolSize: '.tool-size',
+    toolBtn: '.tool-btn',
 };
