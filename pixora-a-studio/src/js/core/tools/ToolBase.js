@@ -7,6 +7,17 @@ export class ToolBase {
         this.drawLayer = drawLayer;
     }
 
+    // переключаем инструмент на другой слой
+    setLayer(drawLayer) {
+        const wasActive = !!this._onPointerDown // был ли активирован
+
+        if ( wasActive ) this.deactivate();
+
+        this.drawLayer = drawLayer;
+
+        if ( wasActive ) this.activate();
+    }
+
     // переопределяется в наследниках
     applySettings() {
         throw new Error('applySettings() должен быть реализован в наследнике');

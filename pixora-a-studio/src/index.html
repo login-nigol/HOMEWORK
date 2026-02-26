@@ -44,7 +44,24 @@
     <main class="workspace">
 
       <!-- side panel - панель слоёв -->
-      <aside class="layers-panel" aria-label="Layers panel">Layers</aside>
+      <aside class="layers-panel" aria-label="Layers panel">
+        <!-- управление слоями -->
+        <div class="layers-panel__controls">
+          <button class="layer-btn" data-action="add"
+            title="Добавить слой">➕</button>
+          <button class="layer-btn" data-action="delete"
+            title="Удалить слой">🗑️</button>
+          <button class="layer-btn" data-action="up"
+            title="Слой выше">⬆️</button>
+          <button class="layer-btn" data-action="down"
+            title="Слой ниже">⬇️</button>
+          <button class="layer-btn" data-action="toggle"
+            title="Скрыть/показать">👁️</button>
+
+        </div>
+        <!-- список слоёв (заполняется из JS) -->
+        <ul class="layers-panel__list"></ul>
+      </aside>
 
       <!-- Stage (canvs area) - холст -->
       <section class="stage" aria-label="Canvas stage">

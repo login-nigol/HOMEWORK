@@ -34,12 +34,14 @@ body {
     padding: 1em;
 }
 
-/* === Tools panel === */
+/* === Toolbar === */
 
 .toolbar {
     padding: 1em 1.2em;
     border-bottom: 1px solid #ddd;
 }
+
+/* === Tools panel === */
 
 /* горизонтальная панель инструментов */
 .tools-panel {
@@ -95,6 +97,63 @@ body {
     width: 6em;
 }
 
+/* === Layers panel - панель слоёв === */
+
+ /* панель слоёв */
+.layers-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    min-width: 15em;
+
+    border: 1px solid #ddd;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+/* кнопки управления слоями */
+.layers-panel__controls {
+    display: flex;
+    gap: 0.3em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd;
+}
+
+.layer-btn {
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 0.3em;
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+/* список слоёв */
+.layers-panel__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+/* элемент списка слоёв */
+.layer-item {
+    padding: 0.4em 0.6em;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+/* активный слой */
+.layer-item--active {
+    background: #e8f0fe;
+    border-left: 3px solid #4a909d;
+}
+
+/* === Stage === */
+
 .stage {
     border: 1px solid #ddd;
     border-radius: 0.5em;
@@ -121,12 +180,4 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-}
- /* панель слоёв */
-.layers-panel {
-    min-width: 15em;
-
-    border: 1px solid #ddd;
-    border-radius: 0.5em;
-    padding: 0.5em;
 }
