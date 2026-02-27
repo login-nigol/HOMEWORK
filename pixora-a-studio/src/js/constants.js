@@ -3,13 +3,18 @@
 
 export const SELECTORS = {
     stageStack: '.stage__stack',
+
     toolColor: '.tool-color',
     toolSize: '.tool-size',
     toolBtns: '.tool-btn',
-    layerList: '.layers-panel__list',
+    toolFile: '.tool-file',
+
     layerBtns: '.layer-btn',
+    layerList: '.layers-panel__list',
+
     undoBtn: '[data-action="undo"]',
     redoBtn: '[data-action="redo"]',
+    
     panelToggle: '.layers-panel__toggle',
     layersPanel: '.layers-panel',
 };

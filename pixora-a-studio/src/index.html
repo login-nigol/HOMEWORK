@@ -29,13 +29,16 @@
 
     <!-- панель инструментов -->
     <nav class="tools-panel" aria-label="Tools panel">
+
       <!-- выбор инструмента -->
       <button class="tool-btn tool-btn--active" data-tool="brush"
         title="Кисть">🖌️</button>
       <button class="tool-btn" data-tool="eraser" title="Ластик">🧹</button>
+      <button class="tool-btn" data-tool="move" title="Перемещение">✋</button>
 
       <!-- подменю активного инструмента (показываем/скрываем) -->
       <div class="tools-panel--submenu" data-submenu="brush">
+
         <label class="tool-label">
           <input class="tool-color" type="color" value="#000000" title="Цвет">
         </label>
@@ -45,6 +48,12 @@
             title="Размер">
         </label>
       </div>
+
+      <!-- загрузка картинки -->
+       <label class="tool-label tool-label--file" title="Добавить картинку">
+        🖼️
+        <input type="file" class="tool-file" accept="image/*" hidden>
+       </label>
     </nav>
 
     <!-- Main area - основная панель -->

@@ -92,6 +92,22 @@ body {
     cursor: pointer;
 }
 
+/* кнопка занрузки картинки */
+.tool-label--file {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 1.1em;
+    border: 2px solid transparent;
+    border-radius: 0.4em;
+    background: #F5F5F5;
+    cursor: pointer;
+    padding-left: 0.8em;
+    border-left: 2px solid #ddd;
+}
+
 /* активный инструмент */
 .tool-btn--active {
     border-color: #4a90d9;

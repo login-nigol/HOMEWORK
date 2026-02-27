@@ -30,8 +30,9 @@ export class LayersPanelUi {
 
             // показываем статус видимости
             const icon = layer.visible ? '👁️' : '🚫';
+            const typeIcon = layer.type === 'image' ? '🖼️' : '🖌️'
             li.dataset.id = layer.id;
-            li.textContent = `${icon} ${layer.id}`;
+            li.textContent = `${icon} ${typeIcon} ${layer.id}`;
 
             // клик по слою - делаем активным
             li.addEventListener('click', () => {

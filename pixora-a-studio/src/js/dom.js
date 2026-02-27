@@ -8,6 +8,7 @@ export const $stageStack = document.querySelector(SELECTORS.stageStack);
 export const $toolColor = document.querySelector(SELECTORS.toolColor);
 export const $toolSize = document.querySelector(SELECTORS.toolSize);
 export const $toolBtns = document.querySelectorAll(SELECTORS.toolBtns);
+export const $toolFile = document.querySelector(SELECTORS.toolFile);
 
 export const $layerBtns = document.querySelectorAll(SELECTORS.layerBtns);
 export const $layerList = document.querySelector(SELECTORS.layerList);

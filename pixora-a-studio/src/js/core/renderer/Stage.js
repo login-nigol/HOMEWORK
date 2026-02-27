@@ -1,6 +1,7 @@
 'use strict';
 
 import { DrawLayer } from "../layers/DrawLayer.js";
+import { ImageLayer } from "../layers/ImageLayer.js";
 
 // отвечает только за "сцену": создание и управление canvas-слоями
 export class Stage {
@@ -28,15 +29,18 @@ export class Stage {
         canvas.classList.add('layer');
 
         // получаем 2D-контекст для рисования
-        const ctx = canvas.getContext('2d');
+        // { willReadFrequently: true } - оптимизация для частого чтения пикселей
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
         // создаём слой нужного типа
         let layer;
 
         if ( type === 'draw') {
             layer = new DrawLayer(canvas, ctx, `layer-${this.layerIndex}`);
+        } else if ( type === 'image') {
+            layer = new ImageLayer(canvas, ctx, `img-${this.layerIndex}`);
         } else {
-            throw new Error(`Неизвестный тип слоя: ${type}`);
+            throw new Error(`Неизвестный тип слоя: ${type}`);            
         }
 
         // добавляем в DOM и массив

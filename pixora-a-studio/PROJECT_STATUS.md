@@ -26,12 +26,6 @@
 ## В работе
 
 ## Следующий шаг
-Следующий пуш — undo/redo:
-
-Класс History — хранит снимки canvas (toDataURL() / putImageData())
-Кнопки ↩️↪️ в toolbar
-Ctrl+Z / Ctrl+Shift+Z
-
 Потом — ImageLayer:
 
 Вставка картинки (input file / drag&drop)
