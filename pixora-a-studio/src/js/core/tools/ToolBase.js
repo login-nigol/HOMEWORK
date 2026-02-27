@@ -3,13 +3,16 @@
 // ToolBase - базовый класс для всех инструментов
 // содержит общую логику: pointer-события, координаты, activate/deactivate
 export class ToolBase {
-    constructor(drawLayer) {
+    constructor(drawLayer, history) {
         this.drawLayer = drawLayer;
+        this.history = history; // ссылка на объект History
     }
 
     // переключаем инструмент на другой слой
     setLayer(drawLayer) {
-        const wasActive = !!this._onPointerDown // был ли активирован
+        // был ли активирован. !! - приведение к boolean 
+        // (!!this._onPointerDown - если функуия существует: true)
+        const wasActive = !!this._onPointerDown
 
         if ( wasActive ) this.deactivate();
 
@@ -25,8 +28,13 @@ export class ToolBase {
 
     activate() {
         const canvas = this.drawLayer.canvas;
-
+        
         this._onPointerDown = (e) => {
+            // сохраняем состояние до рисования
+            if ( this.history ) {
+                this.history.save(this.drawLayer);
+            }
+            
             const { x, y } = this._getCoords(e);
             this.applySettings();
             this.drawLayer.startDrawing(x, y);

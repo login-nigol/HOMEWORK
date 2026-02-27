@@ -5,8 +5,8 @@ import { ToolBase } from "./ToolBase.js";
 // BrushTool - инструмент кисть
 // наследует pointer-логику от ToolBase, добовляет свои настройки
 export class BrushTool extends ToolBase {
-    constructor(drawLayer) { // передаём drawLayer в ToolBase
-        super(drawLayer);
+    constructor(drawLayer, history) { // передаём drawLayer в ToolBase
+        super(drawLayer, history);
 
         // настройки кисти по умолчанию
         this.color = '#000000';

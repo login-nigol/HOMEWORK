@@ -5,8 +5,8 @@ import { ToolBase } from "./ToolBase.js";
 // EraserTool - инструмент ластик
 // стирает содержимое canvas через compositeOperation
 export class EraserTool extends ToolBase {
-    constructor(drawLayer) {
-        super(drawLayer);
+    constructor(drawLayer, history) {
+        super(drawLayer, history);
 
         // размер ластика по умолчанию
         this.size = 15;
