@@ -2,7 +2,8 @@
 
 import {
     $stageStack, $toolColor, $toolSize, $toolBtns,
-    $layerBtns, $layerList, $undoBtn, $redoBtn
+    $layerBtns, $layerList, $undoBtn, $redoBtn,
+    $panelToggle, $layersPanel
 } from "./dom.js";
 import { LayersPanelUi } from "./ui/LayersPanelUi.js";
 import { Stage } from "./core/renderer/Stage.js";
@@ -66,6 +67,11 @@ $toolColor.addEventListener('input', (e) => {
 // смена размера (для инсрументов)
 $toolSize.addEventListener('input', (e) => {
     activeTool.size = Number(e.target.value);
+});
+
+// сворачивание панели слоёв
+$panelToggle.addEventListener('click', () => {
+    $layersPanel.classList.toggle('layers-panel--collapsed');
 });
 
 // undo/redo кнопки

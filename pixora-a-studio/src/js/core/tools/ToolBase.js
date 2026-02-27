@@ -50,17 +50,25 @@ export class ToolBase {
             this._afterStroke();
         };
 
+        // при уходе за пределы canvas, останавливаем рисование
+        this._onPointerLeave = () => {
+            this.drawLayer.stopDrawing();
+            this._afterStroke();
+        }
+
         canvas.addEventListener('pointerdown', this._onPointerDown);
         canvas.addEventListener('pointermove', this._onPointerMove);
         canvas.addEventListener('pointerup', this._onPointerUp);
+        canvas.addEventListener('pointerleave', this._onPointerLeave);
     }
     
     deactivate() {
         const canvas = this.drawLayer.canvas;
-
+        
         canvas.removeEventListener('pointerdown', this._onPointerDown);
         canvas.removeEventListener('pointermove', this._onPointerMove);
         canvas.removeEventListener('pointerup', this._onPointerUp);
+        canvas.removeEventListener('pointerleave', this._onPointerLeave);
     }
 
     // хук после завершения штриха (переопределяют наследники если надо)

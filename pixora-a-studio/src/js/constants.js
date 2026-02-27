@@ -10,6 +10,8 @@ export const SELECTORS = {
     layerBtns: '.layer-btn',
     undoBtn: '[data-action="undo"]',
     redoBtn: '[data-action="redo"]',
+    panelToggle: '.layers-panel__toggle',
+    layersPanel: '.layers-panel',
 };
 
 // максимальное колтчество шагов истории

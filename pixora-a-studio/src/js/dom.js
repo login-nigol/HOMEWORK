@@ -15,6 +15,9 @@ export const $layerList = document.querySelector(SELECTORS.layerList);
 export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
 export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 
+export const $panelToggle = document.querySelector(SELECTORS.panelToggle);
+export const $layersPanel = document.querySelector(SELECTORS.layersPanel);
+
 if ( !$stageStack ) {
     throw new Error(`Не найден элемент: ${SELECTORS.stageStack}`);
 }

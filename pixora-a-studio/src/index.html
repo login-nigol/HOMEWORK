@@ -21,8 +21,10 @@
     <header class="toolbar" aria-label="Toolbar">
       <span class="toolbar__titel">Pixora A. Studio</span>
 
-      <button class="toolbar-btn" data-action="undo" title="Отменить (Ctrl+Z)">↩️</button>
-      <button class="toolbar-btn" data-action="redo" title="Повторить (Ctrl+Shift+Z)">↪️</button>
+      <button class="toolbar-btn" data-action="undo"
+        title="Отменить (Ctrl+Z)">↩️</button>
+      <button class="toolbar-btn" data-action="redo"
+        title="Повторить (Ctrl+Shift+Z)">↪️</button>
     </header>
 
     <!-- панель инструментов -->
@@ -50,22 +52,30 @@
 
       <!-- side panel - панель слоёв -->
       <aside class="layers-panel" aria-label="Layers panel">
-        <!-- управление слоями -->
-        <div class="layers-panel__controls">
-          <button class="layer-btn" data-action="add"
-            title="Добавить слой">➕</button>
-          <button class="layer-btn" data-action="delete"
-            title="Удалить слой">🗑️</button>
-          <button class="layer-btn" data-action="up"
-            title="Слой выше">⬆️</button>
-          <button class="layer-btn" data-action="down"
-            title="Слой ниже">⬇️</button>
-          <button class="layer-btn" data-action="toggle"
-            title="Скрыть/показать">👁️</button>
+        <div class="layers-panel__body">
+          <div class="layers-panel__content">
+            <!-- управление слоями -->
+            <div class="layers-panel__controls">
 
+              <button class="layer-btn" data-action="add"
+                title="Добавить слой">➕</button>
+              <button class="layer-btn" data-action="delete"
+                title="Удалить слой">🗑️</button>
+              <button class="layer-btn" data-action="up"
+                title="Слой выше">⬆️</button>
+              <button class="layer-btn" data-action="down"
+                title="Слой ниже">⬇️</button>
+              <button class="layer-btn" data-action="toggle"
+                title="Скрыть/показать">👁️</button>
+
+            </div>
+            <!-- список слоёв (заполняется из JS) -->
+            <ul class="layers-panel__list"></ul>
+          </div>
         </div>
-        <!-- список слоёв (заполняется из JS) -->
-        <ul class="layers-panel__list"></ul>
+        <!-- сворачивание панели слоёв -->
+        <button class="layers-panel__toggle"
+          title="Свернуть/развернуть">◀</button>
       </aside>
 
       <!-- Stage (canvs area) - холст -->
