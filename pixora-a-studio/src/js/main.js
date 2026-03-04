@@ -15,93 +15,88 @@ import { MoveTool } from "./core/tools/MoveTool.js";
 
 // === Инициализация ===
 
-// точка входа - создаём сцену
+// точка входа - создаём сцену и историю
 const stage = new Stage($stageStack);
 const history = new History();
 
 // создаём слой для рисования
 const drawLayer = stage.addLayer({ type: 'draw'});
 
-// панель слоёв - Колбэк при смене активного слоя
-const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) => {
-    // переключаем инструменты на новый слой
-    tools.brush.setLayer(newLayer);
-    tools.eraser.setLayer(newLayer);
-    tools.move.setLayer(newLayer);
-
-    // автоопределение инструмента по типу слоя
-    if ( newLayer.type === 'image' && activeTool !== tools.move ) {
-        activeTool.deactivate();
-        activeTool = tools.move;
-        activeTool.activate();
-        $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-        document.querySelector('[data-tool="move"]').classList.add('tool-btn--active');
-    } else if ( newLayer.type === 'draw' && activeTool === tools.move ) {
-        activeTool.deactivate();
-        activeTool = tools.brush;
-        activeTool.activate();
-        $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-        document.querySelector('[data-tool="brush"]').classList.add('tool-btn--active');
-    }
-});
-layersPanel.render(); // отрисовывает первый слой
-
-// создаём инструменты с историей
+// создаём инструменты (пока на первом слое)
 const tools = {
     brush: new BrushTool(drawLayer, history),
     eraser: new EraserTool(drawLayer, history),
     move: new MoveTool(drawLayer,history)
 };
-
+    
 // текущий активный инструмент
 let activeTool = tools.brush;
 activeTool.activate();
 
+// === вспомогательная функция: переключение активного инструмента
+function switchTool(toolName) {
+    // если уже активен ничего не делаем
+    if ( tools[toolName] === activeTool ) return;
+    
+    // деактивируем старый слой, активируем новый
+    activeTool.deactivate();
+    activeTool = tools[toolName];
+    activeTool.activate();
+    
+    // обновляем подсветку кнопок
+    $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
+    document.querySelector(`[data-tool="${toolName}"]`).classList.add('tool-btn--active');
+}
+
+// вспомогательная функция: пепреключение слоя для всех инструментов
+function switchLayerForTools(newLayer) {
+    tools.brush.setLayer(newLayer);
+    tools.eraser.setLayer(newLayer);
+    tools.move.setLayer(newLayer);
+    
+}
+
+// панель слоёв - колбэк при смене актвного слоя
+const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) => {
+    // переключаем все инструменты на новый слой
+    switchLayerForTools(newLayer);
+
+    // автоопределение инструмента по типу слоя
+    if ( newLayer.type === 'image' && activeTool !== tools.move ) {
+        switchTool('move');
+    } else if ( newLayer.type === 'draw' && activeTool === tools.move ) {
+        switchTool('brush');
+    }
+});
+
+// отрисовывает начальный список слоёв
+layersPanel.render();
+
 // === Обработчики ===
 
-// переключение инструментов
+// переключение инструментов по клику
 $toolBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-        const toolName = e.currentTarget.dataset.tool;
-
-        // если кликнули на уже активный - ничего не делаем
-        if ( tools[toolName] === activeTool ) return;
-
-        // деактивируем старый, активируем новый
-        activeTool.deactivate();
-        activeTool = tools[toolName];
-        activeTool.activate();
-
-        // переключаем визуальный класс
-        $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-        e.currentTarget.classList.add('tool-btn--active');
+        switchTool(e.currentTarget.dataset.tool);
     });
 });
 
-// загрузка картинки - создаём ImageLayer
+// загрузка картинки через input[type="file"]
 $toolFile.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if ( !file ) return;
 
-    // создаём слой-картинку
+    // создаём image-слой и загркжаем файл
     const imageLayer = stage.addLayer({ type: 'image' });
 
     // загружаем файл в слой
     await imageLayer.loadFromFile(file);
 
     // переключаем инструменты на новый слой
-    tools.brush.setLayer(imageLayer);
-    tools.eraser.setLayer(imageLayer);
-    tools.move.setLayer(imageLayer);
+    switchLayerForTools(imageLayer);
 
-    // автоматически включаем move для картинки
-    activeTool.deactivate();
-    activeTool = tools.move;
-    activeTool.activate();
-
-    // обновляем визуал кнопок
-    $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-    document.querySelector('[data-tool="move"]').classList.add('tool-btn--active');
+    // для картики автоматически включаем move
+    switchTool('move');
 
     // обновляем папнель слоёв
     layersPanel.render();
@@ -121,20 +116,12 @@ $stageStack.addEventListener('drop', async (e) => {
     const file = e.dataTransfer.files[0];
     if ( !file || !file.type.startsWith('image/')) return;
 
+    // та же лоника что и в chage - создаём слой, загружаем, переключаем
     const imageLayer = stage.addLayer({ type: 'image'});
     await imageLayer.loadFromFile(file);
 
-    tools.brush.setLayer(imageLayer);
-    tools.eraser.setLayer(imageLayer);
-    tools.move.setLayer(imageLayer);
-
-    activeTool.deactivate();
-    activeTool = tools.move;
-    activeTool.activate();
-
-    $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-    document.querySelector('[data-tool="move"]').classList.add('tool-btn--active');
-
+    switchLayerForTools(imageLayer);
+    switchTool('move');
     layersPanel.render();
 });
 
@@ -143,7 +130,7 @@ $toolColor.addEventListener('input', (e) => {
     tools.brush.color = e.target.value;
 });
 
-// смена размера (для инсрументов)
+// смена размера активного инструмента
 $toolSize.addEventListener('input', (e) => {
     activeTool.size = Number(e.target.value);
 });
@@ -154,9 +141,11 @@ $redoBtn.addEventListener('click', () => history.redo(stage));
 
 // undo/redo клавиатура
 document.addEventListener('keydown', (e) => {
+    // Ctrl+shift+Z - redo (проверяем первым, иначе поймает Ctrl+Z)
     if ( e.ctrlKey && e.shiftKey && e.key === 'Z') {
         e.preventDefault();
         history.redo(stage);
+    // Ctrl+Z - undo
     } else if ( e.ctrlKey && e.key === 'z') {
         e.preventDefault();
         history.undo(stage);

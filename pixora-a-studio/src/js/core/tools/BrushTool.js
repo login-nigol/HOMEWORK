@@ -3,26 +3,33 @@
 import { ToolBase } from "./ToolBase.js";
 
 // BrushTool - инструмент кисть
-// наследует pointer-логику от ToolBase, добовляет свои настройки
+// наследует всю pointer-логику от ToolBase
+// добовляет только свои настройки отрисовки
 export class BrushTool extends ToolBase {
-    constructor(drawLayer, history) { // передаём drawLayer в ToolBase
-        super(drawLayer, history);
+    constructor(layer, history) { // передаём layer в ToolBase
+        // super() - вызов конструктора родителя(ToolBase)
+        // передаём layer и history наверх по цепочке наследования
+        super(layer, history);
 
         // настройки кисти по умолчанию
         this.color = '#000000';
         this.size = 5;
     }
 
-    // применяем настройки кисти к контексту перед рисованием
+    // переопределяем метод родителя - задаём стиль рисования
+    // override - наследник заменяет метод родителя своей версией
+    // вызывается в activate() -> _onPointerDown перед каждым штирхом
     applySettings() {
+        const ctx = this.layer.ctx;
+
         // цвет линии
-        this.drawLayer.ctx.strokeStyle = this.color;
+        ctx.strokeStyle = this.color;
 
-        // толщина линии
-        this.drawLayer.ctx.lineWidth = this.size;
+        // толщина линии в пикселях
+        ctx.lineWidth = this.size;
 
-        // плавные стыки линий
-        this.drawLayer.ctx.lineJoin = 'round';
-        this.drawLayer.ctx.lineCap = 'round';
+        // скргление стыков и концов линий - без этого будут зубйы
+        ctx.lineJoin = 'round'; // стык двух сегментов
+        ctx.lineCap = 'round'; // конец линии
     }
 }

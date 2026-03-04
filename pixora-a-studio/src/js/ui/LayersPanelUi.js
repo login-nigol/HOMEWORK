@@ -1,11 +1,18 @@
 'use strict';
 
-// LayersPanelUi - рендерит список слоёв и управлет панелью
+// LayersPanelUi - рендерит список слоёв и обрабатывает кнопки управления
+// связывает Stage (данные) с DOM (отображение)
 export class LayersPanelUi {
     constructor(stage, $list, $btns, onChange) {
+        // ссылка на сцену - источник данных о слое
         this.stage = stage;
+
+        // DOM-элемент <ul> - сюда рендерим список
         this.$list = $list;
-        this._onChange = onChange; // вызываем когда активный слой меняется
+
+        // колбэк - вызываем когда активный слой изменился
+        // main.js передаёт сюда функцию для переключения инструментов
+        this._onChange = onChange;
 
         // навешиваем обработчики на кнопки управления
         $btns.forEach((btn) => {
@@ -15,10 +22,12 @@ export class LayersPanelUi {
         });
     }
 
-    // рендерим список слоёв из stage.layers
+    // рендерим список слоёв - полная перерисовка из stage.layers
     render() {
+        // очищаем список
         this.$list.innerHTML = '';
 
+        // прооходим по всем слоям и создайём <li> для каждого
         this.stage.layers.forEach((layer) => {
             const li = document.createElement('li');
             li.classList.add('layer-item');
@@ -28,17 +37,23 @@ export class LayersPanelUi {
                 li.classList.add('layer-item--active');
             }
 
-            // показываем статус видимости
+            // иконки: видимость + тип слоя
             const icon = layer.visible ? '👁️' : '🚫';
             const typeIcon = layer.type === 'image' ? '🖼️' : '🖌️'
             li.dataset.id = layer.id;
             li.textContent = `${icon} ${typeIcon} ${layer.id}`;
 
-            // клик по слою - делаем активным
+            // клик элементу списка - делаем слой активным
             li.addEventListener('click', () => {
                 this.stage.activeLayer = layer;
+
+                // поднимаем canvas наверх DOM-стека
                 this.stage.bringToFront(layer);
+
+                // перерисовыем список (подсветка сменится)
                 this.render();
+
+                // уведомляем main.js о смене слоя
                 this._onChange(layer);
             });
 
@@ -46,7 +61,7 @@ export class LayersPanelUi {
         });
     }
 
-    // обработка действий кнопок
+    // обработка кнопок управления слоями
     _onAction(action) {
         const layer = this.stage.activeLayer;
 
@@ -56,18 +71,22 @@ export class LayersPanelUi {
                 break;
         
             case 'delete':
-                if ( !layer || this.stage.layers.length <= 1 ) return; // не удаляем последний
+                // не удаляем последний слой - редакто без слоёв не работает
+                if ( !layer || this.stage.layers.length <= 1 ) return;
                 this.stage.removeLayer(layer); 
                 break;
 
             case 'up':
                 if ( !layer ) return;
-                this.stage.moveLayer(layer, 1); // вверх в стеке = вперёд в масстве
+                // вверх визуально = вперёд в масстве (+1)
+                this.stage.moveLayer(layer, 1);
                 break;
 
             case 'down':
                 if ( !layer ) return;
-                this.stage.moveLayer(layer, -1); // вниз в стеке = назад в масстве
+
+                // вниз визуально = назад в масстве (-1)
+                this.stage.moveLayer(layer, -1);
                 break;
 
             case 'toggle':
@@ -76,7 +95,10 @@ export class LayersPanelUi {
                 break;
         }
 
+        // обновляем UI после лубого действия
         this.render();
+
+        // уведомляем main.js - активный слой мог измениться
         this._onChange(this.stage.activeLayer);
     }
 }

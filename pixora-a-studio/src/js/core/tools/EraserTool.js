@@ -3,27 +3,32 @@
 import { ToolBase } from "./ToolBase.js";
 
 // EraserTool - инструмент ластик
-// стирает содержимое canvas через compositeOperation
+// стирает пиксели через смену режима наложения (compositing)
 export class EraserTool extends ToolBase {
-    constructor(drawLayer, history) {
-        super(drawLayer, history);
+    constructor(layer, history) {
+        super(layer, history);
 
         // размер ластика по умолчанию
         this.size = 15;
     }
 
-    // применяем настройки ластика
+    // применяем настройки ластика перед штрихом
     applySettings() {
-        const ctx = this.drawLayer.ctx;
+        const ctx = this.layer.ctx;
 
-        // режим вырезания - рисуем прозрачность
+        // destionation-out - режим вырезания, рисуем прозрачность
+        // вместо добавления пикселей - вырезаем их
         ctx.globalCompositeOperation = 'destination-out';
+
         ctx.lineWidth = this.size;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
     }
 
+    // метод заглушка в родителе
+    // хук после штриха - обязательно возвращаем режим наложения
+    // без этого кисто после ластика будет тоже стирать
     _afterStroke() {
-        this.drawLayer.ctx.globalCompositeOperation = 'source-over';
+        this.layer.ctx.globalCompositeOperation = 'source-over';
     }
 }

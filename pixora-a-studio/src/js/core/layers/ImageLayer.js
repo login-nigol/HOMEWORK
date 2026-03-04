@@ -1,15 +1,13 @@
 'use strict';
 
-// ImageLayer - слой с картинкой
-// хрнит изображение, позицию, масштаб, поворот
-export class ImageLayer {
+import { LayerBase } from "./LayerBase.js";
+
+// ImageLayer - слой загруженым изображением
+// наследует рисование от LayerBase
+// добовляет: загрузку файла, трансыормации, рендер
+export class ImageLayer extends LayerBase {
     constructor(canvas, ctx, id) {
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.id = id;
-        this.type = 'image';
-        this.visible = true;
-        this.isDrawing = false; // совместимочть с ToolBase
+        super(canvas, ctx, id, 'image');
 
         // изображение
         this.image = null;
@@ -86,8 +84,8 @@ export class ImageLayer {
         ctx.restore();
     }
 
-    // заглушки для совместимости м ToolBase
-    startDrawing() {}
-    draw() {}
-    stopDrawing() {}
+    // заглушки для совместимости с ToolBase
+    // startDrawing() {}
+    // draw() {}
+    // stopDrawing() {}
 }
