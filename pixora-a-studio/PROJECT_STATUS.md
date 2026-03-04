@@ -14,10 +14,12 @@
 - [x] базовая HTML-разметка (toolbar, stage, panel)
 - [x] main.css (layout, grid, адаптив в процессе)
 - [x] constants.js, dom.js, main.js
+
 - [x] Stage.js — создание canvas-слоёв
 - [x] DrawLayer.js — слой для рисования
 - [x] BrushTool.js — кисть с Pointer Events API
 - [x] Рисование мышью/тачем/стилусом на canvas
+
 - [x] ToolBase — базовый класс инструментов
 - [x] BrushTool / EraserTool — наследование от ToolBase
 - [x] Панель инструментов (кисть, ластик, цвет, размер)
@@ -27,26 +29,24 @@
 - [x] ImageLayer — загрузка картинки, трансформации, drag&drop
 - [x] MoveTool — перемещение картинки
 - [x] Панель слоёв: список, активный, скрыть/показать, удалить, порядок
+
 - [x] Undo/redo с горячими клавишами
 - [x] Исправлен баг: _isActive флаг вместо !!_onPointerDown
+
+- [x] ExportService — экспорт PNG (склейка слоёв)
+- [x] StorageService — сохранение/загрузка проекта в localStorage
 
 ## В работе
 
 ## Следующий шаг
 Ресайз/поворот картинки на canvas
-ImageLayer как отдельный класс
-
-Потом — экспорт/сохранение:
-
-Экспорт PNG
 Возможность передать/отослать картинку/открытку ссылкой,
 но так чтобы получатель не мог редактировать
-Сохранить/загрузить проект JSON (localStorage)
 
 Последнее — полировка:
 
 Звук + вибро
-Анимации интерфейса (CSS transitions)
+CSS-aнимации интерфейса
 Адаптив (медиа-запросы)
 Кроссбраузерность
 
@@ -66,9 +66,9 @@ ImageLayer как отдельный класс
 | Анимация | — | 0% |
 | Мультимедиа | Canvas-рисование, кисть/ластик, ImageLayer | 15% |
 | Интерактивность | Pointer Events (мышь/тач/стилус), переключение инструментов, color/range, управление слоями, drag&drop, undo/redo, горячие клавиши | 35% |
-| Коммуникации | — | 0% |
+| Коммуникации | localStorage сохранение/загрузка проекта | 25% |
 | Адаптивность | Grid layout (базово) | 10% |
-| Самостоятельный JS | ToolBase, LayerBase, Stage, History, BrushTool, EraserTool, MoveTool, DrawLayer, ImageLayer, LayersPanelUi, ООП, наследование, модули | 45% |
+| Самостоятельный JS | ToolBase, LayerBase, Stage, History, BrushTool, EraserTool, MoveTool, DrawLayer, ImageLayer, LayersPanelUi, ExportService, StorageService, 3 инструмента, ООП, наследование, модули | 50% |
 | Кроссбраузерность | Тестируется: Chrome, Samsung, iPad | 10% |
 
 ---
@@ -82,8 +82,8 @@ ImageLayer как отдельный класс
 ### Фаза 1 — MVP (до 14 марта)
 - [x] Canvas-редактор: слой-рисунок (ImageLayer)
 - [x] Панель слоёв: список, скрыть/показать, удалить, порядок
-- [ ] Сохранить/загрузить проект (JSON, localStorage)
-- [ ] Экспорт PNG
+- [x] Сохранить/загрузить проект (JSON, localStorage)
+- [x] Экспорт PNG
 - [ ] Звук + вибро
 - [ ] Адаптив + кроссбраузерность
 
