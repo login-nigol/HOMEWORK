@@ -3,7 +3,10 @@
 import {
     $stageStack, $toolColor, $toolSize, $toolBtns, $toolFile,
     $layerBtns, $layerList, $undoBtn, $redoBtn,
-    $panelToggle, $layersPanel
+    $panelToggle, $layersPanel,
+    $exportBtn,
+    $saveBtn,
+    $loadBtn
 } from "./dom.js";
 import { LayersPanelUi } from "./ui/LayersPanelUi.js";
 import { Stage } from "./core/renderer/Stage.js";
@@ -11,6 +14,8 @@ import { History } from "./core/History.js";
 import { BrushTool } from "./core/tools/BrushTool.js";
 import { EraserTool } from "./core/tools/EraserTool.js";
 import { MoveTool } from "./core/tools/MoveTool.js";
+import { ExportService } from "./core/ExportService.js";
+import { StorageService } from "./core/StorageService.js";
 
 
 // === Инициализация ===
@@ -157,4 +162,29 @@ $panelToggle.addEventListener('click', () => {
     $layersPanel.classList.toggle('layers-panel--collapsed');
 });
 
-console.log(drawLayer.id, stage.layers.length);
+// === экспорт PNG ===
+$exportBtn.addEventListener('click', () => {
+        ExportService.exportPNG(stage);
+    });
+
+// === сохранение проекта ===
+$saveBtn.addEventListener('click', () => {
+    StorageService.save(stage);
+});
+
+// === загрузка проекта ===
+$loadBtn.addEventListener('click', async () => {
+    console.log('до загрузки:', stage.layers.length);
+    const loaded = await StorageService.load(stage);
+    console.log('после загрузки:', stage.layers.length);
+
+    if ( loaded ) {
+        // обновляем проект
+        layersPanel.render();
+
+        // переключаем инструменты на активный слой
+        switchLayerForTools(stage.activeLayer);
+    }
+});
+
+// console.log(drawLayer.id, stage.layers.length);

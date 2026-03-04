@@ -75,6 +75,9 @@ export class Stage {
 
     // удаляем слой из сцены
     removeLayer(layer) {
+
+        // console.log('removeLayer:', layer.id, 'index:', this.layers.indexOf(layer));
+
         const index = this.layers.indexOf(layer);
         if ( index === -1 ) return;
 
@@ -83,6 +86,8 @@ export class Stage {
 
         // убираем из массива
         this.layers.splice(index, 1);
+
+        // console.log('после splice:', this.layers.length);
 
         // если удалили активный - переключаемся на последний
         if ( this.activeLayer === layer ) {

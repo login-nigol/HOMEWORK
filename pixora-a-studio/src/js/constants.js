@@ -14,9 +14,14 @@ export const SELECTORS = {
 
     undoBtn: '[data-action="undo"]',
     redoBtn: '[data-action="redo"]',
+
+    exportBtn: '[data-action="export"]',
+    saveBtn: '[data-action="save"]',
+    loadBtn: '[data-action="load"]',
     
     panelToggle: '.layers-panel__toggle',
     layersPanel: '.layers-panel',
+
 };
 
 // максимальное колтчество шагов истории

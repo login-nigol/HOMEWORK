@@ -21,6 +21,14 @@
     <header class="toolbar" aria-label="Toolbar">
       <span class="toolbar__titel">Pixora A. Studio</span>
 
+      <button class="tollbar-btn" data-action="save"
+        title="Сохранить проект">📁</button>
+      <button class="tollbar-btn" data-action="load"
+        title="Загрузить проект">📂</button>
+
+      <button class="toolbar-btn" data-action="export"
+        title="Экспорт PNG">💾</button>
+
       <button class="toolbar-btn" data-action="undo"
         title="Отменить (Ctrl+Z)">↩️</button>
       <button class="toolbar-btn" data-action="redo"
@@ -50,10 +58,10 @@
       </div>
 
       <!-- загрузка картинки -->
-       <label class="tool-label tool-label--file" title="Добавить картинку">
+      <label class="tool-label tool-label--file" title="Добавить картинку">
         🖼️
         <input type="file" class="tool-file" accept="image/*" hidden>
-       </label>
+      </label>
     </nav>
 
     <!-- Main area - основная панель -->
