@@ -9,6 +9,11 @@ export const SELECTORS = {
     toolBtns: '.tool-btn',
     toolFile: '.tool-file',
 
+    rotateLeftBtn: '[data-action="rotate-left"]',
+    rotateRightBtn: '[data-action="rotate-right"]',
+    scaleUpBtn: '[data-action="scale-up"]',
+    scaleDownBtn: '[data-action="scale-down"]',
+
     layerBtns: '.layer-btn',
     layerList: '.layers-panel__list',
 
@@ -16,8 +21,11 @@ export const SELECTORS = {
     redoBtn: '[data-action="redo"]',
 
     exportBtn: '[data-action="export"]',
-    saveBtn: '[data-action="save"]',
     loadBtn: '[data-action="load"]',
+    saveBtn: '[data-action="save"]',
+
+    shareProjectBtn: '[data-action="share-project"]',
+    shareImageBtn: '[data-action="share-image"]',
     
     panelToggle: '.layers-panel__toggle',
     layersPanel: '.layers-panel',

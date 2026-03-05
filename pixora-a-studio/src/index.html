@@ -21,6 +21,11 @@
     <header class="toolbar" aria-label="Toolbar">
       <span class="toolbar__title">Pixora A. Studio</span>
 
+      <button class="toolbar-btn" data-action="share-image"
+      title="Поделиться картинкой">🔗</button>
+      <button class="toolbar-btn" data-action="share-project"
+      title="Поделиться проектом">📤</button>
+
       <button class="toolbar-btn" data-action="save"
         title="Сохранить проект">📁</button>
       <button class="toolbar-btn" data-action="load"
@@ -62,6 +67,18 @@
         🖼️
         <input type="file" class="tool-file" accept="image/*" hidden>
       </label>
+
+      <!-- трансформация для image-слоя -->
+       <div class="tool-panel__submenu" data-submenu="transform">
+        <button class="transform-btn" data-action="rotate-left"
+        title="Повернуть влево">↺</button>
+        <button class="transform-btn" data-action="rotate-right"
+        title="Повернуть вправо">↻</button>
+        <button class="transform-btn" data-action="scale-up"
+        title="Увеличить">➕</button>
+        <button class="transform-btn" data-action="scale-down"
+        title="Уменьшить">➖</button>
+       </div>
     </nav>
 
     <!-- Main area - основная панель -->

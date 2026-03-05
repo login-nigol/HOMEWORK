@@ -1,11 +1,12 @@
 'use strict';
 
-// ExportService - экспорт проекта в PNG
+// ExportService - экспорт и склейка слоёв в PNG
 // склеивает все видимые слои в одну картинку и скачивает файл
 export class ExportService {
 
-    // принимает Stage - берёт отттуда слои и размеры
-    static exportPNG(stage) {
+    // склеиваем все видимые слои в один canvas
+    // переиспользуется в exportPNG и ShareService
+    static mergeCanvas(stage) {
         // создаём временный canvas для склейки
         const tempCanvas = document.createElement('canvas');
         const firstLayer = stage.layers[0];
@@ -20,10 +21,17 @@ export class ExportService {
         stage.layers.forEach(layer => {
             // пропускаем скрытые слои
             if ( !layer.visible ) return;
-
+    
             // рисуем содержимое слоя на верхний canvas
             tempCtx.drawImage(layer.canvas, 0, 0);
         });
+
+        return tempCanvas;
+    }
+
+    // экспорт PNG - склейка + скачивание
+    static exportPNG(stage) {
+        const tempCanvas = ExportService.mergeCanvas(stage);
 
         // перемещаем canvas в Data URL формата PNG
         // data:image/png;base64 - картинка закодированная в текст

@@ -82,7 +82,8 @@ body {
 }
 
 /* кнопка инструмента (кисть, ластик и тп) */
-.tool-btn {
+.tool-btn,
+.transform-btn {
     width: 2.5em;
     height: 2.5em;
     font-size: 1.1em;

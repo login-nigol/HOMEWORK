@@ -1,14 +1,22 @@
 'use strict';
 
+// === Импорты ===
+
 import {
     $stageStack, $toolColor, $toolSize, $toolBtns, $toolFile,
     $layerBtns, $layerList, $undoBtn, $redoBtn,
     $panelToggle, $layersPanel,
-    $exportBtn,
-    $saveBtn,
-    $loadBtn
+    $exportBtn, $saveBtn, $loadBtn,
+    $shareImageBtn, $shareProjectBtn,
+    $rotateLeftBtn, $rotateRightBtn, $scaleUpBtn, $scaleDownBtn,
 } from "./dom.js";
+
+// UI-модули
 import { LayersPanelUi } from "./ui/LayersPanelUi.js";
+import { ShareLoader } from "./ui/ShareLoader.js";
+import { TransformHandler } from "./ui/TransformHandler.js";
+
+// core-модули
 import { Stage } from "./core/renderer/Stage.js";
 import { History } from "./core/History.js";
 import { BrushTool } from "./core/tools/BrushTool.js";
@@ -16,6 +24,7 @@ import { EraserTool } from "./core/tools/EraserTool.js";
 import { MoveTool } from "./core/tools/MoveTool.js";
 import { ExportService } from "./core/ExportService.js";
 import { StorageService } from "./core/StorageService.js";
+import { ShareService } from "./core/ShareService.js";
 
 
 // === Инициализация ===
@@ -24,10 +33,10 @@ import { StorageService } from "./core/StorageService.js";
 const stage = new Stage($stageStack);
 const history = new History();
 
-// создаём слой для рисования
-const drawLayer = stage.addLayer({ type: 'draw'});
+// создаём первый слой для рисования
+const drawLayer = stage.addLayer({ type: 'draw' });
 
-// создаём инструменты (пока на первом слое)
+// создаём инструменты (привязаны к первому слою)
 const tools = {
     brush: new BrushTool(drawLayer, history),
     eraser: new EraserTool(drawLayer, history),
@@ -38,7 +47,9 @@ const tools = {
 let activeTool = tools.brush;
 activeTool.activate();
 
-// === вспомогательная функция: переключение активного инструмента
+// === вспомогательные функции ===
+
+// переключение активного инструмента
 function switchTool(toolName) {
     // если уже активен ничего не делаем
     if ( tools[toolName] === activeTool ) return;
@@ -53,7 +64,7 @@ function switchTool(toolName) {
     document.querySelector(`[data-tool="${toolName}"]`).classList.add('tool-btn--active');
 }
 
-// вспомогательная функция: пепреключение слоя для всех инструментов
+// пепреключение слоя для всех инструментов
 function switchLayerForTools(newLayer) {
     tools.brush.setLayer(newLayer);
     tools.eraser.setLayer(newLayer);
@@ -61,7 +72,9 @@ function switchLayerForTools(newLayer) {
     
 }
 
-// панель слоёв - колбэк при смене актвного слоя
+// === панель слоёв ===
+
+// колбэк при смене актвного слоя
 const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) => {
     // переключаем все инструменты на новый слой
     switchLayerForTools(newLayer);
@@ -77,7 +90,19 @@ const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) 
 // отрисовывает начальный список слоёв
 layersPanel.render();
 
-// === Обработчики ===
+// === Инициализация модулей ===
+
+// трансформации image-слоя (поворот, масштаб)
+TransformHandler.init(
+    stage,
+    $rotateLeftBtn, $rotateRightBtn,
+    $scaleUpBtn, $scaleDownBtn
+);
+
+// проверяем URL на шаринг-параметры призагрузке страницы
+ShareLoader.checkUrl(stage, layersPanel, switchLayerForTools);
+
+// === Обработчики: инструменты ===
 
 // переключение инструментов по клику
 $toolBtns.forEach((btn) => {
@@ -85,6 +110,18 @@ $toolBtns.forEach((btn) => {
         switchTool(e.currentTarget.dataset.tool);
     });
 });
+
+// смена цвета кисти
+$toolColor.addEventListener('input', (e) => {
+    tools.brush.color = e.target.value;
+});
+
+// смена размера активного инструмента
+$toolSize.addEventListener('input', (e) => {
+    activeTool.size = Number(e.target.value);
+});
+
+// === Обработчики: загрузка изображений ===
 
 // загрузка картинки через input[type="file"]
 $toolFile.addEventListener('change', async (e) => {
@@ -96,16 +133,16 @@ $toolFile.addEventListener('change', async (e) => {
 
     // загружаем файл в слой
     await imageLayer.loadFromFile(file);
-
+    
     // переключаем инструменты на новый слой
     switchLayerForTools(imageLayer);
-
+    
     // для картики автоматически включаем move
     switchTool('move');
-
+    
     // обновляем папнель слоёв
     layersPanel.render();
-
+    
     // сбрасываем input чтобы можно было загрузить то же файл повторно
     e.target.value = '';
 });
@@ -122,7 +159,7 @@ $stageStack.addEventListener('drop', async (e) => {
     if ( !file || !file.type.startsWith('image/')) return;
 
     // та же лоника что и в chage - создаём слой, загружаем, переключаем
-    const imageLayer = stage.addLayer({ type: 'image'});
+    const imageLayer = stage.addLayer({ type: 'image' });
     await imageLayer.loadFromFile(file);
 
     switchLayerForTools(imageLayer);
@@ -130,17 +167,9 @@ $stageStack.addEventListener('drop', async (e) => {
     layersPanel.render();
 });
 
-// смена цвета кисти
-$toolColor.addEventListener('input', (e) => {
-    tools.brush.color = e.target.value;
-});
 
-// смена размера активного инструмента
-$toolSize.addEventListener('input', (e) => {
-    activeTool.size = Number(e.target.value);
-});
+// === ОБработчики: undo/redo ===
 
-// undo/redo кнопки
 $undoBtn.addEventListener('click', () => history.undo(stage));
 $redoBtn.addEventListener('click', () => history.redo(stage));
 
@@ -157,7 +186,60 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// сворачивание панели слоёв
+// === Обработчики: файловые операции
+
+// экспорт PNG
+$exportBtn.addEventListener('click', () => {
+    ExportService.exportPNG(stage);
+});
+
+// сохранение проекта в localStorage
+$saveBtn.addEventListener('click', () => {
+    StorageService.save(stage);
+});
+
+// загрузка проекта из localStorage
+$loadBtn.addEventListener('click', async () => {
+    const loaded = await StorageService.load(stage);
+    
+    if ( loaded ) {
+        // обновляем проект
+        layersPanel.render();
+        
+        // переключаем инструменты на активный слой
+        switchLayerForTools(stage.activeLayer);
+    }
+});
+
+// == Обработчики: шаринг ===
+
+// пооделиться картинкой (только просмотр)
+$shareImageBtn.addEventListener('click', async () => {
+    try {
+        const url =
+        await ShareService.shareImage(stage);
+        await navigator.clipboard.writeText(url);
+        alert('Ссылка на картинку скопирована: ' + url);
+    } catch (error) {
+        alert('Ошибка: ' + error.message);
+    }
+});
+
+// поделиться проектом (с редактированием)
+$shareProjectBtn.addEventListener('click', async () => {
+    try {
+        const url =
+        await ShareService.shareProject(stage);
+        await navigator.clipboard.writeText(url);
+        alert('Ссылка на проект скопирована: ' + url);
+    } catch (error) {
+        alert('Ошибка: ' + error.message);
+    }
+});
+
+// === Обработчики: панели слоёв ===
+
+// свораяивание панели
 $panelToggle.addEventListener('click', () => {
     // на мобиле выдвигаем/прячем панель
     if ( window.innerWidth <= 768 ) {
@@ -165,31 +247,6 @@ $panelToggle.addEventListener('click', () => {
     } else {
         // на десктопе - сворачивание/разворачивание
         $layersPanel.classList.toggle('layers-panel--collapsed');
-    }
-});
-
-// === экспорт PNG ===
-$exportBtn.addEventListener('click', () => {
-        ExportService.exportPNG(stage);
-    });
-
-// === сохранение проекта ===
-$saveBtn.addEventListener('click', () => {
-    StorageService.save(stage);
-});
-
-// === загрузка проекта ===
-$loadBtn.addEventListener('click', async () => {
-    console.log('до загрузки:', stage.layers.length);
-    const loaded = await StorageService.load(stage);
-    console.log('после загрузки:', stage.layers.length);
-
-    if ( loaded ) {
-        // обновляем проект
-        layersPanel.render();
-
-        // переключаем инструменты на активный слой
-        switchLayerForTools(stage.activeLayer);
     }
 });
 
