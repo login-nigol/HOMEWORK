@@ -17,8 +17,9 @@ body {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* === Layout: desctop -> mobile === */
+/* === Layout === */
 
+/* корневой контейнер - сетка на весь экран */
 .app {
     max-width: 90em;
     margin: 0 auto;
@@ -29,6 +30,7 @@ body {
     overflow: hidden;
 }
 
+/* рабочая область - панель слоёв + холст */
 .workspace {
     display: grid;
     grid-template-columns: auto 1fr; /* резина + холст */
@@ -38,7 +40,7 @@ body {
     overflow: hidden;
 }
 
-/* === Toolbar === */
+/* === Toolbar - верхняя панель === */
 
 .toolbar {
     display: flex;
@@ -49,15 +51,18 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
+/* заголовок - прижимает кнопки вправо */
 .toolbar__title {
     font-weight: 700;
-    margin-right: auto; /* прижимает кнопки вправо */
+    margin-right: auto;
 }
 
+/* кнопки toolbar (undo, redo, save и тд) */
 .toolbar-btn {
     width: 2.5em;
     height: 2.5em;
     font-size: 1em;
+
     border: 1px solid #ddd;
     border-radius: 0.4em;
     background: #f5f5f5;
@@ -71,28 +76,40 @@ body {
     display: flex;
     align-items: center;
     gap: 0.8em;
+
     padding: 0.5em 1.2em;
     border-bottom: 1px solid #ddd;
 }
 
-/* группа кнопок */
-.tools-panel__buttons {
-    display: flex;
-    gap: 0.4em;
-}
-
-/* кнопка инструмента */
+/* кнопка инструмента (кисть, ластик и тп) */
 .tool-btn {
     width: 2.5em;
     height: 2.5em;
     font-size: 1.1em;
+
     border: 2px solid transparent;
     border-radius: 0.4em;
     background: #f5f5f5;
     cursor: pointer;
 }
 
-/* кнопка занрузки картинки */
+/* активный инструмент - посветка */
+.tool-btn--active {
+    border-color: #4a90d9;
+    background: #e8f0fe;
+}
+
+/* поодменю инструмента (цвет, размер) - inline рядом с кнопками */
+.tools-panel__submenu {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+
+    padding-left: 0.8em;
+    border-left: 1px solid #ddd;
+}
+
+/* кнопка загрузки картинки */
 .tool-label--file {
     display: flex;
     align-items: center;
@@ -100,68 +117,41 @@ body {
     width: 2.5em;
     height: 2.5em;
     font-size: 1.1em;
+
     border: 2px solid transparent;
     border-radius: 0.4em;
     background: #F5F5F5;
-    cursor: pointer;
-    padding-left: 0.8em;
     border-left: 2px solid #ddd;
-}
-
-/* активный инструмент */
-.tool-btn--active {
-    border-color: #4a90d9;
-    background: #e8f0fe;
-}
-
-/* поодменю - inline рядом с кнопками */
-.tools-panel__submenu {
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
-    padding-left: 0.8em;
-    border-left: 1px solid #ddd;
-}
-
-/* цвет */
-.tool-color {
-    width: 2.2em;
-    height: 2.2em;
-    border: none;
     cursor: pointer;
 }
 
-/* размер кисти */
-.tool-size {
-    width: 6em;
+/* выбор цвета */
+.tool-color {
+    width: 2.5em;
+    height: 2.5em;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
 }
 
-/* === Layers panel - панель слоёв === */
+/* ползунок размера кисти */
+.tool-size {
+    width: 7em;
+}
 
- /* панель слоёв */
+/* === Layers panel - панель слоёв (десктоп) === */
+
+ /* контейнер панели - flex для body + toggle */
 .layers-panel {
-    /* position: relative; для сворачивания панели слоёв */
     display: flex;
-    /* flex-direction: column; */
-    /* gap: 0.5em;/ */
-    /* min-width: 15em; */
-    /* max-width: 25em; */
-    /* width: 18em; */
-    /* overflow: hidden; */
     
     border: 1px solid #ddd;
     border-radius: 0.5em;
-    /* padding: 0.5em; */
-
-    /* плавная анимация ширины */
-    /* transition: width 0.5s ease; */
 }
 
-/* свёрнутое состояние */
+/* свёрнутое состояние (десктоп) */
 .layers-panel--collapsed {
     width: 2.5em;
-    /* max-width: 2.5em; */
-    /* overflow: hidden; */
 }
 
 /* обёртка - анимируем ширину, прячем содержимое */
@@ -171,42 +161,27 @@ body {
     transition: width 0.3s ease;
 }
 
+/* свёрнутая обёртка - штрина 0 */
 .layers-panel--collapsed .layers-panel__body {
     width: 0;
-    transition: width 0.3s ease;
+    /* transition: width 0.3s ease; */
 }
 
-/* содержимое панели */
+/* содержимое - список слоёв + кнопки управления */
 .layers-panel__content {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+
     padding: 0.5em;
     min-width: 15em;
-    /* visibility: visible; */
-    /* overflow: hidden; */
-    /* min-width: 0; */
-
-    /* плавное появление/скрытме */
-    /* opacity: 1; */
-    /* transition: visibility 0.2s ease, opacity 0.2s ease; */
-}
-
-/* скрываем контен при сворачивании */
-.layers-panel--collapsed .layers-panel__content {
-    /* visibility: hidden; */
-    /* opacity: 0; */
-    /* pointer-events: none; */
 }
 
 /* кнопка сворачивания */
 .layers-panel__toggle {
     flex-shrink: 0;
     align-self: flex-start;
-    /* position: absolute; */
-    /* top: 0.5em; */
-    /* right: 0.5em; */
-    /* z-index: 1; */
+
     width: 2em;
     height: 2em;
     margin: 0.5em 0.2em;
@@ -221,6 +196,7 @@ body {
     transition: transform 0.3s ease;
 }
 
+/* стрелка поврачивается при сворачивании */
 .layers-panel--collapsed .layers-panel__toggle {
     transform: rotate(180deg);
 }
@@ -238,6 +214,7 @@ body {
     width: 2.2em;
     height: 2.2em;
     font-size: 1em;
+
     border: 1px solid #ddd;
     border-radius: 0.3em;
     background: #f5f5f5;
@@ -257,10 +234,11 @@ body {
 
 /* элемент списка слоёв */
 .layer-item {
+    white-space: nowrap;
+
     padding: 0.4em 0.6em;
     border-radius: 0.3em;
     cursor: pointer;
-    white-space: nowrap;
 }
 
 /* активный слой */
@@ -269,7 +247,7 @@ body {
     border-left: 3px solid #4a909d;
 }
 
-/* === Stage === */
+/* === Stage - холст === */
 
 .stage {
     border: 1px solid #ddd;
@@ -277,12 +255,12 @@ body {
     overflow: hidden;
 
     /* центрирую канвас если он меньше контейнера */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
-/* canvas layers live here (absolut stack) */
+/* конотейнер canvas layers (absolut stack) */
 .stage__stack {
     position: relative;
     width: 100%;
@@ -290,18 +268,100 @@ body {
     min-height: 60vh;
 }
 
-/* чтобы абсолютные canvas не вылазили и не ловили выделение */
+/* общие правила для canvas внутри стека */
 .stage__stack canvas {
     display: block;
-    touch-action: none; /* важный задел под pointer events */
+    touch-action: none; /* отклюяаем браузерные жесты для pointer events */
 }
 
 /* каждый canvas-слой абсолютно позиционирован внутри стека */
 .layer {
     position: absolute;
-    /* inset: 0; */
     top: 0;
     left: 0;
-    /* width: 100%; */
-    /* height: 100%; */
+}
+
+/* === Adaptive: mobile === */
+
+@media ( max-width: 768px ) {
+    /* позиционирование для .app */
+    .app {
+        position: relative;
+    }
+
+    /* workspace - одна колонка, canvas на весь экран */
+    .workspace {
+        grid-template-columns: 1fr;
+        padding: 0.5em;
+        gap: 0;
+
+        /* border: 1px solid; */
+    }
+
+    /* toolbar - компактнее */
+    .toolbar {
+        padding: 0.4em 0.8em;
+        gap: 0.5em;
+    }
+
+    /* tools panel - прокрутка если не влезет */
+    .tools-panel {
+        padding: 0.4em 0.8em;
+        gap: 0.5em;
+        overflow-x: auto;
+    }
+
+    /* панель слоёв - плавно вывезжает */
+    .layers-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        height: 100%;
+
+        background: rgba(255, 255, 255, 0.92);
+        border-left: 1px solid #ddd;
+        border-radius: 0;
+        border: none;
+
+        transform:  translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    /* открытое состояние - панель выезжает на экран */
+    .layers-panel--open {
+        transform: translateX(0);
+    }
+
+    /* кнопка toggle - внутри .app */
+    .layers-panel__toggle {
+        position: absolute;
+        top: 50%;
+        right: auto;
+        left: -2.5em;
+        z-index: 101;
+
+        transform: translateY(-50%);
+        border-radius: 0.3em 0 0 0.3em;
+        margin: 0;
+    }
+
+    /* когда панель открыта - кнопка двигается с ней */
+    .layers-panel--open .layers-panel__toggle {
+        position: absolute;
+        top: 0.5em;
+        right: auto;
+        left: -2.2em;
+        transform: rotate(180deg);
+    }
+
+    /* canvas на полную ширину */
+    .stage {
+        border-radius: 0;
+        /* border: none; */
+    }
+
+    .stage__stack {
+        min-height: 50vh;
+    }
 }

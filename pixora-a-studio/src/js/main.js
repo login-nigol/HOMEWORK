@@ -159,7 +159,13 @@ document.addEventListener('keydown', (e) => {
 
 // сворачивание панели слоёв
 $panelToggle.addEventListener('click', () => {
-    $layersPanel.classList.toggle('layers-panel--collapsed');
+    // на мобиле выдвигаем/прячем панель
+    if ( window.innerWidth <= 768 ) {
+        $layersPanel.classList.toggle('layers-panel--open');
+    } else {
+        // на десктопе - сворачивание/разворачивание
+        $layersPanel.classList.toggle('layers-panel--collapsed');
+    }
 });
 
 // === экспорт PNG ===
