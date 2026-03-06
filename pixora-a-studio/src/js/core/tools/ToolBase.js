@@ -3,12 +3,13 @@
 // ToolBase - базовый класс для всех инструментов
 // овтвечает за: pointer-события, координаты, жизненый цикл (activate/deactivate)
 export class ToolBase {
-    constructor(layer, history) {
+    constructor(layer, history, sound) {
         // слой на котором работают инструменты
         this.layer = layer;
 
         // ссылка на объект истории (undo/redo)
         this.history = history; 
+        this.sound = sound;
 
         // явный флаг: активвен ли инсструмент прямо сейчас
         this._isActive = false;
@@ -34,13 +35,10 @@ export class ToolBase {
         
         // pointerdown - начало рисования
         this._onPointerDown = (e) => {
-            console.log('layer:', this.layer);
-            console.log('ctx:', this.layer?.ctx);
-            console.log('canvas:', this.layer?.canvas);
             // сохраняем снинмок canvas до изменений (для undo)
-            if ( this.history ) {
-                this.history.save(this.layer);
-            }
+            if ( this.history ) this.history.save(this.layer);
+            if ( this.sound ) this.sound.playDrawStart();
+            
             
             // переводим координаты мыши в координаты canvas
             const { x, y } = this._getCoords(e);
@@ -63,6 +61,7 @@ export class ToolBase {
             this.layer.stopDrawing();
             // хук для наследников (например ластик сбрасывает compositeOperation)
             this._afterStroke();
+            if ( this.sound ) this.sound.playDrawEnd();
         };
 
         // pointerleave - при уходе за пределы canvas, останавливаем рисование

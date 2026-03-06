@@ -25,22 +25,24 @@ import { MoveTool } from "./core/tools/MoveTool.js";
 import { ExportService } from "./core/ExportService.js";
 import { StorageService } from "./core/StorageService.js";
 import { ShareService } from "./core/ShareService.js";
+import { SoundService } from "./core/SoundService.js";
 
 
 // === Инициализация ===
 
-// точка входа - создаём сцену и историю
+// точка входа - экземпляры
 const stage = new Stage($stageStack);
 const history = new History();
+const sound = new SoundService();
 
 // создаём первый слой для рисования
 const drawLayer = stage.addLayer({ type: 'draw' });
 
 // создаём инструменты (привязаны к первому слою)
 const tools = {
-    brush: new BrushTool(drawLayer, history),
-    eraser: new EraserTool(drawLayer, history),
-    move: new MoveTool(drawLayer,history)
+    brush: new BrushTool(drawLayer, history, sound),
+    eraser: new EraserTool(drawLayer, history, sound),
+    move: new MoveTool(drawLayer,history, sound)
 };
     
 // текущий активный инструмент
@@ -62,6 +64,9 @@ function switchTool(toolName) {
     // обновляем подсветку кнопок
     $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
     document.querySelector(`[data-tool="${toolName}"]`).classList.add('tool-btn--active');
+
+    // звук переключения
+    sound.playToolSwitch();
 }
 
 // пепреключение слоя для всех инструментов
@@ -85,7 +90,7 @@ const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) 
     } else if ( newLayer.type === 'draw' && activeTool === tools.move ) {
         switchTool('brush');
     }
-});
+}, sound);
 
 // отрисовывает начальный список слоёв
 layersPanel.render();
@@ -170,8 +175,15 @@ $stageStack.addEventListener('drop', async (e) => {
 
 // === ОБработчики: undo/redo ===
 
-$undoBtn.addEventListener('click', () => history.undo(stage));
-$redoBtn.addEventListener('click', () => history.redo(stage));
+$undoBtn.addEventListener('click', () => {
+    history.undo(stage);
+    sound.playUndo();
+});
+
+$redoBtn.addEventListener('click', () => {
+    history.redo(stage);
+    sound.playRedo();
+});
 
 // undo/redo клавиатура
 document.addEventListener('keydown', (e) => {
@@ -191,11 +203,13 @@ document.addEventListener('keydown', (e) => {
 // экспорт PNG
 $exportBtn.addEventListener('click', () => {
     ExportService.exportPNG(stage);
+    sound.playExport();
 });
 
 // сохранение проекта в localStorage
 $saveBtn.addEventListener('click', () => {
     StorageService.save(stage);
+    sound.playSave();
 });
 
 // загрузка проекта из localStorage

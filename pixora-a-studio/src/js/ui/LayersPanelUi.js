@@ -3,16 +3,17 @@
 // LayersPanelUi - рендерит список слоёв и обрабатывает кнопки управления
 // связывает Stage (данные) с DOM (отображение)
 export class LayersPanelUi {
-    constructor(stage, $list, $btns, onChange) {
+    constructor(stage, $list, $btns, onChange, sound) {
         // ссылка на сцену - источник данных о слое
         this.stage = stage;
-
+        
         // DOM-элемент <ul> - сюда рендерим список
         this.$list = $list;
-
+        
         // колбэк - вызываем когда активный слой изменился
         // main.js передаёт сюда функцию для переключения инструментов
         this._onChange = onChange;
+        this.sound = sound;
 
         // навешиваем обработчики на кнопки управления
         $btns.forEach((btn) => {
@@ -68,12 +69,14 @@ export class LayersPanelUi {
         switch (action) {
             case 'add':
                 this.stage.addLayer({ type: 'draw' });
+                if ( this.sound ) this.sound.playLayerAdd();
                 break;
         
             case 'delete':
                 // не удаляем последний слой - редакто без слоёв не работает
                 if ( !layer || this.stage.layers.length <= 1 ) return;
                 this.stage.removeLayer(layer); 
+                if ( this.sound ) this.sound.playLayerDelete();
                 break;
 
             case 'up':
