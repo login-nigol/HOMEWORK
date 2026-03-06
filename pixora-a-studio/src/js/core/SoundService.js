@@ -62,13 +62,13 @@ export class SoundService {
 
     // начало рисования (мягкий клик)
     playDrawStart() {
-        this._playTone(800, 0.05, 'sine');
+        this._playTone(100, 0.05, 'sine');
         this._vibrate(10);
     }
 
     // конец штриха
     playDrawEnd() {
-        this._playTone(600, 0.03, 'sine');
+        this._playTone(200, 0.03, 'sine');
     }
 
     // переключение инструмента
@@ -91,13 +91,13 @@ export class SoundService {
 
     // undo
     playUndo() {
-        this._playTone(500, 0.08, 'triangle');
+        this._playTone(300, 0.08, 'triangle');
         this._vibrate(10);
     }
 
     // redo
     playRedo() {
-        this._playTone(700, 0.08, 'triangle');
+        this._playTone(200, 0.08, 'triangle');
         this._vibrate(10);
     }
 

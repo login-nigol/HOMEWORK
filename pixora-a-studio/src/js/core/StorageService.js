@@ -107,7 +107,7 @@ export class StorageService {
                     layer.ctx.drawImage(img, 0, 0);
 
                     // для ImageLayer - перерисовываем с транформациями
-                    if ( data.type === 'image' && layer.Image ) {
+                    if ( data.type === 'image' && layer.image ) {
                         layer.render();
                     }
 

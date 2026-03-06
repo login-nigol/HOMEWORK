@@ -5,7 +5,7 @@
 export class ExportService {
 
     // склеиваем все видимые слои в один canvas
-    // переиспользуется в exportPNG и ShareService
+    // переиспользуется в exportPNG и ShareService (DRY)
     static mergeCanvas(stage) {
         // создаём временный canvas для склейки
         const tempCanvas = document.createElement('canvas');
