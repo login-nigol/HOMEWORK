@@ -26,6 +26,7 @@ import { ExportService } from "./core/ExportService.js";
 import { StorageService } from "./core/StorageService.js";
 import { ShareService } from "./core/ShareService.js";
 import { SoundService } from "./core/SoundService.js";
+import { ProgressService } from "./ui/ProgressService.js";
 
 
 // === Инициализация ===
@@ -34,6 +35,7 @@ import { SoundService } from "./core/SoundService.js";
 const stage = new Stage($stageStack);
 const history = new History();
 const sound = new SoundService();
+ProgressService.init(); // инициализируем модалку прогресса
 
 // создаём первый слой для рисования
 const drawLayer = stage.addLayer({ type: 'draw' });

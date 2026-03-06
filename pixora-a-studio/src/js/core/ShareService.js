@@ -1,6 +1,7 @@
 'use strict';
 
 import { ExportService } from "./ExportService.js";
+import { ProgressService } from "../ui/ProgressService.js";
 
 // ShareService - шаринг проекта через AjaxStringStorage2
 // сохраняет данные на сервер, генерирует ссылку для получателя
@@ -34,21 +35,32 @@ export class ShareService {
         return await response.json();
     }
 
-    // READ - прочитать строку по имени
-    static async read(name) {
-        return await ShareService._request({
-            f: 'READ',
-            n: ShareService.PREFIX + name,
-        });
-    }
-
     // INSERT - создать новую строку
     static async insert(name, value) {
-        return await ShareService._request({
-            f: 'INSERT',
-            n: ShareService.PREFIX + name,
-            v: value,
-        });
+        const formData = new FormData();
+        formData.append('f', 'INSERT');
+        formData.append('n', ShareService.PREFIX + name);
+        formData.append('v', value);
+
+        // XHR спрогрессом вместо fatch
+        return await ProgressService.sendWithProgress(
+            ShareService.API_URL,
+            formData,
+            'Отправка данных...',
+        );
+    }
+
+    // READ - с прогрессом загрузки ответа
+    static async read(name) {
+        const formData = new FormData();
+        formData.append('f', 'READ');
+        formData.append('n', ShareService.PREFIX + name);
+
+        return await ProgressService.sendWithProgress(
+            ShareService.API_URL,
+            formData,
+            'Загрузка...',
+        );
     }
 
     // LOCKGET - заблокировать строку для обновления
