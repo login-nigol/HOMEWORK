@@ -42,18 +42,16 @@
 - [x] TransformHandler — поворот/масштаб image-слоя
 - [x] Адаптив: медиа-запрос ≤768px, панель слоёв выезжает справа
 - [x] Рефакторинг main.js — разделение по модулям
+- [x] switchLayerForTools — рефакторинг через Object.values(tools)
 
 ## В работе
 
 ## Следующий шаг
-Последнее — полировка:
 
-- Звук (Web Audio API) + вибро (Vibration API)
-- Галерея стикеров (AJAX-загрузка ресурсов)
-- Прогресс загрузки
-- CSS-анимации (hover, появление слоёв)
-- Тестирование кроссбраузерность
-
+- [ ] Прогресс загрузки (индикатор при AJAX-запросах)
+- [ ] Галерея стикеров (AJAX-загрузка ресурсов с сервера)
+- [ ] CSS-анимации (hover кнопок, появление слоёв)
+- [ ] Тестирование: Edge, Firefox, мобильные устройства
 ---
 
 ## Договорённости
@@ -65,13 +63,15 @@
 ---
 
 ## Критерии оценки (прогресс)
-| Анимация | CSS transitions: сворачивание панели слоёв (desktop), выезд панели справа (mobile), поворот кнопки toggle — main.css. Следующий шаг: hover-анимации кнопок, анимация на Canvas | 15% |
-| Мультимедиа | Canvas-рисование, кисть/ластик — DrawLayer.js, трансформация изображений (translate, rotate, scale) — ImageLayer.js, склейка слоёв для экспорта — ExportService.js, undo/redo (getImageData/putImageData) — History.js. Следующий шаг: звук (Web Audio API) + виброотклик (Vibration API) | 20% |
-| Интерактивность | Pointer Events (мышь/тач/стилус), переключение инструментов, color picker, range input, drag&drop изображений, undo/redo + горячие клавиши, трансформация кнопками (поворот/масштаб) — main.js, ToolBase.js, TransformHandler.js. Следующий шаг: жесты на тачскрине | 40% |
-| Коммуникации | AJAX POST через fetch к AjaxStringStorage2: шаринг картинки (INSERT/READ), шаринг проекта (INSERT/READ), загрузка по URL-параметрам — ShareService.js, ShareLoader.js. Следующий шаг: прогресс загрузки, галерея стикеров через AJAX | 40% |
-| Адаптивность | Резиновая вёрстка до 90em (CSS Grid, em). Медиа-запрос ≤768px: workspace в одну колонку, панель слоёв выезжает справа (transform + transition), tools-panel с прокруткой — main.css. Следующий шаг: тестирование на устройствах | 30% |
-| Самостоятельный JS | ООП, наследование, модули ES6. Классы: ToolBase → BrushTool/EraserTool/MoveTool, LayerBase → DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler. Константы — constants.js, DOM — dom.js | 60% |
-| Кроссбраузерность | Тестируется: Windows 11 (Chrome), Samsung Galaxy S25 (Chrome), iPad Air (Safari). Следующий шаг: Edge, Firefox | 10% |
+| Критерий | Что реализовано | Прогресс |
+|---|---|---|
+| Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle. Далее: hover кнопок, анимация слоёв | 15% |
+| Мультимедиа | Canvas-рисование, кисть/ластик, трансформации изображений, склейка слоёв, undo/redo, **SoundService (Web Audio API + Vibration API)** | 50% |
+| Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками. Далее: жесты тачскрин | 40% |
+| Коммуникации | AJAX POST/READ через fetch: **shareImage → view.html?key=**, shareProject → index.html?project=, ShareLoader. Далее: прогресс загрузки, галерея стикеров | 55% |
+| Адаптивность | CSS Grid, em-единицы, медиа-запрос ≤768px, панель слоёв выезжает. Далее: тестирование на устройствах | 50% |
+| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→BrushTool/EraserTool/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, **view.js** | 65% |
+| Кроссбраузерность | Windows 11 Chrome, Samsung Galaxy S25 Chrome, iPad Air Safari. Далее: Edge, Firefox | 50% |
 
 ---
 
@@ -86,8 +86,14 @@
 - [x] Панель слоёв: список, скрыть/показать, удалить, порядок
 - [x] Сохранить/загрузить проект (JSON, localStorage)
 - [x] Экспорт PNG
-- [ ] Звук + вибро
+- [x] Звук (Web Audio API) + вибро (Vibration API)
 - [x] Адаптив + кроссбраузерность
+- [x] Шаринг картинки → отдельная страница просмотра
+- [x] Шаринг проекта → редактор
+- [ ] Прогресс загрузки
+- [ ] Галерея стикеров
+- [ ] CSS-анимации hover
+- [ ] Тестирование Edge, Firefox
 
 ### Фаза 2 — после сдачи (продакшн)
 - [ ] Трасформация картинокмышкой

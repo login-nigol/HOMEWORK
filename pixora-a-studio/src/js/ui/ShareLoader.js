@@ -37,6 +37,7 @@ export class ShareLoader {
             };
 
             img.src = imageData;
+
         } catch (error) {
             console.error('Ошибка загрузки картинки', error);
         }
@@ -48,8 +49,8 @@ export class ShareLoader {
             const project = await ShareService.loadSharedProject(key);
 
             // очищаем сцену
-            while ( stage.layers.lenght > 0 ) { 
-                stage.removeLayer(stage,layers[0]);
+            while ( stage.layers.length > 0 ) { 
+                stage.removeLayer(stage.layers[0]);
             }
 
             stage.layerIndex = project.layerIndex;

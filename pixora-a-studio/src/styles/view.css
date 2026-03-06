@@ -1,0 +1,72 @@
+/* === Base === */
+
+/* 
+border-box - применяю ко всем элементам 
+width включает padding и border
+псевдоэлементы не наследуют box-sizing автоматически
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* нативный вид под каждую OS */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #f0f0f0;
+}
+
+/* === Layout === */
+
+/* центрируем содержимое по экрану */
+.view {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+}
+
+/* === Frame === */
+
+/* рамка вокруг картинки */
+.view__frame {
+    background: #fff;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    max-width: 90vw;
+}
+
+/* картинка не выходит за экран */
+.view__img {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+/* === Controls === */
+
+/* кнопка скачать */
+.view__btn {
+    padding: 0.6em 1.6em;
+    font-size: 1em;
+
+    border: none;
+    border-radius: 0.4em;
+    background: #4a90d9;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* === Error === */
+
+.view__error {
+    color: #c0392b;
+    font-size: 1.1em;
+}

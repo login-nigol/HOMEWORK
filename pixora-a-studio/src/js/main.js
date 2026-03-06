@@ -71,9 +71,11 @@ function switchTool(toolName) {
 
 // пепреключение слоя для всех инструментов
 function switchLayerForTools(newLayer) {
-    tools.brush.setLayer(newLayer);
-    tools.eraser.setLayer(newLayer);
-    tools.move.setLayer(newLayer);
+    // перебираем все инструменты и переключаем слой
+    Object.values(tools).forEach(tool => tool.setLayer(newLayer));
+    // tools.brush.setLayer(newLayer);
+    // tools.eraser.setLayer(newLayer);
+    // tools.move.setLayer(newLayer);
     
 }
 
@@ -227,7 +229,7 @@ $loadBtn.addEventListener('click', async () => {
 
 // == Обработчики: шаринг ===
 
-// пооделиться картинкой (только просмотр)
+// пооделиться картинкой - открываем PNG в новой вкладке
 $shareImageBtn.addEventListener('click', async () => {
     try {
         const url =

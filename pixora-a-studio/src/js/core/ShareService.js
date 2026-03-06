@@ -99,8 +99,8 @@ export class ShareService {
 
         // формируем ссылку для получателя
         // берём текущий адрес страницы + параметр ?view=ключ
-        const url = new URL(window.location.href);
-        url.searchParams.set('view', key);
+        const url = new URL('view.html', window.location.href);
+        url.searchParams.set('key', key);
 
         return url.toString();        
     }

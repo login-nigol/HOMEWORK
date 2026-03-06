@@ -1,0 +1,30 @@
+<!--
+Автор: Вадим Антипов
+Дата: 06.03.2026
+-->
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1" >
+    <title>Pixora - просмотр</title>
+    <link rel="stylesheet" href="./styles/view.css" type="text/css">
+  </head>
+  <body>
+
+    <div class="view">
+      <!-- рамка с картинкой -->
+       <div class="view__frame">
+        <img class="view__img" id="preview" src="" alt="Pixsora image">
+       </div>
+
+       <!-- кнопка скачать -->
+        <button class="view__btn" id="downloadBtn">⬇️ Скачать PNG</button>
+
+        <!-- ошибка загрузки -->
+         <p class="view__error" id="errorMsg" hidden>Не удалось загрузить картинку</p>
+    </div>
+    
+    <script type="module" src="./js/view.js"></script>
+  </body>
+</html>

@@ -5,8 +5,8 @@ import { ToolBase } from "./ToolBase.js";
 // EraserTool - инструмент ластик
 // стирает пиксели через смену режима наложения (compositing)
 export class EraserTool extends ToolBase {
-    constructor(layer, history) {
-        super(layer, history);
+    constructor(layer, history, sound) {
+        super(layer, history, sound);
 
         // размер ластика по умолчанию
         this.size = 15;
