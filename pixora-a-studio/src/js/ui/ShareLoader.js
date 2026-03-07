@@ -1,6 +1,6 @@
 'use strict';
 
-import { ShareService } from "../core/ShareService.js";
+import { ShareService } from "../services/ShareService.js";
 
 // ShareLoade - проверяет URL при загрузке старницы
 // если есть параметры ?view= или ?prject= - загружает данные с сервера

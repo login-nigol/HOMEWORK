@@ -1,7 +1,7 @@
 'use strict';
 
-import { ShareService } from "./core/ShareService.js";
-import { ProgressService } from "./ui/ProgressService.js";
+import { ShareService } from "./services/ShareService.js";
+import { ProgressService } from "./services/ProgressService.js";
 
 // === DOM-селекторы ===
 const $preview = document.getElementById('preview');

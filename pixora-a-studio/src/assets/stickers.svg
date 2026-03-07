@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- сердце -->
+  <symbol id="heart" viewBox="0 0 100 100">
+    <path d="M50 85 C50 85 15 60 15 35 C15 20 25 10 37 10 C43 10 48 13 50 17 C52 13 57 10 63 10 C75 10 85 20 85 35 C85 60 50 85 50 85Z"
+      fill="#FF6B8A" stroke="#e05070" stroke-width="2"/>
+  </symbol>
+
+  <!-- тортик -->
+  <symbol id="cake" viewBox="0 0 100 100">
+    <!-- основа -->
+    <rect x="15" y="55" width="70" height="35" rx="4" fill="#FFD580" stroke="#e6b840" stroke-width="2"/>
+    <!-- крем -->
+    <path d="M15 55 Q25 42 35 55 Q45 42 55 55 Q65 42 75 55 Q82 45 85 55" fill="#fff" stroke="#ddd" stroke-width="1.5"/>
+    <!-- свечки -->
+    <rect x="30" y="38" width="6" height="18" rx="2" fill="#FF6B8A"/>
+    <rect x="47" y="33" width="6" height="23" rx="2" fill="#7EC8E3"/>
+    <rect x="64" y="38" width="6" height="18" rx="2" fill="#A8E6A3"/>
+    <!-- огоньки -->
+    <ellipse cx="33" cy="36" rx="4" ry="6" fill="#FFD580" opacity="0.9"/>
+    <ellipse cx="50" cy="31" rx="4" ry="6" fill="#FFD580" opacity="0.9"/>
+    <ellipse cx="67" cy="36" rx="4" ry="6" fill="#FFD580" opacity="0.9"/>
+    <!-- украшения -->
+    <circle cx="35" cy="68" r="4" fill="#FF6B8A"/>
+    <circle cx="50" cy="72" r="4" fill="#7EC8E3"/>
+    <circle cx="65" cy="68" r="4" fill="#A8E6A3"/>
+  </symbol>
+
+  <!-- ёлка -->
+  <symbol id="tree" viewBox="0 0 100 100">
+    <!-- ствол -->
+    <rect x="43" y="80" width="14" height="15" rx="2" fill="#8B5E3C"/>
+    <!-- нижний ярус -->
+    <polygon points="50,45 18,85 82,85" fill="#2E8B57" stroke="#1a6b3a" stroke-width="1.5"/>
+    <!-- средний ярус -->
+    <polygon points="50,25 22,65 78,65" fill="#3AA060" stroke="#1a6b3a" stroke-width="1.5"/>
+    <!-- верхний ярус -->
+    <polygon points="50,8 28,48 72,48" fill="#4ABF70" stroke="#1a6b3a" stroke-width="1.5"/>
+    <!-- игрушки -->
+    <circle cx="35" cy="70" r="4" fill="#FF6B8A"/>
+    <circle cx="62" cy="65" r="4" fill="#FFD580"/>
+    <circle cx="42" cy="55" r="3" fill="#7EC8E3"/>
+    <circle cx="58" cy="52" r="3" fill="#FF6B8A"/>
+    <!-- звезда наверху -->
+    <polygon points="50,2 52,8 58,8 53,12 55,18 50,14 45,18 47,12 42,8 48,8"
+      fill="#FFD580" stroke="#e6b840" stroke-width="1"/>
+  </symbol>
+
+  <!-- звезда -->
+  <symbol id="star" viewBox="0 0 100 100">
+    <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35"
+      fill="#FFD580" stroke="#e6b840" stroke-width="2"/>
+    <!-- блик -->
+    <ellipse cx="38" cy="35" rx="8" ry="5" fill="white" opacity="0.4" transform="rotate(-30 38 35)"/>
+  </symbol>
+
+  <!-- радуга -->
+  <symbol id="rainbow" viewBox="0 0 100 100">
+    <!-- дуги радуги -->
+    <path d="M10,75 A40,40 0 0,1 90,75" fill="none" stroke="#FF0000" stroke-width="6"/>
+    <path d="M15,75 A35,35 0 0,1 85,75" fill="none" stroke="#FF7F00" stroke-width="6"/>
+    <path d="M20,75 A30,30 0 0,1 80,75" fill="none" stroke="#FFFF00" stroke-width="6"/>
+    <path d="M25,75 A25,25 0 0,1 75,75" fill="none" stroke="#00AA00" stroke-width="6"/>
+    <path d="M30,75 A20,20 0 0,1 70,75" fill="none" stroke="#0000FF" stroke-width="6"/>
+    <path d="M35,75 A15,15 0 0,1 65,75" fill="none" stroke="#8B00FF" stroke-width="6"/>
+    <!-- облачка -->
+    <circle cx="18" cy="75" r="10" fill="white"/>
+    <circle cx="10" cy="70" r="8" fill="white"/>
+    <circle cx="82" cy="75" r="10" fill="white"/>
+    <circle cx="90" cy="70" r="8" fill="white"/>
+  </symbol>
+
+</svg>

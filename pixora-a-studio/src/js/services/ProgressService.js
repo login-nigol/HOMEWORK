@@ -45,9 +45,6 @@ export class ProgressService {
 
         ProgressService._modal.classList.add('progress-modal--open');
         // ProgressService._modal.hidden = false;
-
-        console.log('hidden after show:', ProgressService._modal.hidden);
-        console.log('modal el:', ProgressService._modal);
     }
 
     // обновляем прогресс (0-100)
@@ -68,10 +65,7 @@ export class ProgressService {
     static sendWithProgress(url, formData, title = 'Отправка...') {
         return new Promise((resolve, reject) => {
             ProgressService.show(title);
-
-            console.log('modal shown', ProgressService._modal.hidden);
-            console.log('modal display:', getComputedStyle(ProgressService._modal).display);
-
+            
             const xhr = new XMLHttpRequest();
 
             // upload.onprogress - прогресс отправки данных на сервер

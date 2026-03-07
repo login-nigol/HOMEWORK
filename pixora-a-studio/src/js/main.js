@@ -15,6 +15,7 @@ import {
 import { LayersPanelUi } from "./ui/LayersPanelUi.js";
 import { ShareLoader } from "./ui/ShareLoader.js";
 import { TransformHandler } from "./ui/TransformHandler.js";
+import { GalleryUi } from "./ui/GalleryUi.js";
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -22,11 +23,13 @@ import { History } from "./core/History.js";
 import { BrushTool } from "./core/tools/BrushTool.js";
 import { EraserTool } from "./core/tools/EraserTool.js";
 import { MoveTool } from "./core/tools/MoveTool.js";
-import { ExportService } from "./core/ExportService.js";
-import { StorageService } from "./core/StorageService.js";
-import { ShareService } from "./core/ShareService.js";
-import { SoundService } from "./core/SoundService.js";
-import { ProgressService } from "./ui/ProgressService.js";
+
+import { ExportService } from "./services/ExportService.js";
+import { StorageService } from "./services/StorageService.js";
+import { ShareService } from "./services/ShareService.js";
+
+import { SoundService } from "./services/SoundService.js";
+import { ProgressService } from "./services/ProgressService.js";
 
 
 // === Инициализация ===
@@ -55,6 +58,9 @@ activeTool.activate();
 
 // переключение активного инструмента
 function switchTool(toolName) {
+    // если инструмента не существует - выходим
+    if ( !tools[toolName] ) return;
+
     // если уже активен ничего не делаем
     if ( tools[toolName] === activeTool ) return;
     
@@ -99,6 +105,13 @@ const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) 
 // отрисовывает начальный список слоёв
 layersPanel.render();
 
+// галерея стикеров и разукрашек
+const gallery = new GalleryUi(
+    stage, layersPanel,
+    switchLayerForTools,
+    switchTool
+);
+
 // === Инициализация модулей ===
 
 // трансформации image-слоя (поворот, масштаб)
@@ -129,6 +142,14 @@ $toolColor.addEventListener('input', (e) => {
 $toolSize.addEventListener('input', (e) => {
     activeTool.size = Number(e.target.value);
 });
+
+// открытие галереи стикеров
+document.querySelector('[data-tool="stickers"]')
+    .addEventListener('click', () => gallery.show('stickers'));
+
+// открытие галереи разукрашек
+// document.querySelector('[data-tool="coloring"]')
+//     .addEventListener('click', () => gallery.show('coloring'));
 
 // === Обработчики: загрузка изображений ===
 

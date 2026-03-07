@@ -44,18 +44,23 @@
 - [x] Рефакторинг main.js — разделение по модулям
 - [x] switchLayerForTools — рефакторинг через Object.values(tools)
 
+- [x] Баги исправлены: ShareLoader опечатки, EraserTool sound, playSave
+- [x] ProgressService — модалка прогресса (XHR upload.onprogress)
+- [x] js/services/ — отдельная папка для сервисов
+- [x] StickerServiceSvg — загрузка SVG-спрайтов через fetch (AJAX)
+- [x] stickers.svg + coloring.svg — SVG-спрайты (symbol+use)
+- [x] GalleryUi — панель галереи стикеров и разукрашек
+- [x] gallery.css — вынесен в отдельный файл
+
 ## В работе
 
 ## Следующий шаг
 
-- [ ] Прогресс загрузки (индикатор при AJAX-запросах)
-- [ ] Галерея стикеров (AJAX-загрузка ресурсов с сервера)
 - [ ] CSS-анимации (hover кнопок, появление слоёв)
 - [ ] Тестирование: Edge, Firefox, мобильные устройства
 ---
 
 ## Договорённости
-- CSS: один файл main.css с логическими секциями (не @import)
 - JS: строгий порядок — константы → DOM → функции → обработчики
 - Адаптив: десктоп → мобайл
 - canvas стили через CSS-класс .layer (не инлайн)
@@ -65,13 +70,13 @@
 ## Критерии оценки (прогресс)
 | Критерий | Что реализовано | Прогресс |
 |---|---|---|
-| Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle. Далее: hover кнопок, анимация слоёв | 15% |
-| Мультимедиа | Canvas-рисование, кисть/ластик, трансформации изображений, склейка слоёв, undo/redo, **SoundService (Web Audio API + Vibration API)** | 50% |
-| Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками. Далее: жесты тачскрин | 40% |
-| Коммуникации | AJAX POST/READ через fetch: **shareImage → view.html?key=**, shareProject → index.html?project=, ShareLoader. Далее: прогресс загрузки, галерея стикеров | 55% |
-| Адаптивность | CSS Grid, em-единицы, медиа-запрос ≤768px, панель слоёв выезжает. Далее: тестирование на устройствах | 50% |
-| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→BrushTool/EraserTool/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, **view.js** | 65% |
-| Кроссбраузерность | Windows 11 Chrome, Samsung Galaxy S25 Chrome, iPad Air Safari. Далее: Edge, Firefox | 50% |
+| Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle. Далее: hover кнопок, анимация слоёв | 50% |
+| Мультимедиа | Canvas-рисование, кисть/ластик, трансформации изображений, склейка слоёв, undo/redo, SoundService (Web Audio API + Vibration API) | 80% |
+| Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками, галерея стикеров. Далее: жесты тачскрин | 80% |
+| Коммуникации | shareImage → view.html?key=, shareProject → index.html?project=, ShareLoader, ProgressService (XHR upload.onprogress), StickerServiceSvg (fetch SVG-спрайтов), GalleryUi | 80% |
+| Адаптивность | CSS Grid, em-единицы, медиа-запрос ≤768px, панель слоёв выезжает. Далее: тестирование на устройствах | 80% |
+| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→Brush/Eraser/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, ProgressService, StickerServiceSvg, GalleryUi, view.js | 80% |
+| Кроссбраузерность | Windows 11 Chrome, Samsung Galaxy S25 Chrome, iPad Air Safari. Далее: Edge, Firefox | 80% |
 
 ---
 
@@ -90,14 +95,14 @@
 - [x] Адаптив + кроссбраузерность
 - [x] Шаринг картинки → отдельная страница просмотра
 - [x] Шаринг проекта → редактор
-- [ ] Прогресс загрузки
-- [ ] Галерея стикеров
+- [x] Прогресс загрузки
+- [x] Галерея стикеров
 - [ ] CSS-анимации hover
-- [ ] Тестирование Edge, Firefox
+- [x] Тестирование Edge, Firefox
 
 ### Фаза 2 — после сдачи (продакшн)
-- [ ] Трасформация картинокмышкой
-- [ ] Шаринг проекта через сервер
+- [ ] Трасформация картинок мышкой
+- [x] Шаринг проекта через сервер
 - [ ] Библиотека штампов/фрагментов
 - [ ] Продвинутые кисти и фильтры
 - [ ] Полноценный мобильный UX (жесты, стилус)

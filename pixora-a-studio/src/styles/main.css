@@ -21,6 +21,7 @@ body {
 
 /* корневой контейнер - сетка на весь экран */
 .app {
+    position: relative;
     max-width: 90em;
     margin: 0 auto;
     height: 100vh;

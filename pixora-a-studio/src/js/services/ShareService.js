@@ -1,7 +1,7 @@
 'use strict';
 
 import { ExportService } from "./ExportService.js";
-import { ProgressService } from "../ui/ProgressService.js";
+import { ProgressService } from "./ProgressService.js";
 
 // ShareService - шаринг проекта через AjaxStringStorage2
 // сохраняет данные на сервер, генерирует ссылку для получателя
