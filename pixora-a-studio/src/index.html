@@ -11,7 +11,6 @@
     content="width=device-width, height=device-height, initial-scale=1">
   <title>Pixora A. Studio</title>
   <link rel="stylesheet" href="./styles/main.css" type="text/css">
-  <link rel="stylesheet" href="./styles/gallery.css" type="text/css">
 </head>
 
 <body>
@@ -20,70 +19,129 @@
 
     <!-- Top toolbar - глобальные действия -->
     <header class="toolbar" aria-label="Toolbar">
+
       <span class="toolbar__title">Pixora A. Studio</span>
 
-      <button class="toolbar-btn" data-action="share-image"
-      title="Поделиться картинкой">🔗</button>
-      <button class="toolbar-btn" data-action="share-project"
-      title="Поделиться проектом">📤</button>
+      <!-- шаринг -->
+      <span class="toolbar__sep">
+        <button class="toolbar-btn" data-action="share-image"
+          title="Отправить картинку">
+          <svg>
+            <use href="#icon-link"></use>
+          </svg>
+        </button>
+        <button class="toolbar-btn" data-action="share-project"
+          title="Поделиться проектом">
+          <svg>
+            <use href="#icon-eye-plus"></use>
+          </svg>
+        </button>
+      </span>
 
-      <button class="toolbar-btn" data-action="save"
-        title="Сохранить проект">📁</button>
-      <button class="toolbar-btn" data-action="load"
-        title="Загрузить проект">📂</button>
+      <!-- папки -->
+      <span class="toolbar__sep">
+        <button class="toolbar-btn" data-action="save" title="Сохранить проект">
+            <svg>
+              <use href="#icon-folder-download"></use>
+            </svg>
+        </button>
+        <button class="toolbar-btn" data-action="load" title="Загрузить проект">
+          <svg>
+            <use href="#icon-folder-upload"></use>
+          </svg>
+        </button>
+      </span>
 
-      <button class="toolbar-btn" data-action="export"
-        title="Экспорт PNG">💾</button>
+      <!-- сохранить картинку -->
+      <span class="toolbar__sep">
+        <button class="toolbar-btn" data-action="export"
+          title="Сохранить картинку">
+          <svg>
+            <use href="#icon-download"></use>
+          </svg>
+        </button>
+      </span>
 
-      <button class="toolbar-btn" data-action="undo"
-        title="Отменить (Ctrl+Z)">↩️</button>
-      <button class="toolbar-btn" data-action="redo"
-        title="Повторить (Ctrl+Shift+Z)">↪️</button>
     </header>
 
     <!-- панель инструментов -->
     <nav class="tools-panel" aria-label="Tools panel">
 
-      <!-- выбор инструмента -->
-      <button class="tool-btn tool-btn--active" data-tool="brush"
-        title="Кисть">🖌️</button>
-      <button class="tool-btn" data-tool="eraser" title="Ластик">🧹</button>
-      <button class="tool-btn" data-tool="move" title="Перемещение">✋</button>
+      <!-- инструменты слева -->
+      <button class="tool-btn tool-btn--active" data-tool="brush" title="Кисть">
+        <svg>
+          <use href="#icon-pencil2"></use>
+        </svg>
+      </button>
+      <button class="tool-btn" data-tool="eraser" title="Ластик">
+        <svg>
+          <use href="#icon-eraser"></use>
+        </svg>
+      </button>
+      <button class="tool-btn" data-tool="move" title="Перемещение">
+        <svg>
+          <use href="#icon-hand-paper-o"></use>
+        </svg>
+      </button>
 
-      <!-- подменю активного инструмента (показываем/скрываем) -->
+      <!-- подменю активного инструмента -->
       <div class="tools-panel--submenu" data-submenu="brush">
-
         <label class="tool-label">
           <input class="tool-color" type="color" value="#000000" title="Цвет">
         </label>
-
         <label class="tool-label">
           <input class="tool-size" type="range" min="1" max="50" value="5"
             title="Размер">
         </label>
       </div>
 
-      <!-- загрузка картинки -->
-      <label class="tool-label tool-label--file" title="Добавить картинку">
-        🖼️
-        <input type="file" class="tool-file" accept="image/*" hidden>
-      </label>
+      <!-- правая группа кнопок -->
+      <div class="tools-panel__right">
+        <!-- загрзка: файл + галерея -->
+        <span class="tools-panel__group">
+          <!-- галерея стикеров -->
+          <button class="tool-btn" data-tool="stickers" title="Стикеры">
+            <svg>
+              <use href="#icon-finder"></use>
+            </svg>
+          </button>
 
-      <!-- галерея стикеров -->
-       <button class="tool-btn" data-tool="stickers" title="Стикеры">🎭</button>
-       <!-- <button class="tool-btn" data-tool="coloring" title="Разукрашки">✏️</button> -->
+          <label class="tool-btn" data-action="add-file" title="Добавить картинку">
+            <svg>
+              <use href="#icon-images"></use>
+            </svg>
+            <input type="file" class="tool-file" accept="image/*" hidden>
+          </label>
+        </span>
 
-      <!-- трансформация для image-слоя -->
-       <div class="tool-panel__submenu" data-submenu="transform">
-        <button class="transform-btn" data-action="rotate-left"
-        title="Повернуть влево">↺</button>
-        <button class="transform-btn" data-action="rotate-right"
-        title="Повернуть вправо">↻</button>
-        <button class="transform-btn" data-action="scale-up"
-        title="Увеличить">➕</button>
-        <button class="transform-btn" data-action="scale-down"
-        title="Уменьшить">➖</button>
-       </div>
+        <!-- трансформация для image-слоя -->
+        <span class="tools-panel__group" data-submenu="transform">
+          <button class="transform-btn" data-action="rotate-left"
+            title="Повернуть влево">
+            <svg>
+              <use href="#icon-rotate-ccw"></use>
+            </svg>
+          </button>
+          <button class="transform-btn" data-action="rotate-right"
+            title="Повернуть вправо">
+            <svg>
+              <use href="#icon-rotate-cw"></use>
+            </svg>
+          </button>
+          <button class="transform-btn" data-action="scale-up"
+            title="Увеличить">
+            <svg>
+              <use href="#icon-enlarge"></use>
+            </svg>
+          </button>
+          <button class="transform-btn" data-action="scale-down"
+            title="Уменьшить">
+            <svg>
+              <use href="#icon-shrink"></use>
+            </svg>
+          </button>
+        </span>
+      </div>
     </nav>
 
     <!-- Main area - основная панель -->
@@ -97,33 +155,75 @@
             <div class="layers-panel__controls">
 
               <button class="layer-btn" data-action="add"
-                title="Добавить слой">➕</button>
+                title="Добавить слой">
+                <svg>
+              <use href="#icon-indent-increase"></use>
+            </svg>
+              </button>
               <button class="layer-btn" data-action="delete"
-                title="Удалить слой">🗑️</button>
+                title="Удалить слой">
+                <svg>
+              <use href="#icon-indent-decrease"></use>
+            </svg>
+              </button>
               <button class="layer-btn" data-action="up"
-                title="Слой выше">⬆️</button>
+                title="Слой выше">
+                <svg>
+              <use href="#icon-sort-asc"></use>
+            </svg>
+              </button>
               <button class="layer-btn" data-action="down"
-                title="Слой ниже">⬇️</button>
+                title="Слой ниже">
+                <svg>
+              <use href="#icon-sort-desc"></use>
+            </svg>
+              </button>
               <button class="layer-btn" data-action="toggle"
-                title="Скрыть/показать">👁️</button>
+                title="Скрыть/показать">
+                <svg>
+              <use href="#icon-eye"></use>
+            </svg>
+              </button>
 
             </div>
+
             <!-- список слоёв (заполняется из JS) -->
             <ul class="layers-panel__list"></ul>
           </div>
         </div>
+
         <!-- сворачивание панели слоёв -->
         <button class="layers-panel__toggle"
-          title="Свернуть/развернуть">◀</button>
+          title="Свернуть/развернуть">
+          <svg>
+              <use href="#icon-embed"></use>
+            </svg>
+        </button>
       </aside>
 
       <!-- Stage (canvs area) - холст -->
       <section class="stage" aria-label="Canvas stage">
-        <div class="stage__stack"></div>
+        <div class="stage__stack" id="stageStack">
+
+          <!-- кнопки ундо/редо -->
+          <div class="stage__history">
+            <button class="toolbar-btn" data-action="undo"
+              title="Отменить (Ctrl+Z)">
+              <svg>
+                <use href="#icon-undo"></use>
+              </svg>
+            </button>
+            <button class="toolbar-btn" data-action="redo"
+              title="Повторить (Ctrl+Shift+Z)">
+              <svg>
+                <use href="#icon-redo"></use>
+              </svg>
+            </button>
+          </div>
+
+        </div>
       </section>
-
     </main>
-
   </div>
 
   <script type="module" src="./js/main.js"></script>

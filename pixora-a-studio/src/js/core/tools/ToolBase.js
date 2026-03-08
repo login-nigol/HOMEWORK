@@ -38,7 +38,9 @@ export class ToolBase {
             // сохраняем снинмок canvas до изменений (для undo)
             if ( this.history ) this.history.save(this.layer);
             if ( this.sound ) this.sound.playDrawStart();
-            
+
+            // игнорируем правую кнопку и колесо (button 2, 1)
+            if ( e.button === 1 || e.button === 2 ) return;
             
             // переводим координаты мыши в координаты canvas
             const { x, y } = this._getCoords(e);

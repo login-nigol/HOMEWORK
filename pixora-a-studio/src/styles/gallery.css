@@ -1,4 +1,4 @@
-/* === Galery === */
+/* === Gallery === */
 
 /* оверлей */
 .gallery {
@@ -40,7 +40,7 @@
     justify-content: space-between;
 }
 
-.gallery_title {
+.gallery__title {
     font-weight: 700;
     font-size: 1em;
 }
@@ -57,7 +57,7 @@
 }
 
 /* вкладки */
-.gallery_tabs {
+.gallery__tabs {
     display: flex;
     gap: 0.5em;
 }
@@ -67,7 +67,7 @@
     padding: 0.4em;
     font-size: 0.9em;
 
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 0.4em;
     background: #f5f5f5;
     cursor: pointer;
@@ -80,6 +80,15 @@
 
 /* сетка превью */
 .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5em;
+    overflow: auto;
+    /* cursor: pointer; */
+}
+
+/* кнопка превью */
+.gallery__item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,13 +97,13 @@
     aspect-ratio: 1;
     padding: 0.3em;
 
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 0.4em;
     background: #f5f5f5;
     cursor: pointer;
 }
 
-.gallery_item:hover {
+.gallery__item:hover {
     border-color: #4a90d9;
     background: #e8f0fe;
 }
@@ -106,7 +115,7 @@
 
 /* статусы */
 .gallery__loading,
-.gallery_error {
+.gallery__error {
     margin: 0;
     padding: 1em;
     text-align: center;
@@ -114,6 +123,6 @@
     font-size: 0.9em;
 }
 
-.gallery_error {
+.gallery__error {
     color: #c0392b;
 }

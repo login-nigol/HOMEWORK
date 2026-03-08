@@ -1,0 +1,130 @@
+/* === кнопки с SVG-иконками */
+
+.toolbar-btn,
+.tool-btn,
+.transform-btn,
+.layer-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0;
+
+    padding: 0.4em;
+    border: 2px solid transparent;
+    border-radius: 0.4em;
+    background: rgba(74, 174, 217, 0.12);
+
+    cursor: pointer;
+
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+label.tool-btn {
+    width: 2.1em;
+    height: 2.1em;
+    align-items: center;
+    padding: 0;
+}
+
+/* иконки SVG в кнопках */
+.toolbar-btn svg,
+.tool-btn svg,
+.transform-btn svg,
+.layer-btn svg {
+    width: 1.2em;
+    height: 1.2em;
+    fill: currentColor;
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+/* наведение - добавляем зелёного */
+.toolbar-btn:hover,
+.tool-btn:hover,
+.transform-btn:hover,
+.layer-btn:hover {
+    background: rgba(52, 168, 83, 0.18);
+    border-color: rgba(52, 168, 83, 0.3);
+}
+
+/* нажатие - светло-зелёный + эфект вдавливания */
+.toolbar-btn:active,
+.tool-btn:active,
+.transform-btn:active,
+.layer-btn:active {
+    background: rgba(52, 168, 83, 0.35);
+    background-color: rgba(52, 168, 83, 0.6);
+    transform: scale(0.93);
+}
+
+/* === цвет иконок tool-panel === */
+
+/* рисование */
+[data-tool="brush"] svg { color: #f4b400; }
+[data-tool="eraser"] svg { color: #4a90d9; }
+[data-tool="move"] svg { color: #d4a853; }
+
+/* стикеры */
+[data-tool="stickers"] svg { color: #3b5bdb; }
+/* загрузка файла */
+[data-tool="add-file"] svg { color: #34a834; }
+
+[data-action="rotate-left"] svg,
+[data-action="rotate-right"] svg { color: #4a90d9; }
+
+[data-action="scale-up"] svg,
+[data-action="scale-down"] svg { color: #e67e22; }
+
+/* === цвет иконок toolbar === */
+
+[data-action="share-image"] svg { color: #4a90d9; }
+[data-action="share-project"] svg { color: #34a853; }
+
+[data-action="save"] svg { color: #f4b400; }
+[data-action="load"] svg { color: #f4b400; }
+
+[data-action="export"] svg { color: #4a90d9; }
+
+[data-action="undo"] svg { color: #e74c3c; }
+[data-action="redo"] svg { color: #34a853; }
+
+[data-action="add-file"] svg { color: #34a853; }
+
+/* === цвета иконок слоёв === */
+
+[data-action="add"] svg { color: #34a853; }
+[data-action="delete"] svg { color: #e74c3c; }
+
+[data-action="up"] svg { color: #4a90d9; }
+[data-action="down"] svg { color: #4a90d9; }
+
+[data-action="toggle"] svg { color: #f4b400; }
+
+/* === tollbar группы */
+
+.toolbar__sep {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    padding: 0 0 0 0.8em;
+}
+
+/* первая группа без левой границы */
+.toolbar__sep + .toolbar__sep {
+    border-left: 1px solid #ddd;
+}
+
+/* кнопки undo/redo на холсте */
+.stage__history {
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em;
+    z-index: 10;
+
+    display: flex;
+    gap: 0.4em;
+}

@@ -1,5 +1,11 @@
 /* === Base === */
 
+@import './gallery.css';
+@import './buttons.css';
+@import './tools.css';
+@import './layers.css';
+@import './progress.css';
+
 /* 
 border-box - применяю ко всем элементам 
 width включает padding и border
@@ -25,6 +31,7 @@ body {
     max-width: 90em;
     margin: 0 auto;
     height: 100vh;
+
     display: grid;
     grid-template-rows: auto auto 1fr;
 
@@ -36,6 +43,7 @@ body {
     display: grid;
     grid-template-columns: auto 1fr; /* резина + холст */
     gap: 1em;
+
     padding: 1em;
 
     overflow: hidden;
@@ -58,208 +66,12 @@ body {
     margin-right: auto;
 }
 
-/* кнопки toolbar (undo, redo, save и тд) */
-.toolbar-btn {
-    width: 2.5em;
-    height: 2.5em;
-    font-size: 1em;
-
-    border: 1px solid #ddd;
-    border-radius: 0.4em;
-    background: #f5f5f5;
-    cursor: pointer;
-}
-
-/* === Tools panel === */
-
-/* горизонтальная панель инструментов */
-.tools-panel {
-    display: flex;
-    align-items: center;
-    gap: 0.8em;
-
-    padding: 0.5em 1.2em;
-    border-bottom: 1px solid #ddd;
-}
-
-/* кнопка инструмента (кисть, ластик и тп) */
-.tool-btn,
-.transform-btn {
-    width: 2.5em;
-    height: 2.5em;
-    font-size: 1.1em;
-
-    border: 2px solid transparent;
-    border-radius: 0.4em;
-    background: #f5f5f5;
-    cursor: pointer;
-}
-
-/* активный инструмент - посветка */
-.tool-btn--active {
-    border-color: #4a90d9;
-    background: #e8f0fe;
-}
-
-/* поодменю инструмента (цвет, размер) - inline рядом с кнопками */
-.tools-panel__submenu {
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
-
-    padding-left: 0.8em;
-    border-left: 1px solid #ddd;
-}
-
-/* кнопка загрузки картинки */
-.tool-label--file {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5em;
-    height: 2.5em;
-    font-size: 1.1em;
-
-    border: 2px solid transparent;
-    border-radius: 0.4em;
-    background: #F5F5F5;
-    border-left: 2px solid #ddd;
-    cursor: pointer;
-}
-
-/* выбор цвета */
-.tool-color {
-    width: 2.5em;
-    height: 2.5em;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-}
-
-/* ползунок размера кисти */
-.tool-size {
-    width: 7em;
-}
-
-/* === Layers panel - панель слоёв (десктоп) === */
-
- /* контейнер панели - flex для body + toggle */
-.layers-panel {
-    display: flex;
-    
-    border: 1px solid #ddd;
-    border-radius: 0.5em;
-}
-
-/* свёрнутое состояние (десктоп) */
-.layers-panel--collapsed {
-    width: 2.5em;
-}
-
-/* обёртка - анимируем ширину, прячем содержимое */
-.layers-panel__body {
-    overflow: hidden;
-    width: 16em;
-    transition: width 0.3s ease;
-}
-
-/* свёрнутая обёртка - штрина 0 */
-.layers-panel--collapsed .layers-panel__body {
-    width: 0;
-    /* transition: width 0.3s ease; */
-}
-
-/* содержимое - список слоёв + кнопки управления */
-.layers-panel__content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-
-    padding: 0.5em;
-    min-width: 15em;
-}
-
-/* кнопка сворачивания */
-.layers-panel__toggle {
-    flex-shrink: 0;
-    align-self: flex-start;
-
-    width: 2em;
-    height: 2em;
-    margin: 0.5em 0.2em;
-    font-size: 0.9em;
-    
-    border: 1px solid #ddd;
-    border-radius: 0.3em;
-    background: #f5f5f5;
-    cursor: pointer;
-    
-    /* плавный повороот стрелки */
-    transition: transform 0.3s ease;
-}
-
-/* стрелка поврачивается при сворачивании */
-.layers-panel--collapsed .layers-panel__toggle {
-    transform: rotate(180deg);
-}
-
-/* кнопки управления слоями */
-.layers-panel__controls {
-    display: flex;
-    gap: 0.3em;
-
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid #ddd;
-}
-
-.layer-btn {
-    width: 2.2em;
-    height: 2.2em;
-    font-size: 1em;
-
-    border: 1px solid #ddd;
-    border-radius: 0.3em;
-    background: #f5f5f5;
-    cursor: pointer;
-}
-
-/* список слоёв */
-.layers-panel__list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3em;
-    list-style: none;
-
-    margin: 0;
-    padding: 0;
-}
-
-/* элемент списка слоёв */
-.layer-item {
-    white-space: nowrap;
-
-    padding: 0.4em 0.6em;
-    border-radius: 0.3em;
-    cursor: pointer;
-}
-
-/* активный слой */
-.layer-item--active {
-    background: #e8f0fe;
-    border-left: 3px solid #4a909d;
-}
-
-/* === Stage - холст === */
+/* === Stage === */
 
 .stage {
     border: 1px solid #ddd;
     border-radius: 0.5em;
     overflow: hidden;
-
-    /* центрирую канвас если он меньше контейнера */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
 }
 
 /* конотейнер canvas layers (absolut stack) */
@@ -283,76 +95,12 @@ body {
     left: 0;
 }
 
-/* === Progress modal === */
-
-/* оверлей - затемняет фон */
-.progress-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.progress-modal--open {
-    display: flex;
-}
-
-/* .progress-modal:not([hidden]) {
-    display: flex;
-} */
-
-/* блок с контентом */
-.progress-modal__box {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8em;
-
-    padding: 1.5em 2em;
-    min-width: 15em;
-
-    background: #fff;
-    border-radius: 0.5em;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* трек полоски */
-.progress-modal__track {
-    height: 0.5em;
-    border-radius: 1em;
-    background: #eee;
-    overflow: hidden;
-}
-
-/* заполненая часть - анимируем ширину */
-.progress-modal__bar {
-    height: 100%;
-    width: 0;
-
-    border-radius: 1em;
-    background: #4a90d9;
-    transition: width 0.2s ease;
-}
-
-/* процент */
-.progress-modal__percent {
-    margin: 0;
-    font-size: 0.9em;
-    text-align: center;
-    color: #666;
-}
-
 /* === Adaptive: mobile === */
 
 @media ( max-width: 768px ) {
     /* позиционирование для .app */
     .app {
-        position: relative;
+        /* position: relative; */
     }
 
     /* workspace - одна колонка, canvas на весь экран */
@@ -366,14 +114,14 @@ body {
 
     /* toolbar - компактнее */
     .toolbar {
-        padding: 0.4em 0.8em;
+        padding: 0.4em 0.4em;
         gap: 0.5em;
     }
 
     /* tools panel - прокрутка если не влезет */
     .tools-panel {
-        padding: 0.4em 0.8em;
-        gap: 0.5em;
+        padding: 0.4em 0.4em;
+        /* gap: 0.5em; */
         overflow-x: auto;
     }
 
@@ -387,11 +135,12 @@ body {
 
         background: rgba(255, 255, 255, 0.92);
         border-left: 1px solid #ddd;
-        border-radius: 0;
-        border: none;
+        /* opacity: 0.9; */
+        border-radius: 0.8em;
+        /* border: none; */
 
         transform:  translateX(100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.8s ease;
     }
 
     /* открытое состояние - панель выезжает на экран */
@@ -403,27 +152,29 @@ body {
     .layers-panel__toggle {
         position: absolute;
         top: 50%;
-        right: auto;
-        left: -2.5em;
+        left: -2.4em;
         z-index: 101;
 
-        transform: translateY(-50%);
-        border-radius: 0.3em 0 0 0.3em;
+        width: 2.5em;
+        height: 2.5em;
+
+        transform-origin: center center;
+        border-radius: 0.3em;
         margin: 0;
+        opacity: 0.5;
     }
 
     /* когда панель открыта - кнопка двигается с ней */
     .layers-panel--open .layers-panel__toggle {
-        position: absolute;
-        top: 0.5em;
-        right: auto;
-        left: -2.2em;
+        left: -1.25em;
         transform: rotate(180deg);
+        transform-origin: center center;
+        opacity: 0.5;
     }
 
     /* canvas на полную ширину */
     .stage {
-        border-radius: 0;
+        border-radius: 0.4em;
         /* border: none; */
     }
 

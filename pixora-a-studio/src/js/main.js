@@ -4,7 +4,7 @@
 
 import {
     $stageStack, $toolColor, $toolSize, $toolBtns, $toolFile,
-    $layerBtns, $layerList, $undoBtn, $redoBtn,
+    $layerBtns, $layerList,
     $panelToggle, $layersPanel,
     $exportBtn, $saveBtn, $loadBtn,
     $shareImageBtn, $shareProjectBtn,
@@ -16,6 +16,7 @@ import { LayersPanelUi } from "./ui/LayersPanelUi.js";
 import { ShareLoader } from "./ui/ShareLoader.js";
 import { TransformHandler } from "./ui/TransformHandler.js";
 import { GalleryUi } from "./ui/GalleryUi.js";
+import { IconLoader } from "./ui/IconLoader.js";
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -33,6 +34,9 @@ import { ProgressService } from "./services/ProgressService.js";
 
 
 // === Инициализация ===
+
+// загружаем SVG-спрайт иконок
+await IconLoader.load();
 
 // точка входа - экземпляры
 const stage = new Stage($stageStack);
@@ -200,15 +204,27 @@ $stageStack.addEventListener('drop', async (e) => {
 
 // === ОБработчики: undo/redo ===
 
-$undoBtn.addEventListener('click', () => {
-    history.undo(stage);
-    sound.playUndo();
-});
+document.querySelector('[data-action="undo"]')
+    .addEventListener('click', () => {
+        history.undo(stage);
+        sound.playUndo();
+    });
 
-$redoBtn.addEventListener('click', () => {
-    history.redo(stage);
-    sound.playRedo();
-});
+document.querySelector('[data-action="redo"]')
+    .addEventListener('click', () => {
+        history.redo(stage);
+        sound.playRedo();
+    });
+
+// $undoBtn.addEventListener('click', () => {
+//     history.undo(stage);
+//     sound.playUndo();
+// });
+
+// $redoBtn.addEventListener('click', () => {
+//     history.redo(stage);
+//     sound.playRedo();
+// });
 
 // undo/redo клавиатура
 document.addEventListener('keydown', (e) => {

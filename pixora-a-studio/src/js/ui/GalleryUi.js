@@ -40,7 +40,7 @@ export class GalleryUi {
             <div class="gallery__tabs">
                 <button class="gallery__tab gallery__tab--active" 
                 data-type="stickers">🎨 Стикеры</button>
-                <button class="gallery__tab" data-type="coloring">✏️ Защукрашки</button>
+                <button class="gallery__tab" data-type="coloring">✏️ Разукрашки</button>
             </div>
 
             <!-- сетка превью --><div class="gallery__grid" id="galleryGrid"></div>

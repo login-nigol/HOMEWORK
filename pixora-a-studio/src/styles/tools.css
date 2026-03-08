@@ -1,0 +1,60 @@
+/* === Tools panel === */
+
+/* горизонтальная панель инструментов */
+.tools-panel {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    padding: 0.4em 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+/* активный инструмент - посветка */
+.tool-btn--active {
+    border-color: #4a90d9;
+    background: #e8f0fe;
+}
+
+/* поодменю инструмента (цвет, размер) */
+.tools-panel__submenu {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+
+    padding-left: 0.8em;
+    border-left: 1px solid #ddd;
+}
+
+/* выбор цвета */
+.tool-color {
+    width: 2.5em;
+    height: 2.5em;
+    border: none;
+    border-radius: 0.5em;
+
+    cursor: pointer;
+}
+
+/* ползунок размера кисти */
+.tool-size {
+    width: 7em;
+}
+
+/* первая группа */
+.tools-panel__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    margin-left: auto;
+}
+
+/* группа кнопок с разделителями */
+.tools-panel__group {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    /* border-left: 1px solid #ddd; */
+    /* padding-left: 0.6em; */
+}

@@ -18,8 +18,8 @@ export const $scaleDownBtn = document.querySelector(SELECTORS.scaleDownBtn);
 export const $layerBtns = document.querySelectorAll(SELECTORS.layerBtns);
 export const $layerList = document.querySelector(SELECTORS.layerList);
 
-export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
-export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
+// export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
+// export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 export const $exportBtn = document.querySelector(SELECTORS.exportBtn);
 export const $saveBtn = document.querySelector(SELECTORS.saveBtn);
 export const $loadBtn = document.querySelector(SELECTORS.loadBtn);
