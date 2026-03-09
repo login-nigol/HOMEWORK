@@ -291,13 +291,22 @@ $shareProjectBtn.addEventListener('click', async () => {
 
 // свораяивание панели
 $panelToggle.addEventListener('click', () => {
-    // на мобиле выдвигаем/прячем панель
+    // сворачивание панели по кнопке toggle
     if ( window.innerWidth <= 768 ) {
         $layersPanel.classList.toggle('layers-panel--open');
     } else {
-        // на десктопе - сворачивание/разворачивание
         $layersPanel.classList.toggle('layers-panel--collapsed');
     }
+});
+
+// закрываем панель по клику всне её
+document.addEventListener('click', (e) => {
+    if ( window.innerWidth > 768 ) return;
+    if ( !$layersPanel.classList.contains('layers-panel--open') ) return;
+    // если клик внутри панели - не закрываем
+    if ( $layersPanel.contains(e.target) ) return;
+
+    $layersPanel.classList.remove('layers-panel--open');
 });
 
 // console.log(drawLayer.id, stage.layers.length);
