@@ -24,6 +24,8 @@ export const SELECTORS = {
     loadBtn: '[data-action="load"]',
     saveBtn: '[data-action="save"]',
 
+    newBtn: '[data-action="new"]',
+
     shareProjectBtn: '[data-action="share-project"]',
     shareImageBtn: '[data-action="share-image"]',
     

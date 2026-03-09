@@ -7,7 +7,7 @@ import {
     $layerBtns, $layerList,
     $panelToggle, $layersPanel,
     $exportBtn, $saveBtn, $loadBtn,
-    $shareImageBtn, $shareProjectBtn,
+    $shareImageBtn, $shareProjectBtn, $newBtn,
     $stickersBtn, $undoBtn, $redoBtn,
     $rotateLeftBtn, $rotateRightBtn, $scaleUpBtn, $scaleDownBtn,
 } from "./dom.js";
@@ -259,6 +259,27 @@ $loadBtn.addEventListener('click', async () => {
         // переключаем инструменты на активный слой
         switchLayerForTools(stage.activeLayer);
     }
+});
+
+// очищаем/создаём сцену - новый проект
+$newBtn.addEventListener('click', () => {
+    if ( !confirm
+        ('Начать новый проект? Несохранённые данные будут потеряны.') 
+    ) return;
+
+    // удаляем все слои
+    while ( stage.layers.length > 0 ) {
+        stage.removeLayer(stage.layers[0]);
+    }
+
+    // сбрасываем счётчик
+    stage.layerIndex = 0;
+
+    // создаём первый пустой слой
+    const drawLayer = stage.addLayer({ type: 'draw'});
+    switchLayerForTools(drawLayer);
+    switchTool('brush');
+    layersPanel.render();
 });
 
 // == Обработчики: шаринг ===

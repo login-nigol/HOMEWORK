@@ -83,6 +83,8 @@ label.tool-btn {
 [data-action="share-image"] svg { color: #4a90d9; }
 [data-action="share-project"] svg { color: #34a853; }
 
+[data-action="new"] svg { color: #e74c3c; }
+
 [data-action="save"] svg { color: #f4b400; }
 [data-action="load"] svg { color: #f4b400; }
 

@@ -45,6 +45,8 @@ export class ProgressService {
 
         ProgressService._modal.classList.add('progress-modal--open');
         // ProgressService._modal.hidden = false;
+
+        // console.log('modal classes:', ProgressService._modal.className);
     }
 
     // обновляем прогресс (0-100)

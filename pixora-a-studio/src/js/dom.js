@@ -24,6 +24,8 @@ export const $exportBtn = document.querySelector(SELECTORS.exportBtn);
 export const $saveBtn = document.querySelector(SELECTORS.saveBtn);
 export const $loadBtn = document.querySelector(SELECTORS.loadBtn);
 
+export const $newBtn = document.querySelector(SELECTORS.newBtn);
+
 export const $shareProjectBtn = document.querySelector(SELECTORS.shareProjectBtn);
 export const $shareImageBtn = document.querySelector(SELECTORS.shareImageBtn);
 

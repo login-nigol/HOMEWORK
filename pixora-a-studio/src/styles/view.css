@@ -1,5 +1,7 @@
 /* === Base === */
 
+@import './progress.css';
+
 /* 
 border-box - применяю ко всем элементам 
 width включает padding и border
@@ -36,11 +38,18 @@ body {
 
 /* рамка вокруг картинки */
 .view__frame {
+    max-width: 90vw;
+    min-width: 17.5em;
+    min-height: 17.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: #fff;
     padding: 1em;
     border-radius: 0.5em;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-    max-width: 90vw;
 }
 
 /* картинка не выходит за экран */
