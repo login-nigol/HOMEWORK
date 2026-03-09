@@ -28,6 +28,8 @@ export const SELECTORS = {
 
     shareProjectBtn: '[data-action="share-project"]',
     shareImageBtn: '[data-action="share-image"]',
+
+    mutebtn: '[data-action="mute"]',
     
     panelToggle: '.layers-panel__toggle',
     layersPanel: '.layers-panel',

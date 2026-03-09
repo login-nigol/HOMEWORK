@@ -7,7 +7,7 @@ import {
     $layerBtns, $layerList,
     $panelToggle, $layersPanel,
     $exportBtn, $saveBtn, $loadBtn,
-    $shareImageBtn, $shareProjectBtn, $newBtn,
+    $shareImageBtn, $shareProjectBtn, $newBtn, $muteBtn,
     $stickersBtn, $undoBtn, $redoBtn,
     $rotateLeftBtn, $rotateRightBtn, $scaleUpBtn, $scaleDownBtn,
 } from "./dom.js";
@@ -280,6 +280,21 @@ $newBtn.addEventListener('click', () => {
     switchLayerForTools(drawLayer);
     switchTool('brush');
     layersPanel.render();
+});
+
+// переключение звука
+$muteBtn.addEventListener('click', () =>{
+    sound.enabled = !sound.enabled;
+
+    // меняем кнопку
+    const use = $muteBtn.querySelector('use');
+    if ( sound.enabled ){
+        use.setAttribute('href', '#icon-bullhorn');
+        $muteBtn.classList.remove('muted');
+    } else {
+        use.setAttribute('href', '#icon-bullhorn-mute');
+        $muteBtn.classList.add('muted');
+    }
 });
 
 // == Обработчики: шаринг ===

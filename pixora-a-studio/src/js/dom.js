@@ -29,6 +29,9 @@ export const $newBtn = document.querySelector(SELECTORS.newBtn);
 export const $shareProjectBtn = document.querySelector(SELECTORS.shareProjectBtn);
 export const $shareImageBtn = document.querySelector(SELECTORS.shareImageBtn);
 
+// sound/mute
+export const $muteBtn = document.querySelector(SELECTORS.mutebtn);
+
 export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
 export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 
