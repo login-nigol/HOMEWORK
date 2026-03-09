@@ -7,12 +7,25 @@ export class StorageService {
     // ключ в localStorage - static property, принадлежит классу, не экземпляру
     static STORAGE_KEY = 'pixora-project';
 
-    // созраняем текущее состояние проекта
+    // сохраняем текущее состояние проекта
     static save(stage) {
         // собираем данные каждого слоя
         const layersData = stage.layers.map((layer) => {
-            // превращаем canvas в base64 строку
-            const imageData = layer.canvas.toDataURL('image/png');
+
+            let imageData;
+
+            // image-слой: сохраняем оригинальную картинку, не весь canvas
+            if ( layer.type === 'image' && layer.image ) {
+                const temp = document.createElement('canvas');
+                temp.width = layer.image.width;
+                temp.height = layer.image.height;
+                temp.getContext('2d').drawImage(layer.image, 0, 0);
+                imageData = temp.toDataURL('image/png');
+            } else {
+                // drow-слой: сохраняем весь canvas
+                imageData = layer.canvas.toDataURL('image/png');
+            }
+            // console.log(layer.id, layer.type, imageData.slice(0, 50));
 
             // базовые поля - общие для всех типов слоёв
             const data = {
@@ -43,10 +56,11 @@ export class StorageService {
         };
 
         // сохраняем в localStorage как JSON-строку
-        // localStorage - браузерное хранилище, данные живут даже после закрытия вкладки
+        // localStorage - браузерное хранилище, данные живут 
+        // даже после закрытия вкладки
         localStorage.setItem(
             StorageService.STORAGE_KEY,
-            // объект -> строка.localStorage хранит ьлдбкл строки
+            // объект -> строка.localStorage хранит только строки
             JSON.stringify(project)
         );
 
@@ -98,18 +112,23 @@ export class StorageService {
                     layer.scale = data.scale;
                     layer.rotation = data.rotation;
                 }
-
+                
                 // загружаем base64 картинку обратно в canvas
                 const img = new Image();
+                console.log('загружен:', data.id, data.type, img.width, img.height);
 
                 img.onload = () => {
-                    // рисуем сохранённое изображение на canvas слое
-                    layer.ctx.drawImage(img, 0, 0);
 
-                    // для ImageLayer - перерисовываем с транформациями
-                    if ( data.type === 'image' && layer.image ) {
-                        layer.render();
-                    }
+                    // сохраняем ссылку на Image
+                    if ( data.type === 'image') {
+
+                        // console.log('загружен слой:', data.id, 'size:', img.width, img.height);
+                        layer.image = img;
+                        layer.render(); /* перерисовываем с трансформацией */
+                    } else {
+                        // drow-слой просто копируем пиксели
+                        layer.ctx.drawImage(img, 0, 0);
+                    }                    
 
                     resolve(layer);
                 };

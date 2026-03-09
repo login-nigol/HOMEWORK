@@ -93,32 +93,41 @@ export class StickerServiceSvg {
         const blob = new Blob([svgString], { type: 'image/svg+xml'});
         const url = URL.createObjectURL(blob);
 
-        // создаём временный canvas для вырезания элемента из справйта
-        // const tempCanvas = document.createElement('canvas');
-        // tempCanvas.width = size;
-        // tempCanvas.height = size;
-        // const tempCTX = tempCanvas.getContext('2d');
-
+        
         // вырезаем нужный элемент: sx = index * size
         // tempCTX.drawImage(sprite, index * size, 0, size, size, 0, 0, size, size);
-
+        
         // загружаем вырезанный элемент в слой как картинку
         return new Promise((resolve) => {
+
             const img = new Image();
             img.onload = () => {
                 // создаём image-слой
                 const layer = stage.addLayer({ type: 'image'});
-                layer.image = img;
-                layer.scale = 1;
 
-                // центрируем на canvas
-                layer.x = (layer.canvas.width - size) / 2;
-                layer.y = (layer.canvas.height - size) / 2;
-                layer.render();
+                // создаём временный canvas для SVG
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = size;
+                tempCanvas.height = size;
+                const tempCTX = tempCanvas.getContext('2d');
+                tempCTX.drawImage(img, 0, 0, size, size);
 
-                // освобождаем objectURL
-                URL.revokeObjectURL(url);
-                resolve(layer);
+                // создаём новый Image из растеризованнгго canvas
+                const rasterImg = new Image();
+                rasterImg.onload = () => {
+                    layer.image = rasterImg;
+                    layer.scale = 1;
+
+                    // центрируем на canvas
+                    layer.x = (layer.canvas.width - size) / 2;
+                    layer.y = (layer.canvas.height - size) / 2;
+                    layer.render();
+
+                    // освобождаем objectURL
+                    URL.revokeObjectURL(url);
+                    resolve(layer);
+                };
+                rasterImg.src = tempCanvas.toDataURL();
             };
             img.src = url;
         });

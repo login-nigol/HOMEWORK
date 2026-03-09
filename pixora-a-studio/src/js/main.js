@@ -8,6 +8,7 @@ import {
     $panelToggle, $layersPanel,
     $exportBtn, $saveBtn, $loadBtn,
     $shareImageBtn, $shareProjectBtn,
+    $stickersBtn, $undoBtn, $redoBtn,
     $rotateLeftBtn, $rotateRightBtn, $scaleUpBtn, $scaleDownBtn,
 } from "./dom.js";
 
@@ -85,9 +86,6 @@ function switchTool(toolName) {
 function switchLayerForTools(newLayer) {
     // перебираем все инструменты и переключаем слой
     Object.values(tools).forEach(tool => tool.setLayer(newLayer));
-    // tools.brush.setLayer(newLayer);
-    // tools.eraser.setLayer(newLayer);
-    // tools.move.setLayer(newLayer);
     
 }
 
@@ -148,12 +146,7 @@ $toolSize.addEventListener('input', (e) => {
 });
 
 // открытие галереи стикеров
-document.querySelector('[data-tool="stickers"]')
-    .addEventListener('click', () => gallery.show('stickers'));
-
-// открытие галереи разукрашек
-// document.querySelector('[data-tool="coloring"]')
-//     .addEventListener('click', () => gallery.show('coloring'));
+$stickersBtn.addEventListener('click', () => gallery.show('stickers'));
 
 // === Обработчики: загрузка изображений ===
 
@@ -204,29 +197,31 @@ $stageStack.addEventListener('drop', async (e) => {
 
 // === ОБработчики: undo/redo ===
 
-document.querySelector('[data-action="undo"]')
-    .addEventListener('click', () => {
-        history.undo(stage);
-        sound.playUndo();
-    });
+$undoBtn.addEventListener('click', () => {
+    history.undo(stage);
+    sound.playUndo();
+});
 
-document.querySelector('[data-action="redo"]')
-    .addEventListener('click', () => {
-        history.redo(stage);
-        sound.playRedo();
-    });
+$redoBtn.addEventListener('click', () => {
+    history.redo(stage);
+    sound.playRedo();
+});
 
-// $undoBtn.addEventListener('click', () => {
-//     history.undo(stage);
-//     sound.playUndo();
-// });
+// document.querySelector('[data-action="undo"]')
+//     .addEventListener('click', () => {
+//         history.undo(stage);
+//         sound.playUndo();
+//     });
 
-// $redoBtn.addEventListener('click', () => {
-//     history.redo(stage);
-//     sound.playRedo();
-// });
+// document.querySelector('[data-action="redo"]')
+//     .addEventListener('click', () => {
+//         history.redo(stage);
+//         sound.playRedo();
+//     });
 
-// undo/redo клавиатура
+
+// === Обработчики: undo/redo клавиатура ===
+
 document.addEventListener('keydown', (e) => {
     // Ctrl+shift+Z - redo (проверяем первым, иначе поймает Ctrl+Z)
     if ( e.ctrlKey && e.shiftKey && e.key === 'Z') {
@@ -239,7 +234,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// === Обработчики: файловые операции
+// === Обработчики: файловые операции ===
 
 // экспорт PNG
 $exportBtn.addEventListener('click', () => {

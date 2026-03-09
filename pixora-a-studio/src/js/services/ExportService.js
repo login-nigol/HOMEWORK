@@ -17,6 +17,10 @@ export class ExportService {
 
         const tempCtx = tempCanvas.getContext('2d');
 
+        // заливаем белым фоном перед склейкой слоёв
+        tempCtx.fillStyle = '#ffffff';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
         // проходим по слоям снизу вверх - порядок отрисовки
         stage.layers.forEach(layer => {
             // пропускаем скрытые слои

@@ -114,15 +114,43 @@ body {
 
     /* toolbar - компактнее */
     .toolbar {
-        padding: 0.4em 0.4em;
-        gap: 0.5em;
+        padding: 0.3em 0.3em;
+        gap: 0.3em;
+    }
+
+    .toolbar__sep {
+        padding-left: 0.5em;
     }
 
     /* tools panel - прокрутка если не влезет */
     .tools-panel {
-        padding: 0.4em 0.4em;
-        /* gap: 0.5em; */
+        flex-wrap: nowrap;
         overflow-x: auto;
+
+        padding: 0.4em 0.4em;
+        overflow-x: auto;
+    }
+
+    .toolbar-btn,
+    .tool-btn,
+    .transform-btn,
+    .layer-btn {
+        width: 3em;
+        height: 3em;
+        padding: 0;
+
+        flex-shrink: 0;
+    }
+
+    label.tool-btn {
+        width: 3.1em;
+        height: 3.1em;
+        align-items: center;
+        padding: 0;    
+    }
+
+    .tools-panel__right {
+        gap: 0.5em;
     }
 
     /* панель слоёв - плавно вывезжает */

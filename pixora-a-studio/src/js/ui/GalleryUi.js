@@ -28,11 +28,11 @@ export class GalleryUi {
 
         // внутренний блок
         overLay.innerHTML = `
-        <div class="gallery__box"
+        <div class="gallery__box">
 
             <!-- заголовок + закрытие -->
-            <div class="gallert__header">
-                <span class="gallert__title">Галерея</span>
+            <div class="gallery__header">
+                <span class="gallery__title">Галерея</span>
                 <button class="gallery__close">✕</button>
             </div>
 
@@ -136,10 +136,7 @@ export class GalleryUi {
             });
 
         } catch (error) {
-
-            console.log('gallery error:', error);
-
-            grid.innerHTML = `<p class="gallery__error">Ошибка: ${error.messeg}</p>`;
+            grid.innerHTML = `<p class="gallery__error">Ошибка: ${error.message}</p>`;
         }
     }
 }

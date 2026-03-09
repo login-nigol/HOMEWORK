@@ -15,17 +15,20 @@ export const $rotateRightBtn = document.querySelector(SELECTORS.rotateRightBtn);
 export const $scaleUpBtn = document.querySelector(SELECTORS.scaleUpBtn);
 export const $scaleDownBtn = document.querySelector(SELECTORS.scaleDownBtn);
 
+export const $stickersBtn = document.querySelector('[data-tool="stickers"]');
+
 export const $layerBtns = document.querySelectorAll(SELECTORS.layerBtns);
 export const $layerList = document.querySelector(SELECTORS.layerList);
 
-// export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
-// export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 export const $exportBtn = document.querySelector(SELECTORS.exportBtn);
 export const $saveBtn = document.querySelector(SELECTORS.saveBtn);
 export const $loadBtn = document.querySelector(SELECTORS.loadBtn);
 
 export const $shareProjectBtn = document.querySelector(SELECTORS.shareProjectBtn);
 export const $shareImageBtn = document.querySelector(SELECTORS.shareImageBtn);
+
+export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
+export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 
 export const $panelToggle = document.querySelector(SELECTORS.panelToggle);
 export const $layersPanel = document.querySelector(SELECTORS.layersPanel);

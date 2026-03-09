@@ -19,18 +19,9 @@ function showError() {
 // загружаем картинку по ключу и показываем
 async function loadImage(key) {
     try {
-
-        console.log('loading key:', key);
-
         const dataURL = await ShareService.loadSharedImage(key);
-
-         console.log('dataURL:', dataURL ? dataURL.slice(0, 30) : 'null');
-
         $preview.src = dataURL;        
     } catch {
-
-         console.log('error:', e.message);
-
         showError();
     }
 }

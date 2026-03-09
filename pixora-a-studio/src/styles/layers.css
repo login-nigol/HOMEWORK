@@ -16,8 +16,8 @@
 /* обёртка - анимируем ширину, прячем содержимое */
 .layers-panel__body {
     overflow: hidden;
-    max-width: 16em;
-    transition: width 1.3s ease;
+    width: 16em;
+    transition: width 0.8s ease;
 }
 
 /* свёрнутая обёртка - штрина 0 */
@@ -32,7 +32,7 @@
     gap: 0.5em;
 
     padding: 0.5em;
-    min-width: 15em;
+    /* min-width: 15em; */
 }
 
 /* кнопка сворачивания */

@@ -52,13 +52,36 @@
 - [x] GalleryUi — панель галереи стикеров и разукрашек
 - [x] gallery.css — вынесен в отдельный файл
 
+- [x] IconLoader.js — загрузка SVG-спрайта через fetch, вставка в DOM
+- [x] Все кнопки заменены с эмодзи на SVG-иконки
+- [x] CSS разбит на модули: buttons.css, tools.css, layers.css, progress.css
+- [x] Цветовая схема кнопок через data-action/data-tool селекторы
+- [x] Hover/active анимации кнопок (scale, border, background transition)
+
+
 ## В работе
 
 ## Следующий шаг
 
-- [ ] CSS-анимации (hover кнопок, появление слоёв)
-- [ ] Тестирование: Edge, Firefox, мобильные устройства
----
+🟡 Важные доработки
+при добавлении из галереи, картинки нужно вставлять крупнее
+нужно предлогать пользователю при старте создать новый проект
+и предложить два варианта холста профельный и ландшавтный.
+холст должен увеличиваться/уменьшаться для навигации по холсту и прокрутка
+
+7 — резиновый холст (canvas ломается при ресайзе)
+5 — прыжок контента в view.html
+55 — боковая панель закрывается при нажатии в любом местеэкрана, как галерея
+
+6 — трансформации слоя сбрасываются после рисования
+
+🟢 Новый функционал
+
+1 — кнопка mute звука
+2 — кнопка "новый проект"
+3 — поделиться ссылкой на приложение
+4 — меню шаринга картинки (WhatsApp, Telegram...)
+11 — видимые границы холста / выбор размера
 
 ## Договорённости
 - JS: строгий порядок — константы → DOM → функции → обработчики
@@ -70,12 +93,12 @@
 ## Критерии оценки (прогресс)
 | Критерий | Что реализовано | Прогресс |
 |---|---|---|
-| Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle. Далее: hover кнопок, анимация слоёв | 50% |
+| Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle, hover/active кнопок (scale + border + background). Далее: плавное появление слоёв, анимация на мобиле | 70% |
 | Мультимедиа | Canvas-рисование, кисть/ластик, трансформации изображений, склейка слоёв, undo/redo, SoundService (Web Audio API + Vibration API) | 80% |
 | Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками, галерея стикеров. Далее: жесты тачскрин | 80% |
 | Коммуникации | shareImage → view.html?key=, shareProject → index.html?project=, ShareLoader, ProgressService (XHR upload.onprogress), StickerServiceSvg (fetch SVG-спрайтов), GalleryUi | 80% |
 | Адаптивность | CSS Grid, em-единицы, медиа-запрос ≤768px, панель слоёв выезжает. Далее: тестирование на устройствах | 80% |
-| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→Brush/Eraser/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, ProgressService, StickerServiceSvg, GalleryUi, view.js | 80% |
+| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→Brush/Eraser/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, ProgressService, StickerServiceSvg, GalleryUi, IconLoader, view.js | 85% |
 | Кроссбраузерность | Windows 11 Chrome, Samsung Galaxy S25 Chrome, iPad Air Safari. Далее: Edge, Firefox | 80% |
 
 ---
@@ -97,7 +120,7 @@
 - [x] Шаринг проекта → редактор
 - [x] Прогресс загрузки
 - [x] Галерея стикеров
-- [ ] CSS-анимации hover
+- [x] CSS-анимации hover
 - [x] Тестирование Edge, Firefox
 
 ### Фаза 2 — после сдачи (продакшн)

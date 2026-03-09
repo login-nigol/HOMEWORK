@@ -72,6 +72,11 @@ export class ShareLoader {
 
                     const img = new Image();
                     img.onload = () => {
+                        // сохраняем ссылку на Image
+                        if ( data.type === 'image') {
+                            layer.image = img;
+                        }
+
                         layer.ctx.drawImage(img, 0, 0);
                         resolve(layer);
                     };
