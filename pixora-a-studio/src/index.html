@@ -23,8 +23,8 @@
       <!-- звук -->
       <button class="toolbar-btn" data-action="mute" title="Звук">
         <svg>
-            <use href="#icon-bullhorn"></use>
-          </svg>
+          <use href="#icon-bullhorn"></use>
+        </svg>
       </button>
 
       <!-- лого -->
@@ -58,9 +58,9 @@
       <!-- папки -->
       <span class="toolbar__sep">
         <button class="toolbar-btn" data-action="save" title="Сохранить проект">
-            <svg>
-              <use href="#icon-folder-download"></use>
-            </svg>
+          <svg>
+            <use href="#icon-folder-download"></use>
+          </svg>
         </button>
         <button class="toolbar-btn" data-action="load" title="Загрузить проект">
           <svg>
@@ -123,7 +123,8 @@
             </svg>
           </button>
 
-          <label class="tool-btn" data-action="add-file" title="Добавить картинку">
+          <label class="tool-btn" data-action="add-file"
+            title="Добавить картинку">
             <svg>
               <use href="#icon-images"></use>
             </svg>
@@ -168,40 +169,36 @@
       <aside class="layers-panel" aria-label="Layers panel">
         <div class="layers-panel__body">
           <div class="layers-panel__content">
+
             <!-- управление слоями -->
             <div class="layers-panel__controls">
-
-              <button class="layer-btn" data-action="add"
-                title="Добавить слой">
+              <button class="layer-btn" data-action="add" title="Добавить слой">
                 <svg>
-              <use href="#icon-indent-increase"></use>
-            </svg>
+                  <use href="#icon-indent-increase"></use>
+                </svg>
               </button>
               <button class="layer-btn" data-action="delete"
                 title="Удалить слой">
                 <svg>
-              <use href="#icon-indent-decrease"></use>
-            </svg>
+                  <use href="#icon-indent-decrease"></use>
+                </svg>
               </button>
-              <button class="layer-btn" data-action="up"
-                title="Слой выше">
+              <button class="layer-btn" data-action="up" title="Слой выше">
                 <svg>
-              <use href="#icon-sort-asc"></use>
-            </svg>
+                  <use href="#icon-sort-asc"></use>
+                </svg>
               </button>
-              <button class="layer-btn" data-action="down"
-                title="Слой ниже">
+              <button class="layer-btn" data-action="down" title="Слой ниже">
                 <svg>
-              <use href="#icon-sort-desc"></use>
-            </svg>
+                  <use href="#icon-sort-desc"></use>
+                </svg>
               </button>
               <button class="layer-btn" data-action="toggle"
                 title="Скрыть/показать">
                 <svg>
-              <use href="#icon-eye"></use>
-            </svg>
+                  <use href="#icon-eye"></use>
+                </svg>
               </button>
-
             </div>
 
             <!-- список слоёв (заполняется из JS) -->
@@ -210,11 +207,10 @@
         </div>
 
         <!-- сворачивание панели слоёв -->
-        <button class="layers-panel__toggle"
-          title="Свернуть/развернуть">
+        <button class="layers-panel__toggle" title="Свернуть/развернуть">
           <svg>
-              <use href="#icon-embed"></use>
-            </svg>
+            <use href="#icon-embed"></use>
+          </svg>
         </button>
       </aside>
 
@@ -222,7 +218,23 @@
       <section class="stage" aria-label="Canvas stage">
         <div class="stage__stack" id="stageStack">
 
-          <!-- кнопки ундо/редо -->
+          <!-- панель зума -->
+          <div class="stage__zoom">
+            <button class="toolbar-btn" data-action="zoom-in"
+              title="Увеличить (+)">
+              <svg>
+                <use href="#icon-zoom-in"></use>
+              </svg>
+            </button>
+            <button class="toolbar-btn" data-action="zoom-out"
+              title="Уменьшить (-)">
+              <svg>
+                <use href="#icon-zoom-out"></use>
+              </svg>
+            </button>
+          </div>
+
+          <!-- undo/redo -->
           <div class="stage__history">
             <button class="toolbar-btn" data-action="undo"
               title="Отменить (Ctrl+Z)">
@@ -237,10 +249,16 @@
               </svg>
             </button>
           </div>
-
         </div>
-      </section>
-    </main>
+
+        <!-- холст -->
+        <!-- <section class="stage" aria-label="Canvas stage">
+            <div class="stage__stack" id="stageStack"></div>
+          </section> -->
+
+  </div>
+  </section>
+  </main>
   </div>
 
   <script type="module" src="./js/main.js"></script>

@@ -17,6 +17,10 @@ export const SELECTORS = {
     layerBtns: '.layer-btn',
     layerList: '.layers-panel__list',
 
+    // масштаб холста
+    zoomInBtn: '[data-action="zoom-in"]',
+    zoomOutBtn: '[data-action="zoom-out"]',
+    // история
     undoBtn: '[data-action="undo"]',
     redoBtn: '[data-action="redo"]',
 

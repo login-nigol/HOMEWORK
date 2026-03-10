@@ -32,6 +32,10 @@ export const $shareImageBtn = document.querySelector(SELECTORS.shareImageBtn);
 // sound/mute
 export const $muteBtn = document.querySelector(SELECTORS.mutebtn);
 
+// масштаб холста
+export const $zoomInBtn = document.querySelector(SELECTORS.zoomInBtn);
+export const $zoomOutBtn = document.querySelector(SELECTORS.zoomOutBtn);
+// история
 export const $undoBtn = document.querySelector(SELECTORS.undoBtn);
 export const $redoBtn = document.querySelector(SELECTORS.redoBtn);
 

@@ -95,6 +95,9 @@ label.tool-btn {
 
 [data-action="export"] svg { color: #4a90d9; }
 
+
+[data-action="zoom-in"] svg { color: #27ae60; }
+[data-action="zoom-out"] svg { color: #27ae60; }
 [data-action="undo"] svg { color: #e74c3c; }
 [data-action="redo"] svg { color: #34a853; }
 

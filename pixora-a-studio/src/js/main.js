@@ -3,12 +3,13 @@
 // === Импорты ===
 
 import {
-    $stageStack, $toolColor, $toolSize, $toolBtns, $toolFile,
+    $stageStack, 
+    $toolColor, $toolSize, $toolBtns, $toolFile,
     $layerBtns, $layerList,
     $panelToggle, $layersPanel,
     $exportBtn, $saveBtn, $loadBtn,
     $shareImageBtn, $shareProjectBtn, $newBtn, $muteBtn,
-    $stickersBtn, $undoBtn, $redoBtn,
+    $stickersBtn, $zoomInBtn, $zoomOutBtn, $undoBtn, $redoBtn,
     $rotateLeftBtn, $rotateRightBtn, $scaleUpBtn, $scaleDownBtn,
 } from "./dom.js";
 
@@ -18,6 +19,7 @@ import { ShareLoader } from "./ui/ShareLoader.js";
 import { TransformHandler } from "./ui/TransformHandler.js";
 import { GalleryUi } from "./ui/GalleryUi.js";
 import { IconLoader } from "./ui/IconLoader.js";
+import { CanvasDialog } from "./ui/CanvasDialog.js";
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -44,6 +46,13 @@ const stage = new Stage($stageStack);
 const history = new History();
 const sound = new SoundService();
 ProgressService.init(); // инициализируем модалку прогресса
+
+// показываем диалог выбора размера окна при старте
+// const startResult = await CanvasDialog.show();
+// if ( startResult ) {
+//     $stageStack.style.width = startResult.w + 'px';
+//     $stageStack.style.height = startResult.h + 'px';
+// }
 
 // создаём первый слой для рисования
 const drawLayer = stage.addLayer({ type: 'draw' });
@@ -207,18 +216,32 @@ $redoBtn.addEventListener('click', () => {
     sound.playRedo();
 });
 
-// document.querySelector('[data-action="undo"]')
-//     .addEventListener('click', () => {
-//         history.undo(stage);
-//         sound.playUndo();
-//     });
+// === Зум холста ===
 
-// document.querySelector('[data-action="redo"]')
-//     .addEventListener('click', () => {
-//         history.redo(stage);
-//         sound.playRedo();
-//     });
+let zoomLevel = 1;
+const ZOOM_STEP = 0.1;
+const ZOOM_MIN = 0.3;
+const ZOOM_MAX = 3;
 
+function applyZoom() {
+    console.log('zoom:', zoomLevel);
+
+    $stageStack.style.transform = `scale(${zoomLevel})`;
+    $stageStack.style.transformOrigin = 'top left';
+}
+
+// кнопки зума
+$zoomInBtn.addEventListener('click', () => {
+    if ( zoomLevel >= ZOOM_MAX ) return;
+    zoomLevel = Math.round((zoomLevel + ZOOM_STEP) * 10) / 10;
+    applyZoom();
+});
+
+$zoomOutBtn.addEventListener('click', () => {
+    if ( zoomLevel <= ZOOM_MIN ) return;
+    zoomLevel = Math.round((zoomLevel - ZOOM_STEP) * 10) / 10;
+    applyZoom();
+});
 
 // === Обработчики: undo/redo клавиатура ===
 
@@ -262,10 +285,9 @@ $loadBtn.addEventListener('click', async () => {
 });
 
 // очищаем/создаём сцену - новый проект
-$newBtn.addEventListener('click', () => {
-    if ( !confirm
-        ('Начать новый проект? Несохранённые данные будут потеряны.') 
-    ) return;
+$newBtn.addEventListener('click', async () => {
+    // показываем диалог выбора размера
+    const { w, h } = await CanvasDialog.show();
 
     // удаляем все слои
     while ( stage.layers.length > 0 ) {
@@ -274,6 +296,10 @@ $newBtn.addEventListener('click', () => {
 
     // сбрасываем счётчик
     stage.layerIndex = 0;
+
+    // обновляем размер контейнера
+    $stageStack.style.width = w + 'px';
+    $stageStack.style.height = h + 'px';
 
     // создаём первый пустой слой
     const drawLayer = stage.addLayer({ type: 'draw'});
