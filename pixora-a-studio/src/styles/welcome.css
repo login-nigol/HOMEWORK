@@ -1,0 +1,55 @@
+/* === Welcome Screen === */
+
+.stage__welcome {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+    padding: 2em;
+    background: #fff;
+}
+
+.stage__welcome-title {
+    margin: 0;
+    font-size: 1.8em;
+    color: #4a909d;
+}
+
+.stage__welcome-text {
+    margin: 0;
+    max-width: 24em;
+    text-align: center;
+    color: #666;
+    line-height: 1.5;
+}
+
+.stage__welcome-btn {
+    padding: 0.7em 0.9em;
+    font-size: 1em;
+
+    border: none;
+    border-radius: 0.4em;
+    background: #4a909d;
+    color: #fff;
+
+    cursor: pointer;
+
+    transition: background 0.15 sease, transform 0.1s ease;
+}
+
+.stage__welcome-btn:hover {
+    background: #357abd;
+    transform: scale(1.03);
+}
+
+.stage__welcome-hint {
+    margin: 0;
+    font-size: 0.85em;
+    color: #aaa;
+}

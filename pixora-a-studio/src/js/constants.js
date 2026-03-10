@@ -2,6 +2,7 @@
 'use strict';
 
 export const SELECTORS = {
+    stage: '.stage',
     stageStack: '.stage__stack',
 
     toolColor: '.tool-color',

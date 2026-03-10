@@ -6,6 +6,7 @@
 @import './layers.css';
 @import './progress.css';
 @import './dialog.css';
+@import './welcome.css';
 
 /* 
 border-box - применяю ко всем элементам 

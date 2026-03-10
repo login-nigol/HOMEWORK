@@ -38,6 +38,10 @@ export class CanvasDialog {
             // клик по кнопке - возвращаем размер и закрываем
             overlay.querySelectorAll('.canvas-dialog__btn').forEach((btn) => {
                 btn.addEventListener('click', (e) => {
+
+                    console.log('outerHTML:', e.currentTarget.outerHTML);
+                    console.log('dialog btn clicked', e.currentTarget.dataset);
+
                     const w = Number(e.currentTarget.dataset.w);
                     const h = Number(e.currentTarget.dataset.h);
                     overlay.remove();
@@ -54,6 +58,9 @@ export class CanvasDialog {
 
             // закрытие по клику вне окна
             overlay.addEventListener('click', (e) => {
+
+                console.log('dialog btn clicked', e.currentTarget.dataset);
+
                 if ( e.target === overlay ) {
                     overlay.remove();
                     resolve(null);

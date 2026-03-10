@@ -5,6 +5,10 @@ import { SELECTORS } from "./constants.js";
 // DOM-селекторы (в одном месте)
 export const $stageStack = document.querySelector(SELECTORS.stageStack);
 
+// новый проект
+export const $stage = document.querySelector(SELECTORS.stage);
+// console.log('$stage:', $stage); 
+
 export const $toolColor = document.querySelector(SELECTORS.toolColor);
 export const $toolSize = document.querySelector(SELECTORS.toolSize);
 export const $toolBtns = document.querySelectorAll(SELECTORS.toolBtns);

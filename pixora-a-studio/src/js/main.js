@@ -3,7 +3,7 @@
 // === Импорты ===
 
 import {
-    $stageStack, 
+    $stage, $stageStack, 
     $toolColor, $toolSize, $toolBtns, $toolFile,
     $layerBtns, $layerList,
     $panelToggle, $layersPanel,
@@ -20,6 +20,7 @@ import { TransformHandler } from "./ui/TransformHandler.js";
 import { GalleryUi } from "./ui/GalleryUi.js";
 import { IconLoader } from "./ui/IconLoader.js";
 import { CanvasDialog } from "./ui/CanvasDialog.js";
+import { WelcomeScreen } from "./ui/WelcomeScreen.js";
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -35,42 +36,22 @@ import { ShareService } from "./services/ShareService.js";
 import { SoundService } from "./services/SoundService.js";
 import { ProgressService } from "./services/ProgressService.js";
 
+// === Константы зума ===
 
-// === Инициализация ===
+const ZOOM_STEP = 0.1; // шаг зума (10%)
+const ZOOM_MIN = 0.3;  // минимальный масштаб (30%)
+const ZOOM_MAX = 3;    // максимальный масштаб (300%)
 
-// загружаем SVG-спрайт иконок
-await IconLoader.load();
+// === Создание экзепляров (не зависят от размера холста)
 
 // точка входа - экземпляры
 const stage = new Stage($stageStack);
 const history = new History();
 const sound = new SoundService();
-ProgressService.init(); // инициализируем модалку прогресса
 
-// показываем диалог выбора размера окна при старте
-// const startResult = await CanvasDialog.show();
-// if ( startResult ) {
-//     $stageStack.style.width = startResult.w + 'px';
-//     $stageStack.style.height = startResult.h + 'px';
-// }
+// === Вспомогательные функции ===
 
-// создаём первый слой для рисования
-const drawLayer = stage.addLayer({ type: 'draw' });
-
-// создаём инструменты (привязаны к первому слою)
-const tools = {
-    brush: new BrushTool(drawLayer, history, sound),
-    eraser: new EraserTool(drawLayer, history, sound),
-    move: new MoveTool(drawLayer,history, sound)
-};
-    
-// текущий активный инструмент
-let activeTool = tools.brush;
-activeTool.activate();
-
-// === вспомогательные функции ===
-
-// переключение активного инструмента
+// --- переключение активного инструмента
 function switchTool(toolName) {
     // если инструмента не существует - выходим
     if ( !tools[toolName] ) return;
@@ -85,22 +66,99 @@ function switchTool(toolName) {
     
     // обновляем подсветку кнопок
     $toolBtns.forEach((b) => b.classList.remove('tool-btn--active'));
-    document.querySelector(`[data-tool="${toolName}"]`).classList.add('tool-btn--active');
+    document.querySelector(`[data-tool="${toolName}"]`)
+        .classList.add('tool-btn--active');
 
     // звук переключения
     sound.playToolSwitch();
 }
 
-// пепреключение слоя для всех инструментов
+// --- пепреключение слоя для всех инструментов
 function switchLayerForTools(newLayer) {
     // перебираем все инструменты и переключаем слой
     Object.values(tools).forEach(tool => tool.setLayer(newLayer));
     
 }
 
-// === панель слоёв ===
+// --- добавление image-слоя из файла (переиспользуется в file, drop)
+async function addImageLayer(file) {
+    const imageLayer = stage.addLayer({ type: 'image'});
+    await imageLayer.loadFromFile(file);
+    switchLayerForTools(imageLayer);
+    switchTool('move');
+    layersPanel.render();
+}
 
-// колбэк при смене актвного слоя
+// --- создание нового холста с заданым размером
+
+async function createNewProject() {
+    const result = await CanvasDialog.show();
+    if ( !result ) return;
+
+    const { w, h } = result;
+
+    // очищаем сцену - удаляем все слои
+    while ( stage.layers.length > 0 ) {
+        stage.removeLayer(stage.layers[0]);
+    }
+
+    // сбрасываем счётчик
+    stage.layerIndex = 0;
+
+    // обновляем размер контейнера
+    $stageStack.style.width = w + 'px';
+    $stageStack.style.height = h + 'px';
+
+    // создаём первый пустой слой
+    const drawLayer = stage.addLayer({ type: 'draw'});
+    switchLayerForTools(drawLayer);
+    switchTool('brush');
+    layersPanel.render();
+}
+
+// --- применяем зум
+let zoomLevel = 1;
+
+function applyZoom() {    
+    // console.log('zoom:', zoomLevel);
+
+    $stageStack.style.transform = `scale(${zoomLevel})`;
+    $stageStack.style.transformOrigin = 'top left';
+}
+
+// === Инициализация приложения ===
+
+async function init() {
+    // загружаем SVG-спрайт иконок
+    await IconLoader.load();
+
+    // инициализируем модалку прогресса
+    ProgressService.init();
+
+    console.log('показываем welcome');
+    
+    // показываем приветственный экран
+    await WelcomeScreen.show($stage);
+
+    console.log('показываем dialog');
+
+    await createNewProject();
+
+    console.log('init завершён');
+}
+
+// === Инструменты (создаём поле первого слоя в createNewProject) ===
+// tools и activeTool объявляем здесь - заполняется поле init()
+
+let tools ={};
+
+// текущий активный инструмент
+let activeTool = null;
+
+
+// === Панель слоёв ===
+
+// --- колбэк при смене актвного слоя
 const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) => {
     // переключаем все инструменты на новый слой
     switchLayerForTools(newLayer);
@@ -113,27 +171,13 @@ const layersPanel = new LayersPanelUi(stage, $layerList, $layerBtns, (newLayer) 
     }
 }, sound);
 
-// отрисовывает начальный список слоёв
-layersPanel.render();
-
-// галерея стикеров и разукрашек
+// --- галерея стикеров и разукрашек
 const gallery = new GalleryUi(
     stage, layersPanel,
     switchLayerForTools,
     switchTool
 );
 
-// === Инициализация модулей ===
-
-// трансформации image-слоя (поворот, масштаб)
-TransformHandler.init(
-    stage,
-    $rotateLeftBtn, $rotateRightBtn,
-    $scaleUpBtn, $scaleDownBtn
-);
-
-// проверяем URL на шаринг-параметры призагрузке страницы
-ShareLoader.checkUrl(stage, layersPanel, switchLayerForTools);
 
 // === Обработчики: инструменты ===
 
@@ -155,7 +199,9 @@ $toolSize.addEventListener('input', (e) => {
 });
 
 // открытие галереи стикеров
-$stickersBtn.addEventListener('click', () => gallery.show('stickers'));
+$stickersBtn.addEventListener('click', () =>
+    gallery.show('stickers'));
+
 
 // === Обработчики: загрузка изображений ===
 
@@ -164,43 +210,29 @@ $toolFile.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if ( !file ) return;
 
-    // создаём image-слой и загркжаем файл
-    const imageLayer = stage.addLayer({ type: 'image' });
-
     // загружаем файл в слой
-    await imageLayer.loadFromFile(file);
-    
-    // переключаем инструменты на новый слой
-    switchLayerForTools(imageLayer);
-    
-    // для картики автоматически включаем move
-    switchTool('move');
-    
-    // обновляем папнель слоёв
-    layersPanel.render();
-    
+    await addImageLayer(file);
+
     // сбрасываем input чтобы можно было загрузить то же файл повторно
     e.target.value = '';
 });
 
-// drag & drop картинки на canvas
+
+// === Обработчики: drag & drop - картинки на canvas ===
+
+// разрешаем сброс (иначе браузер откроет файл)
 $stageStack.addEventListener('dragover', (e) => {
     e.preventDefault();
 });
 
+// drop - загружаем файл в новый слой
 $stageStack.addEventListener('drop', async (e) => {
     e.preventDefault();
 
     const file = e.dataTransfer.files[0];
     if ( !file || !file.type.startsWith('image/')) return;
-
-    // та же лоника что и в chage - создаём слой, загружаем, переключаем
-    const imageLayer = stage.addLayer({ type: 'image' });
-    await imageLayer.loadFromFile(file);
-
-    switchLayerForTools(imageLayer);
-    switchTool('move');
-    layersPanel.render();
+    // загружаем файл в слой
+    await addImageLayer(file);
 });
 
 
@@ -216,21 +248,9 @@ $redoBtn.addEventListener('click', () => {
     sound.playRedo();
 });
 
-// === Зум холста ===
 
-let zoomLevel = 1;
-const ZOOM_STEP = 0.1;
-const ZOOM_MIN = 0.3;
-const ZOOM_MAX = 3;
+// === Обработчики: зума ===
 
-function applyZoom() {
-    console.log('zoom:', zoomLevel);
-
-    $stageStack.style.transform = `scale(${zoomLevel})`;
-    $stageStack.style.transformOrigin = 'top left';
-}
-
-// кнопки зума
 $zoomInBtn.addEventListener('click', () => {
     if ( zoomLevel >= ZOOM_MAX ) return;
     zoomLevel = Math.round((zoomLevel + ZOOM_STEP) * 10) / 10;
@@ -243,35 +263,45 @@ $zoomOutBtn.addEventListener('click', () => {
     applyZoom();
 });
 
-// === Обработчики: undo/redo клавиатура ===
 
+// === Обработчики: горячие клавиши ===
+
+// создать новый проект
 document.addEventListener('keydown', (e) => {
+
+    // console.log('key:', e.key, 'ctrl:', e.ctrlKey);
+
+    // Ctrl+M - новый проект (только после завершения init)
+    if ( e.ctrlKey && (e.key === 'm' || e.key === 'ь') ) {
+        e.preventDefault();
+        if ( isReady ) createNewProject();
     // Ctrl+shift+Z - redo (проверяем первым, иначе поймает Ctrl+Z)
-    if ( e.ctrlKey && e.shiftKey && e.key === 'Z') {
+    } else if ( e.ctrlKey && e.shiftKey && e.key === 'Z') {
         e.preventDefault();
         history.redo(stage);
     // Ctrl+Z - undo
     } else if ( e.ctrlKey && e.key === 'z') {
         e.preventDefault();
-        history.undo(stage);
+        history.undo(stage);    
     }
 });
 
+
 // === Обработчики: файловые операции ===
 
-// экспорт PNG
+// --- экспорт PNG
 $exportBtn.addEventListener('click', () => {
     ExportService.exportPNG(stage);
     sound.playExport();
 });
 
-// сохранение проекта в localStorage
+// --- сохранение проекта в localStorage
 $saveBtn.addEventListener('click', () => {
     StorageService.save(stage);
     sound.playSave();
 });
 
-// загрузка проекта из localStorage
+// --- загрузка проекта из localStorage
 $loadBtn.addEventListener('click', async () => {
     const loaded = await StorageService.load(stage);
     
@@ -284,31 +314,12 @@ $loadBtn.addEventListener('click', async () => {
     }
 });
 
-// очищаем/создаём сцену - новый проект
-$newBtn.addEventListener('click', async () => {
-    // показываем диалог выбора размера
-    const { w, h } = await CanvasDialog.show();
+// --- новый проект - очищаем/создаём сцену
+$newBtn.addEventListener('click', () => createNewProject());
 
-    // удаляем все слои
-    while ( stage.layers.length > 0 ) {
-        stage.removeLayer(stage.layers[0]);
-    }
 
-    // сбрасываем счётчик
-    stage.layerIndex = 0;
+// === Обработчики: mute ===
 
-    // обновляем размер контейнера
-    $stageStack.style.width = w + 'px';
-    $stageStack.style.height = h + 'px';
-
-    // создаём первый пустой слой
-    const drawLayer = stage.addLayer({ type: 'draw'});
-    switchLayerForTools(drawLayer);
-    switchTool('brush');
-    layersPanel.render();
-});
-
-// переключение звука
 $muteBtn.addEventListener('click', () =>{
     sound.enabled = !sound.enabled;
 
@@ -351,7 +362,7 @@ $shareProjectBtn.addEventListener('click', async () => {
 
 // === Обработчики: панели слоёв ===
 
-// свораяивание панели
+// --- сворачивание панели
 $panelToggle.addEventListener('click', () => {
     // сворачивание панели по кнопке toggle
     if ( window.innerWidth <= 768 ) {
@@ -361,14 +372,51 @@ $panelToggle.addEventListener('click', () => {
     }
 });
 
-// закрываем панель по клику всне её
+// --- закрываем панель по клику всне её
 document.addEventListener('click', (e) => {
     if ( window.innerWidth > 768 ) return;
     if ( !$layersPanel.classList.contains('layers-panel--open') ) return;
     // если клик внутри панели - не закрываем
     if ( $layersPanel.contains(e.target) ) return;
-
     $layersPanel.classList.remove('layers-panel--open');
 });
 
-// console.log(drawLayer.id, stage.layers.length);
+// === Инициализация модулей ===
+
+// --- трансформации image-слоя (поворот, масштаб)
+TransformHandler.init(
+    stage,
+    $rotateLeftBtn, $rotateRightBtn,
+    $scaleUpBtn, $scaleDownBtn
+);
+
+// --- проверяем URL на шаринг-параметры призагрузке страницы
+ShareLoader.checkUrl(
+    stage, 
+    layersPanel, 
+    switchLayerForTools
+);
+
+// === Запуск ===
+
+// флаг - приложение готово к работе (после init)
+let isReady = false;
+
+init().then(() => {
+    isReady = true; // приложение готово
+
+    console.log('activeLayer:', stage.activeLayer);
+
+    // после init создаём инструменты - слой уже существует
+    const firstLayer = stage.activeLayer;
+    tools.brush = new BrushTool(firstLayer,history,sound);
+    tools.eraser = new EraserTool(firstLayer,history,sound);
+    tools.move = new MoveTool(firstLayer,history,sound);
+
+    activeTool =tools.brush;
+    activeTool.activate();
+
+    // обновляем папнель слоёв
+    layersPanel.render();
+});
+
