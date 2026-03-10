@@ -71,7 +71,7 @@ body {
 /* === Stage === */
 
 .stage {
-    /* position: relative; */
+    position: relative;
     overflow: hidden;
         
     border: 1px solid #ddd;
@@ -90,22 +90,22 @@ body {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* истори справа */
-.stage__history {
+/* зум - слева */
+.stage__zoom {
     position: absolute;
     top: 0.8em;
-    right: 0.8em;
+    left: 0.8em;
     z-index: 10;
 
     display: flex;
     gap: 0.8em;
 }
 
-/* зум - слева */
-.stage__zoom {
+/* истори справа */
+.stage__history {
     position: absolute;
     top: 0.8em;
-    left: 0.8em;
+    right: 0.8em;
     z-index: 10;
 
     display: flex;
