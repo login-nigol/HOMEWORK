@@ -343,7 +343,7 @@ $shareImageBtn.addEventListener('click', async () => {
         // загружаем картинку на сервер через AJAX, получаем ссылку
         const url =
         await ShareService.shareImage(stage);
-        console.log('url:', url);
+        // console.log('url:', url);
         await ShareUi.share(url, 'Ссылка на открытку скопирована')
         // alert('Ссылка на картинку скопирована: ' + url);
     } catch (error) {
@@ -353,14 +353,14 @@ $shareImageBtn.addEventListener('click', async () => {
     }
 });
 
-// поделиться проектом (с редактированием)
+// поделиться проектом (с возможностью редактирования)
 $shareProjectBtn.addEventListener('click', async () => {
     try {
         const url =
         await ShareService.shareProject(stage);
-        await navigator.clipboard.writeText(url);
-        alert('Ссылка на проект скопирована: ' + url);
+        await ShareUi.share(url, 'Ссылка на проект скопирована');
     } catch (error) {
+        if ( error.name === 'AbortError' ) return;
         alert('Ошибка: ' + error.message);
     }
 });
