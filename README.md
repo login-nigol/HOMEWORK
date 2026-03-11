@@ -1,6 +1,7 @@
 #### Homework Projects
 
-Учебный проект - <a href="https://login-nigol.github.io/HOMEWORK/pixora-a-studio/src/">Pixora A. Studio</a><a href="https://github.com/login-nigol/HOMEWORK/blob/master/pixora-a-studio/PROJECT_STATUS.md"> - Статус проекта</a>
+Учебный проект - <a href="https://login-nigol.github.io/HOMEWORK/pixora-a-studio/src/">Pixora A. Studio</a>
+Статус проекта - <a href="https://github.com/login-nigol/HOMEWORK/blob/master/pixora-a-studio/PROJECT_STATUS.md">PROJECT_STATUS.md</a>
 
 Учебные проекты по фронтенд-разработке. Практическое применение JavaScript, HTML и CSS.
 

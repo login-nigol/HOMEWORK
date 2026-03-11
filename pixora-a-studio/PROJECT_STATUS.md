@@ -75,6 +75,7 @@
 - [x] Горячие клавиши: Ctrl+M новый проект
 - [x] Рефакторинг main.js — addImageLayer(), createNewProject(), init(), isReady флаг
 - [x] Зум холста кнопками +/- (transform: scale) — main.js
+- [x] Кнопки зума и истории вынесены из stage__stack в section.stage
 
 
 ## В работе

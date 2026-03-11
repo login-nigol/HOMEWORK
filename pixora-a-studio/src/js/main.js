@@ -32,6 +32,7 @@ import { MoveTool } from "./core/tools/MoveTool.js";
 import { ExportService } from "./services/ExportService.js";
 import { StorageService } from "./services/StorageService.js";
 import { ShareService } from "./services/ShareService.js";
+import { ShareUi } from "./services/ShareUi.js";
 
 import { SoundService } from "./services/SoundService.js";
 import { ProgressService } from "./services/ProgressService.js";
@@ -339,11 +340,15 @@ $muteBtn.addEventListener('click', () =>{
 // пооделиться картинкой - открываем PNG в новой вкладке
 $shareImageBtn.addEventListener('click', async () => {
     try {
+        // загружаем картинку на сервер через AJAX, получаем ссылку
         const url =
         await ShareService.shareImage(stage);
-        await navigator.clipboard.writeText(url);
-        alert('Ссылка на картинку скопирована: ' + url);
+        console.log('url:', url);
+        await ShareUi.share(url, 'Ссылка на открытку скопирована')
+        // alert('Ссылка на картинку скопирована: ' + url);
     } catch (error) {
+        // пользователь отмени шаринг - это не ошибка
+        if ( error.name === 'AbortError' ) return;
         alert('Ошибка: ' + error.message);
     }
 });

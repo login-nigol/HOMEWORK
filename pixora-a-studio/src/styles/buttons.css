@@ -1,5 +1,9 @@
 /* === кнопки с SVG-иконками */
 
+button {
+    touch-action: manipulation;
+}
+
 .toolbar-btn,
 .tool-btn,
 .transform-btn,
