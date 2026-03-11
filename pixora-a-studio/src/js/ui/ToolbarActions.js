@@ -1,0 +1,87 @@
+'use strict';
+
+import { ExportService } from "../services/ExportService.js";
+import { StorageService } from "../services/StorageService.js";
+import { ShareService } from "../services/ShareService.js";
+import { ShareUi } from "../services/ShareUi.js";
+
+// ToolbarActions - обработка всех действий тулбара через делегирование
+export class ToolbarActions {
+
+    static init({ stage, sound, history, layersPanel, switchLayerForTools, createNewProject }) {
+
+        document.addEventListener('click', async (e) => {
+            // ищем ближайший элемент с data-action
+            const btn = e.target.closest('[data-action]');
+            if ( !btn ) return;
+
+            const action = btn.dataset.action;
+
+            switch ( action ) {
+                // пропускаем зум и историю
+                // case 'zoom-in':
+                case 'zoom-out':
+                case 'undo':
+                case 'redo':
+                    return;
+
+                // --- экспорт картинки
+                case 'export':
+                    ExportService.exportPNG( stage );
+                    sound.playExport();
+                    break;
+
+                // --- сохранение прокта
+                case 'save':
+                    StorageService.save( stage );
+                    sound.playSave();
+                    break;
+
+                // --- загрузка проекта
+                case 'load':
+                    const loaded = await StorageService.load( stage );
+                    if ( loaded ) {
+                        layersPanel.render();
+                        switchLayerForTools(stage.activeLayer)
+                    }
+                    break;
+
+                // --- новый проект
+                case 'new':
+                    createNewProject();
+                    break;
+
+                // --- шаринг открытки
+                case 'share-image': {
+                    try {
+                        // загружаем картинку на сервер через AJAX, получаем ссылку
+                        const url =
+                        await ShareService.shareImage(stage);
+                        // console.log('url:', url);
+                        await ShareUi.share(url, 'Ссылка на открытку скопирована')
+                        // alert('Ссылка на картинку скопирована: ' + url);
+                    } catch (error) {
+                        // пользователь отмени шаринг - это не ошибка
+                        if ( error.name === 'AbortError' ) return;
+                        alert('Ошибка: ' + error.message);
+                    }
+                    console.log('Ссылка на шаринг картинки сформирована');
+                    break;
+                }
+                // --- шаринг проекта
+                case 'share-project':
+                    try {
+                        const url =
+                        await ShareService.shareProject(stage);
+                        await ShareUi.share(url, 'Ссылка на проект скопирована');
+                    } catch (error) {
+                        if ( error.name === 'AbortError' ) return;
+                        alert('Ошибка: ' + error.message);
+                    }
+                    console.log('Ссылка на шаринг проекта сформирована');
+                    break;
+            }
+        });
+
+    }
+}

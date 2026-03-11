@@ -9,7 +9,8 @@
   <meta charset="UTF-8">
   <meta name="viewport"
     content="width=device-width, height=device-height, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+    rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <title>Pixora A. Studio</title>
   <link rel="stylesheet" href="./styles/main.css" type="text/css">
@@ -19,71 +20,90 @@
   <!-- App shell -->
   <div class="app">
 
-    <!-- Top toolbar - глобальные действия -->
+    <!-- === Top toolbar - глобальные действия === -->
     <header class="toolbar" aria-label="Toolbar">
 
-      <!-- звук -->
+      <!-- Звук -->
       <button class="toolbar-btn" data-action="mute" title="Звук">
         <svg>
           <use href="#icon-bullhorn"></use>
         </svg>
       </button>
 
-      <!-- лого -->
+      <!-- Лого -->
       <span class="toolbar__title"></span>
 
-      <!-- шаринг -->
-      <span class="toolbar__sep">
-        <button class="toolbar-btn" data-action="share-image"
-          title="Отправить картинку">
-          <svg>
-            <use href="#icon-link"></use>
-          </svg>
-        </button>
-        <button class="toolbar-btn" data-action="share-project"
-          title="Поделиться проектом">
-          <svg>
-            <use href="#icon-eye-plus"></use>
-          </svg>
-        </button>
-      </span>
+      <!-- бургер -->
+      <button class="toolbar-btn toolbar__menu-btn" data-action="menu"
+        title="Меню">
+        <svg>
+          <use href="#icon-menu"></use>
+        </svg>
+      </button>
 
-      <!-- новый проект -->
-      <span class="toolbar__sep">
-        <button class="toolbar-btn" data-action="new" title="Новый проект">
-          <svg>
-            <use href="#icon-folder-plus"></use>
-          </svg>
-        </button>
-      </span>
+      <!-- Набор кнопок глобальных действий -->
+      <div class="toolbar__dropdown">
+        <!-- шаринг -->
+        <span class="toolbar__sep">
+          <button class="toolbar-btn" data-action="share-image"
+            title="Отправить картинку">
+            <svg>
+              <use href="#icon-link"></use>
+            </svg>
+            <span>Отправить открытку</span>
+          </button>
+          <button class="toolbar-btn" data-action="share-project"
+            title="Поделиться проектом">
+            <svg>
+              <use href="#icon-eye-plus"></use>
+            </svg>
+            <span>Поделиться проектом</span>
+          </button>
+        </span>
 
-      <!-- папки -->
-      <span class="toolbar__sep">
-        <button class="toolbar-btn" data-action="save" title="Сохранить проект">
-          <svg>
-            <use href="#icon-folder-download"></use>
-          </svg>
-        </button>
-        <button class="toolbar-btn" data-action="load" title="Загрузить проект">
-          <svg>
-            <use href="#icon-folder-upload"></use>
-          </svg>
-        </button>
-      </span>
+        <!-- новый проект -->
+        <span class="toolbar__sep">
+          <button class="toolbar-btn" data-action="new" title="Новый проект">
+            <svg>
+              <use href="#icon-folder-plus"></use>
+            </svg>
+            <span>Новый проект</span>
+          </button>
+        </span>
 
-      <!-- сохранить картинку -->
-      <span class="toolbar__sep">
-        <button class="toolbar-btn" data-action="export"
-          title="Сохранить картинку">
-          <svg>
-            <use href="#icon-download"></use>
-          </svg>
-        </button>
-      </span>
+        <!-- папки -->
+        <span class="toolbar__sep">
+          <button class="toolbar-btn" data-action="save"
+            title="Сохранить проект">
+            <svg>
+              <use href="#icon-folder-download"></use>
+            </svg>
+            <span>Сохранить проект</span>
+          </button>
+          <button class="toolbar-btn" data-action="load"
+            title="Загрузить проект">
+            <svg>
+              <use href="#icon-folder-upload"></use>
+            </svg>
+            <span>Загрузить проект</span>
+          </button>
+        </span>
 
+        <!-- сохранить картинку -->
+        <span class="toolbar__sep">
+          <button class="toolbar-btn" data-action="export"
+            title="Сохранить картинку">
+            <svg>
+              <use href="#icon-download"></use>
+            </svg>
+            <span>Сохранить картинку</span>
+          </button>
+        </span>
+      </div>
     </header>
 
-    <!-- панель инструментов -->
+    <!-- ===Tools Panel - панель инструментов === -->
+
     <nav class="tools-panel" aria-label="Tools panel">
 
       <!-- инструменты слева -->
@@ -109,8 +129,8 @@
           <input class="tool-color" type="color" value="#000000" title="Цвет">
         </label>
         <label class="tool-label">
-          <input class="tool-size" type="range" min="1" max="50" value="5"
-            title="Размер">
+          <input class="tool-size" type="range" min="0.5" max="100" value="0.5"
+            step="0.5" title="Размер">
         </label>
       </div>
 
@@ -222,44 +242,44 @@
         <!-- слой -->
         <!-- <div class="stage__stack" id="stageStack"> -->
 
-          <!-- панель зума -->
-          <div class="stage__zoom">
-            <button class="toolbar-btn" data-action="zoom-in"
-              title="Увеличить (+)">
-              <svg>
-                <use href="#icon-zoom-in"></use>
-              </svg>
-            </button>
-            <button class="toolbar-btn" data-action="zoom-out"
-              title="Уменьшить (-)">
-              <svg>
-                <use href="#icon-zoom-out"></use>
-              </svg>
-            </button>
-          </div>
+        <!-- панель зума -->
+        <div class="stage__zoom">
+          <button class="toolbar-btn" data-action="zoom-in"
+            title="Увеличить (+)">
+            <svg>
+              <use href="#icon-zoom-in"></use>
+            </svg>
+          </button>
+          <button class="toolbar-btn" data-action="zoom-out"
+            title="Уменьшить (-)">
+            <svg>
+              <use href="#icon-zoom-out"></use>
+            </svg>
+          </button>
+        </div>
 
-          <!-- undo/redo -->
-          <div class="stage__history">
-            <button class="toolbar-btn" data-action="undo"
-              title="Отменить (Ctrl+Z)">
-              <svg>
-                <use href="#icon-undo"></use>
-              </svg>
-            </button>
-            <button class="toolbar-btn" data-action="redo"
-              title="Повторить (Ctrl+Shift+Z)">
-              <svg>
-                <use href="#icon-redo"></use>
-              </svg>
-            </button>
-          </div>
+        <!-- undo/redo -->
+        <div class="stage__history">
+          <button class="toolbar-btn" data-action="undo"
+            title="Отменить (Ctrl+Z)">
+            <svg>
+              <use href="#icon-undo"></use>
+            </svg>
+          </button>
+          <button class="toolbar-btn" data-action="redo"
+            title="Повторить (Ctrl+Shift+Z)">
+            <svg>
+              <use href="#icon-redo"></use>
+            </svg>
+          </button>
+        </div>
 
         <!-- </div> -->
 
         <!-- <section class="stage" aria-label="Canvas stage"> -->
-          <!-- стек canvas слоёв внутри области (stage) -->
-            <div class="stage__stack" id="stageStack"></div>
-          <!-- </section> -->
+        <!-- стек canvas слоёв внутри области (stage) -->
+        <div class="stage__stack" id="stageStack"></div>
+        <!-- </section> -->
 
   </div>
   </section>

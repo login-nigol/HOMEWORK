@@ -19,7 +19,7 @@ export class Logo {
                         font-family="Great Vibes, cursive"
                         stroke-width="1">Studio</text>
                 </g>
-                <text x="133" y="64"
+                <text x="130" y="64"
                     font-size="80"
                     font-weight="700"
                     font-family="Great Vibes, cursive"

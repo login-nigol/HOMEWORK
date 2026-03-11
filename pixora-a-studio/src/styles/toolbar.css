@@ -1,0 +1,164 @@
+/* === Toolbar - верхняя панель === */
+
+.toolbar {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+
+    padding: 0.8em 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+/* заголовок - прижимает кнопки вправо */
+.toolbar__title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    /* font-weight: 700; */
+    /* margin-right: auto; */
+    /* border: 1px solid; */
+}
+.toolbar__title svg {
+    height: 2.7em;
+    width: auto;
+
+    display: block;
+}
+
+.toolbar__dropdown .toolbar-btn span {
+    display: none;
+}
+
+.toolbar__sep {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    padding: 0 0 0 0.8em;
+}
+
+/*  === Бургер (скрыт на десктопе) === */
+
+.toolbar__menu-btn {
+    display: none;
+}
+
+/* === Выпадашка === */
+
+.toolbar__dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+/* === Мобила === */
+
+@media ( max-width: 768px ) {
+
+    /* toolbar - компактнее */
+    .toolbar {
+        padding: 0.3em 0.3em;
+        gap: 0.3em;
+    }
+
+    .toolbar__title svg {
+    /* display: block; */
+    width: auto;
+    height: 2.3em;
+    }
+
+    .toolbar > .toolbar__sep {
+        display: none;
+    }
+
+    /* показываем бургер */
+    .toolbar__menu-btn {
+        display: flex;
+        margin-left: auto;
+    }
+
+    /* выпадашка скрыта */
+    .toolbar__dropdown {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        right: 2%;
+        z-index: 100;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.2em;
+
+        padding: 0.5em;
+        min-width: 50%;
+
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 0 0 0.5em 0.5em;
+
+        /* анимация */
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-0.5em);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    /* sep внутри dropdown -в колонку */
+    .toolbar__dropdown .toolbar__sep {
+        display: flex;
+        flex-direction: column;
+
+        border: none;
+        padding: 0;
+        gap: 0.8em;
+    }
+
+    .toolbar__dropdown .toolbar-btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.7em;
+
+        width: 100%;
+        height: auto;
+        text-align: left;
+        padding: 0.5em 0.8em;
+    }
+
+    .toolbar__dropdown .toolbar-btn svg {
+        flex-shrink: 0;
+        width: 2em;
+        height: 2em;
+    }
+
+    .toolbar__dropdown .toolbar-btn span {
+    display: inline;
+}
+
+    /* открытое состояние */
+    .toolbar__dropdown--open {
+        visibility: visible;
+        opacity: 1;
+        transform: rotateY(0);
+    }
+
+    /* пункт меню */
+    .toolbar__dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+
+        width: 100%;
+        padding: 0.5em 0.8em;
+        text-align: left;
+        border-radius: 0.3em;
+    }
+
+    .toolbar__dropdown-item span {
+        font-size: 0.9em;
+    }
+}
+

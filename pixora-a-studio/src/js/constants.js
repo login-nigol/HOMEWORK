@@ -8,6 +8,10 @@ export const SELECTORS = {
     // лого
     logo: '.toolbar__title',
 
+    // выпадашка
+    menuBtn: '[data-action="menu"]',
+    dropdown: '.toolbar__dropdown',
+
     toolColor: '.tool-color',
     toolSize: '.tool-size',
     toolBtns: '.tool-btn',

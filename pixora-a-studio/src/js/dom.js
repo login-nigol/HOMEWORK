@@ -12,6 +12,10 @@ export const $stage = document.querySelector(SELECTORS.stage);
 // лого
 export const $logo = document.querySelector(SELECTORS.logo);
 
+// выпадашка
+export const $menuBtn = document.querySelector(SELECTORS.menuBtn);
+export const $dropdown = document.querySelector(SELECTORS.dropdown);
+
 export const $toolColor = document.querySelector(SELECTORS.toolColor);
 export const $toolSize = document.querySelector(SELECTORS.toolSize);
 export const $toolBtns = document.querySelectorAll(SELECTORS.toolBtns);
