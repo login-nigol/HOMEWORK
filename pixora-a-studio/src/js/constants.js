@@ -6,7 +6,7 @@ export const SELECTORS = {
     stageStack: '.stage__stack',
 
     // лого
-    logo: '.app-header__logo',
+    logo: '.toolbar__title',
 
     toolColor: '.tool-color',
     toolSize: '.tool-size',

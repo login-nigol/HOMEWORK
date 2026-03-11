@@ -5,6 +5,7 @@ export class CanvasDialog {
 
     // показываем диалог и возвращаем Promise с выбраным размером
     static show() {
+        // console.log('CanvasDialog.show вызван');
         return new Promise((resolve) => {
             // создаём оверлей
             const overlay = document.createElement('div');
@@ -37,13 +38,14 @@ export class CanvasDialog {
 
             // клик по кнопке - возвращаем размер и закрываем
             overlay.querySelectorAll('.canvas-dialog__btn').forEach((btn) => {
-                btn.addEventListener('click', (e) => {
+                btn.addEventListener('click', () => {
 
-                    console.log('outerHTML:', e.currentTarget.outerHTML);
-                    console.log('dialog btn clicked', e.currentTarget.dataset);
+                    // console.log('outerHTML:', e.currentTarget.outerHTML);
+                    // console.log('dialog btn clicked', e.currentTarget.dataset);
 
-                    const w = Number(e.currentTarget.dataset.w);
-                    const h = Number(e.currentTarget.dataset.h);
+                    const w = Number(btn.dataset.w);
+                    const h = Number(btn.dataset.h);
+                    // console.log('removing overlay, w:', w, 'h:', h);
                     overlay.remove();
                     resolve({ w, h });
                 });
@@ -59,7 +61,7 @@ export class CanvasDialog {
             // закрытие по клику вне окна
             overlay.addEventListener('click', (e) => {
 
-                console.log('dialog btn clicked', e.currentTarget.dataset);
+                // console.log('dialog btn clicked', e.currentTarget.dataset);
 
                 if ( e.target === overlay ) {
                     overlay.remove();

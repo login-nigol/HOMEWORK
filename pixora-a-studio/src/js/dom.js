@@ -9,6 +9,9 @@ export const $stageStack = document.querySelector(SELECTORS.stageStack);
 export const $stage = document.querySelector(SELECTORS.stage);
 // console.log('$stage:', $stage); 
 
+// лого
+export const $logo = document.querySelector(SELECTORS.logo);
+
 export const $toolColor = document.querySelector(SELECTORS.toolColor);
 export const $toolSize = document.querySelector(SELECTORS.toolSize);
 export const $toolBtns = document.querySelectorAll(SELECTORS.toolBtns);

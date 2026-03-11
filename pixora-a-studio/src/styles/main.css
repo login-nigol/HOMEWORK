@@ -64,8 +64,16 @@ body {
 
 /* заголовок - прижимает кнопки вправо */
 .toolbar__title {
-    font-weight: 700;
+    /* display: flex; */
+    /* align-items: center; */
+    /* font-weight: 700; */
     margin-right: auto;
+    /* border: 1px solid; */
+}
+.toolbar__title svg {
+    display: block;
+    width: auto;
+    height: 3.5em;
 }
 
 /* === Stage === */

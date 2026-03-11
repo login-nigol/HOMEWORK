@@ -3,6 +3,7 @@
 // === Импорты ===
 
 import {
+    $logo,
     $stage, $stageStack, 
     $toolColor, $toolSize, $toolBtns, $toolFile,
     $layerBtns, $layerList,
@@ -21,6 +22,8 @@ import { GalleryUi } from "./ui/GalleryUi.js";
 import { IconLoader } from "./ui/IconLoader.js";
 import { CanvasDialog } from "./ui/CanvasDialog.js";
 import { WelcomeScreen } from "./ui/WelcomeScreen.js";
+import { Logo } from "./ui/Logo.js";
+// console.log('Logo:', Logo);
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -93,10 +96,14 @@ async function addImageLayer(file) {
 // --- создание нового холста с заданым размером
 
 async function createNewProject() {
-    const result = await CanvasDialog.show();
-    if ( !result ) return;
+    // console.log('createNewProject вызван');
+    // console.trace('createNewProject вызван');
+    const dialogResult = await CanvasDialog.show();
+    // console.log('CanvasDialog result:', dialogResult);
+    // console.log('result:', result);
+    if ( !dialogResult ) return null;
 
-    const { w, h } = result;
+    const { w, h } = dialogResult;
 
     // очищаем сцену - удаляем все слои
     while ( stage.layers.length > 0 ) {
@@ -112,9 +119,20 @@ async function createNewProject() {
 
     // создаём первый пустой слой
     const drawLayer = stage.addLayer({ type: 'draw'});
+
+    // создаём/пересоздаём инструменты
+    tools.brush = new BrushTool(drawLayer, history, sound);
+    tools.eraser = new EraserTool(drawLayer, history, sound);
+    tools.move = new MoveTool(drawLayer, history, sound);
+
+    activeTool = tools.brush;
+    activeTool.activate();
+    
     switchLayerForTools(drawLayer);
-    switchTool('brush');
+    // switchTool('brush');
     layersPanel.render();
+
+    return true;
 }
 
 // --- применяем зум
@@ -136,16 +154,31 @@ async function init() {
     // инициализируем модалку прогресса
     ProgressService.init();
 
-    console.log('показываем welcome');
+    // console.log('показываем welcome');
+    // console.log('$logo:', $logo);
+    Logo.render($logo);
     
     // показываем приветственный экран
-    await WelcomeScreen.show($stage);
+    // await WelcomeScreen.show($stage);
 
-    console.log('показываем dialog');
+    let projectCreated = null;
+    while ( !projectCreated ) {
+        await WelcomeScreen.show($stage);
+        projectCreated = await createNewProject();
+    }
 
-    await createNewProject();
+    // рекурсия
+    // const result = await createNewProject();
+    // if ( !result ) {
+        // отменил диалог - возвращаем приветствие
+    //     return init();
+    // }
 
-    console.log('init завершён');
+    // console.log('показываем dialog');
+
+    // await createNewProject();
+
+    // console.log('init завершён');
 }
 
 // === Инструменты (создаём поле первого слоя в createNewProject) ===
@@ -410,18 +443,18 @@ let isReady = false;
 init().then(() => {
     isReady = true; // приложение готово
 
-    console.log('activeLayer:', stage.activeLayer);
+    // console.log('activeLayer:', stage.activeLayer);
 
     // после init создаём инструменты - слой уже существует
-    const firstLayer = stage.activeLayer;
-    tools.brush = new BrushTool(firstLayer,history,sound);
-    tools.eraser = new EraserTool(firstLayer,history,sound);
-    tools.move = new MoveTool(firstLayer,history,sound);
+    // const firstLayer = stage.activeLayer;
+    // tools.brush = new BrushTool(firstLayer,history,sound);
+    // tools.eraser = new EraserTool(firstLayer,history,sound);
+    // tools.move = new MoveTool(firstLayer,history,sound);
 
-    activeTool =tools.brush;
-    activeTool.activate();
+    // activeTool =tools.brush;
+    // activeTool.activate();
 
     // обновляем папнель слоёв
-    layersPanel.render();
+    // layersPanel.render();
 });
 

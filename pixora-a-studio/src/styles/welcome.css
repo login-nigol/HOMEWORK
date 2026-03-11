@@ -38,6 +38,7 @@
     background: #4a909d;
     color: #fff;
 
+    /* pointer-events: none; */
     cursor: pointer;
 
     transition: background 0.15 sease, transform 0.1s ease;

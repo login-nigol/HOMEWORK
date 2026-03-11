@@ -4,6 +4,7 @@
 export class WelcomeScreen {
 
     static show($stage) {
+        //  console.log('WelcomeScreen.show вызван');
         return new Promise((resolve) => {
             // скрываем togglr на мобиле в окне приветствия
             const $toggle = document.querySelector('.layers-panel__toggle');
@@ -30,6 +31,7 @@ export class WelcomeScreen {
 
             // общий обработчик закрытия
             function close() {
+                // console.log('WelcomeScreen close');
                 if ( $toggle ) $toggle.style.display = '';
                 el.remove();
                 resolve();
