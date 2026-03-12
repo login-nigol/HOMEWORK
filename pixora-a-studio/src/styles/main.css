@@ -57,6 +57,10 @@ body {
 .stage {
     position: relative;
     overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
         
     border: 1px solid #ddd;
     border-radius: 0.5em;

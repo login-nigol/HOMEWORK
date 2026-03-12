@@ -145,7 +145,7 @@ function applyZoom() {
     // console.log('applyZoom:', zoomLevel, $stageStack.style.transform);
     // console.log('before:', zoomLevel, 'calc:', zoomLevel - ZOOM_STEP);
     $stageStack.style.transform = `scale(${zoomLevel})`;
-    $stageStack.style.transformOrigin = 'top left';
+    $stageStack.style.transformOrigin = 'center center';
 }
 
 // === Панель слоёв ===
