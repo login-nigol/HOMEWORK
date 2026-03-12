@@ -18,11 +18,13 @@ export class ToolbarActions {
             const action = btn.dataset.action;
 
             switch ( action ) {
-                // пропускаем зум и историю
-                // case 'zoom-in':
+                // пропускаем - обрабатывается отдельными листенерами
+                case 'zoom-in':
                 case 'zoom-out':
                 case 'undo':
                 case 'redo':
+                case 'mute':
+                case 'menu':
                     return;
 
                 // --- экспорт картинки
