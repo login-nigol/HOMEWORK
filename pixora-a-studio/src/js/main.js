@@ -77,6 +77,12 @@ function switchTool(toolName) {
     document.querySelector(`[data-tool="${toolName}"]`)
         .classList.add('tool-btn--active');
 
+    // синхронизируем ползунок с размеро нового инструмента
+    if ( activeTool.size !== undefined ) {
+        activeTool.size = Number($toolSize.value);
+        // console.log('size:', activeTool.size, '$toolSize.value:', $toolSize.value);
+    }
+
     // звук переключения
     sound.playToolSwitch();
 }

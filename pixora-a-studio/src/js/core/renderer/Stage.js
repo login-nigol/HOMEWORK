@@ -30,6 +30,8 @@ export class Stage {
         const width = this.$container.clientWidth;
         const height = this.$container.clientHeight;
 
+        console.log('addLayer size:', width, height);
+
         // создаём DOM-элемент canvas
         const canvas = document.createElement('canvas');
         canvas.width = width; // реальный размер в писелях

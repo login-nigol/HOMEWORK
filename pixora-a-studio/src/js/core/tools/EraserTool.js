@@ -14,6 +14,7 @@ export class EraserTool extends ToolBase {
 
     // применяем настройки ластика перед штрихом
     applySettings() {
+        // console.log('EraserTool.applySettings size:', this.size);
         const ctx = this.layer.ctx;
 
         // destionation-out - режим вырезания, рисуем прозрачность

@@ -20,7 +20,7 @@ export class StickerServiceSvg {
     };
 
     // размер превью и стикера на canvas
-    static SIZE = 100;
+    static SIZE = 300;
 
     // колчество элементов в каждом спрайте
     // static COUNT = 5;
