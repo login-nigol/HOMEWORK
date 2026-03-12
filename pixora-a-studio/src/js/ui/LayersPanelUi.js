@@ -45,7 +45,10 @@ export class LayersPanelUi {
             li.textContent = `${icon} ${typeIcon} ${layer.id}`;
 
             // клик элементу списка - делаем слой активным
-            li.addEventListener('click', () => {
+            li.addEventListener('click', (e) => {
+                // стопаем всплытие - панель не закроется при выборе слоя
+                e.stopPropagation();
+
                 this.stage.activeLayer = layer;
 
                 // поднимаем canvas наверх DOM-стека

@@ -109,6 +109,11 @@ body {
     left: 0;
 }
 
+.layers-panel__toggle svg {
+    width: 2em;
+    height: 2em;
+}
+
 /* === Adaptive: mobile === */
 
 @media ( max-width: 768px ) {

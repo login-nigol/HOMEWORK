@@ -342,13 +342,19 @@ $panelToggle.addEventListener('click', () => {
     }
 });
 
-// --- закрываем панель по клику всне её
+// --- закрываем панель по клику вне её
 document.addEventListener('click', (e) => {
     if ( window.innerWidth > 768 ) return;
     if ( !$layersPanel.classList.contains('layers-panel--open') ) return;
+
     // если клик внутри панели - не закрываем
     if ( $layersPanel.contains(e.target) ) return;
     $layersPanel.classList.remove('layers-panel--open');
+
+    // блокируем первый поиндаун на холсте (once - сам снимается)
+    $stageStack.addEventListener('pointerdown', (ev) => {
+        ev.stopImmediatePropagation();
+    }, { once: true, capture: true });
 });
 
 // === Инициализация модулей ===
