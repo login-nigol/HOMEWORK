@@ -87,21 +87,28 @@
 - [x] Зум исправлен — Math.round * 100 для шага 0.05
 - [x] WelcomeScreen — возврат на приветствие при отмене диалога<br>
 
-## В работе
+- [x] fix: stopPropagation в LayersPanelUi — панель не закрывается при выборе слоя
+- [x] fix: блокируем первый pointerdown после закрытия панели слоёв
+- [x] fix: zoom-in, mute, menu явно исключены из switch в ToolbarActions
+- [x] fix: isReady объявлен до обработчиков событий
+- [x] fix: центрирование холста в stage, transformOrigin center center
+- [x] fix: синхронизация размера инструмента с ползунком при переключении
+- [x] fix: ShareUi — на десктопе clipboard вместо зависающего navigator.share
+- [x] fix: при загрузке shared project пропускаем приветствие и createNewProject
+- [x] fix: увеличен размер стикеров SIZE 100 → 300
+- [x] fix: const в case load обёрнут в блок {}
+- [x] fix: toolbar__dropdown--open transform rotateY → translateY
+- [x] feat: кнопка "Поделиться ссылкой на приложение" (Шаг 5)
+- [x] feat: PWA manifest.json, кнопка "Установить приложение" (Шаг 4)
+- [x] feat: GestureHandler — pan и pinch-scale на тачскрине (Шаг 7)
 
-на десктопе не работает шаринг - обе кнопки, на мобиле создаётся
-непонятных размеров
+## В работе
 
 при загрузки проекта нужно обязательно создавать новый проект,
 но если проект был сохранён ландшафтно, а я создаю новый проект
 портретный, то ландшафтный сохранёный проект грузиться на портретный,
 разрешить загрузку проекта как он есть без создания нового проекта,
 учитывая окно приветствия
-
-
-5 — поделиться ссылкой на приложение, копка
-4 — создать ярлык на рабочем столе/мобиле, создать кнопку в выпадашке
-7 — обработка жестов на тачскрине (pinch-scale, rotate, pan)
 
 ## Следующий шаг
 
@@ -116,6 +123,7 @@
 
 🟡 Важные доработки
 
+- загрузка сохранённого проекта без создания нового (учитывая WelcomeScreen)
 2 — холст: прокрутка для навигации
 
 🟢 Новый функционал
@@ -133,10 +141,10 @@
 |---|---|---|
 | Анимация | CSS transitions: сворачивание панели (desktop), выезд справа (mobile), поворот toggle, hover/active кнопок (scale + border + background). Далее: плавное появление слоёв, анимация на мобиле | 70% |
 | Мультимедиа | Canvas-рисование, кисть/ластик, трансформации изображений, склейка слоёв, undo/redo, SoundService (Web Audio API + Vibration API) | 80% |
-| Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками, галерея стикеров. Далее: жесты тачскрин | 80% |
-| Коммуникации | shareImage → view.html?key=, shareProject → index.html?project=, ShareLoader, ProgressService (XHR upload.onprogress), StickerServiceSvg (fetch SVG-спрайтов), GalleryUi | 80% |
+| Интерактивность | Pointer Events, инструменты, color picker, range, drag&drop, undo/redo + hotkeys, трансформация кнопками, галерея стикеров. Далее: жесты тачскрин, жесты тачскрин: pan + pinch-scale (GestureHandler, Pointer Events) | 95% |
+| Коммуникации | shareImage → view.html?key=, shareProject → index.html?project=, ShareLoader, ProgressService (XHR upload.onprogress), StickerServiceSvg (fetch SVG-спрайтов), GalleryUi + кнопка share-app (ссылка на приложение) | 90% |
 | Адаптивность | CSS Grid, em-единицы, медиа-запрос ≤768px, панель слоёв выезжает. Далее: тестирование на устройствах | 80% |
-| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→Brush/Eraser/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, ProgressService, StickerServiceSvg, GalleryUi, IconLoader, view.js | 85% |
+| Самостоятельный JS | ООП, наследование, ES6-модули. Классы: ToolBase→Brush/Eraser/MoveTool, LayerBase→DrawLayer/ImageLayer, Stage, History, LayersPanelUi, ExportService, StorageService, ShareService, ShareLoader, TransformHandler, SoundService, ProgressService, StickerServiceSvg, GalleryUi, IconLoader, view.js + GestureHandler.js | 90% |
 | Кроссбраузерность | Windows 11 Chrome, Samsung Galaxy S25 Chrome, iPad Air Safari. Далее: Edge, Firefox | 80% |
 
 ---
