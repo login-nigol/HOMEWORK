@@ -55,6 +55,11 @@ export class GestureHandler {
         // pointerdown - добавляем палец в Map
         el.addEventListener('pointerdown', (e) => {
             this._pointers.set(e.pointerId, e);
+
+            // когда второй палец - блокируем рисование
+            if ( this._pointers.size === 2 ) {
+                e.stopImmediatatePropagation();
+            }
         });
 
         // pointermove - обрабатываем жест
@@ -62,6 +67,11 @@ export class GestureHandler {
             // обновляем указатель в Map
             if ( !this._pointers.has(e.pointerId) ) return;
             this._pointers.set(e.pointerId, e);
+
+            // два пальца - останавливаем рисование
+            if ( this._pointers.size === 2 ) {
+                e.stopImmediatatePropagation(); // блокируем pointermove для ToolBase
+            }
 
             // жест только двумя пальцами
             if ( this._pointers.size !== 2 ) return;
