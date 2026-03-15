@@ -42,6 +42,14 @@ export class ToolbarActions {
 
                 // установить ярлык
                 case 'install-app': {
+                    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+                    if ( isIos ) {
+                        // Safari не поддерживает beforeinstallprompt
+                        alert('Для установкиЖ нажмите кнопку "Поделиться" -> "НА экран домой"');
+                        break;
+                    }
+
                     const prompt = getInstallPrompt();
                     if ( !prompt ) return;
                     prompt.prompt();

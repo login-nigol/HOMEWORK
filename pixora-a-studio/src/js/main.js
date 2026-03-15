@@ -454,3 +454,12 @@ if ( 'serviceWorker' in navigator ) {
         .catch((e) => console.error('SW ошибка:', e));
 }
 
+// === PWA: подсказка для Safari (iOS/iPadOS) ===
+const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+const isInStandaloneMode = window.navigator.standalone === true;
+
+if ( isIos && !isInStandaloneMode ) {
+    // показываем кнопку — она откроет подсказку
+    document.querySelector('[data-action="install-app"]')
+        .removeAttribute('hidden');
+}
