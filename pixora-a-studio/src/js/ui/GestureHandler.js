@@ -58,7 +58,7 @@ export class GestureHandler {
 
             // когда второй палец - блокируем рисование
             if ( this._pointers.size === 2 ) {
-                e.stopImmediatatePropagation();
+                e.stopImmediatePropagation();
             }
         });
 
@@ -70,7 +70,7 @@ export class GestureHandler {
 
             // два пальца - останавливаем рисование
             if ( this._pointers.size === 2 ) {
-                e.stopImmediatatePropagation(); // блокируем pointermove для ToolBase
+                e.stopImmediatePropagation(); // блокируем pointermove для ToolBase
             }
 
             // жест только двумя пальцами
