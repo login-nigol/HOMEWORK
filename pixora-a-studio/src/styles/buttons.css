@@ -92,6 +92,8 @@ label.tool-btn {
 [data-action="mute"] svg { color: #4a90d9; }
 [data-action="mute"].muted svg { color: #aaa; }
 
+[data-action="share-app"] svg { color: #9b59b6; }
+
 [data-action="share-image"] svg { color: #4a90d9; }
 [data-action="share-project"] svg { color: #34a853; }
 

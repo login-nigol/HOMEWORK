@@ -27,6 +27,18 @@ export class ToolbarActions {
                 case 'menu':
                     return;
 
+                // поделиться ссылкой на приложение
+                case 'share-app': {
+                    const url = window.location.origin + window.location.pathname;
+                    try {
+                        await ShareUi.share(url, 'Ссылка на приложение скопирована');
+                    } catch (error) {
+                        if ( error.name === 'AbortError' ) return;
+                        alert('Ошиька: ' + error.message);
+                    }
+                    break;
+                }
+
                 // --- экспорт картинки
                 case 'export':
                     ExportService.exportPNG( stage );
