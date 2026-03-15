@@ -447,3 +447,10 @@ init().then(() => {
     // console.log('activeLayer:', stage.activeLayer);
 });
 
+// === Регистрация Service Worker (PWA) ===
+if ( 'serviceWorker' in navigator ) {
+    navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('SW зарегистрирован'))
+        .catch((e) => console.error('SW ошибка:', e));
+}
+
