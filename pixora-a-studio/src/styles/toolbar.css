@@ -107,7 +107,7 @@
         visibility: hidden;
         opacity: 0;
         transform: translateY(-0.5em);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        transition: opacity 1s ease, transform 1s ease;
     }
 
     /* sep внутри dropdown -в колонку */
@@ -147,7 +147,7 @@
     .toolbar__dropdown--open {
         visibility: visible;
         opacity: 1;
-        transform: rotateY(0);
+        transform: translateY(0);
     }
 
     /* пункт меню */

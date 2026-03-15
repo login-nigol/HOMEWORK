@@ -12,28 +12,28 @@
 
 - [x] базовая HTML-разметка (toolbar, stage, panel)
 - [x] main.css (layout, grid, адаптив в процессе)
-- [x] constants.js, dom.js, main.js
+- [x] constants.js, dom.js, main.js<br>
 
 - [x] Stage.js — создание canvas-слоёв
 - [x] DrawLayer.js — слой для рисования
 - [x] BrushTool.js — кисть с Pointer Events API
-- [x] Рисование мышью/тачем/стилусом на canvas
+- [x] Рисование мышью/тачем/стилусом на canvas<br>
 
 - [x] ToolBase — базовый класс инструментов
 - [x] BrushTool / EraserTool — наследование от ToolBase
 - [x] Панель инструментов (кисть, ластик, цвет, размер)
-- [x] Переключение инструментов с деактивацией
+- [x] Переключение инструментов с деактивацией<br>
 
 - [x] LayerBase — базовый класс слоёв (убрали дублирование)
 - [x] ImageLayer — загрузка картинки, трансформации, drag&drop
 - [x] MoveTool — перемещение картинки
-- [x] Панель слоёв: список, активный, скрыть/показать, удалить, порядок
+- [x] Панель слоёв: список, активный, скрыть/показать, удалить, порядок<br>
 
 - [x] Undo/redo с горячими клавишами
-- [x] Исправлен баг: _isActive флаг вместо !!_onPointerDown
+- [x] Исправлен баг: _isActive флаг вместо !!_onPointerDown<br>
 
 - [x] ExportService — экспорт PNG (склейка слоёв)
-- [x] StorageService — сохранение/загрузка проекта в localStorage
+- [x] StorageService — сохранение/загрузка проекта в localStorage<br>
 
 - [x] ExportService.mergeCanvas — переиспользуемая склейка слоёв
 - [x] ShareService — шаринг через AjaxStringStorage2 (AJAX POST)
@@ -41,7 +41,7 @@
 - [x] TransformHandler — поворот/масштаб image-слоя
 - [x] Адаптив: медиа-запрос ≤768px, панель слоёв выезжает справа
 - [x] Рефакторинг main.js — разделение по модулям
-- [x] switchLayerForTools — рефакторинг через Object.values(tools)
+- [x] switchLayerForTools — рефакторинг через Object.values(tools)<br>
 
 - [x] Баги исправлены: ShareLoader опечатки, EraserTool sound, playSave
 - [x] ProgressService — модалка прогресса (XHR upload.onprogress)
@@ -49,13 +49,13 @@
 - [x] StickerServiceSvg — загрузка SVG-спрайтов через fetch (AJAX)
 - [x] stickers.svg + coloring.svg — SVG-спрайты (symbol+use)
 - [x] GalleryUi — панель галереи стикеров и разукрашек
-- [x] gallery.css — вынесен в отдельный файл
+- [x] gallery.css — вынесен в отдельный файл<br>
 
 - [x] IconLoader.js — загрузка SVG-спрайта через fetch, вставка в DOM
 - [x] Все кнопки заменены с эмодзи на SVG-иконки
 - [x] CSS разбит на модули: buttons.css, tools.css, layers.css, progress.css
 - [x] Цветовая схема кнопок через data-action/data-tool селекторы
-- [x] Hover/active анимации кнопок (scale, border, background transition)
+- [x] Hover/active анимации кнопок (scale, border, background transition)<br>
 
 - [x] ExportService — белый фон при экспорте PNG
 - [x] StorageService — исправлена загрузка image-слоёв (layer.image)
@@ -67,7 +67,7 @@
 - [x] Закрытие панели слоёв кликом вне неё (мобиле)
 - [x] view.html — прогресс загрузки, зарезервировано место под картинку
 - [x] layers.css — анимация сворачивания панели (transition: width)
-- [x] dialog.css — стили модалки выбора холста
+- [x] dialog.css — стили модалки выбора холста<br>
 
 - [x] WelcomeScreen — приветственный экран при старте (js/ui/WelcomeScreen.js, styles/welcome.css)
 - [x] Горячие клавиши: Ctrl+M новый проект
@@ -76,20 +76,28 @@
 - [x] Кнопки зума и истории вынесены из stage__stack в section.stage
 
 - [x] Logo.js — SVG-логотип динамически в toolbar (js/ui/Logo.js)
-- [x] favicon.svg — иконка приложения (assets/favicon.svg)
+- [x] favicon.svg — иконка приложения (assets/favicon.svg)<br>
 
 - [x] toolbar.css — стили тулбара вынесены в отдельный файл
 - [x] ToolbarActions.js — обработчики тулбара через делегирование (js/ui/ToolbarActions.js)
-- [x] Бургер-меню на мобиле — выпадашка с подписями (toolbar__dropdown)
+- [x] Бургер-меню на мобиле — выпадашка с подписями (toolbar__dropdown)<br>
 
 - [x] touch-action: manipulation — запрет zoom по двойному тапу на кнопках
 - [x] Рефакторинг main.js — убраны дубли, init() с while-циклом
 - [x] Зум исправлен — Math.round * 100 для шага 0.05
-- [x] WelcomeScreen — возврат на приветствие при отмене диалога
+- [x] WelcomeScreen — возврат на приветствие при отмене диалога<br>
 
 ## В работе
 
-на десктопе не работает шаринг - обе кнопки
+на десктопе не работает шаринг - обе кнопки, на мобиле создаётся
+непонятных размеров
+
+при загрузки проекта нужно обязательно создавать новый проект,
+но если проект был сохранён ландшафтно, а я создаю новый проект
+портретный, то ландшафтный сохранёный проект грузиться на портретный,
+разрешить загрузку проекта как он есть без создания нового проекта,
+учитывая окно приветствия
+
 
 5 — поделиться ссылкой на приложение, копка
 4 — создать ярлык на рабочем столе/мобиле, создать кнопку в выпадашке
@@ -108,7 +116,6 @@
 
 🟡 Важные доработки
 
-1 —галерея: стикеры вставлять крупнее
 2 — холст: прокрутка для навигации
 
 🟢 Новый функционал

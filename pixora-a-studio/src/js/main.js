@@ -192,7 +192,26 @@ async function init() {
     // показываем приветственный экран
     // await WelcomeScreen.show($stage);
 
-    // показываем приветствие -Ю диалог, повторяем если отменили
+    // если в URL есть параметр шаринга - пропускам приветствие
+    const params = new URLSearchParams(window.location.search);
+    const hasSharedProject = params.has('project') || params.has('view');
+
+    if ( hasSharedProject ) {
+        // загружаем шареный проект - ShareLoader уже вызван выше
+        await ShareLoader.checkUrl(stage, layersPanel, switchLayerForTools);
+
+        // инициализируем инструменты на старом слое
+        const activeLayer = stage.activeLayer;
+        tools.brush = new BrushTool(activeLayer, history, sound);
+        tools.eraser = new EraserTool(activeLayer, history, sound);
+        tools.move = new MoveTool(activeLayer, history, sound);
+        activeTool = tools.brush;
+        activeTool.activate();
+
+        return; // показываем приветствие и не создаём новый проект
+    }
+
+    // обычный старт - приветствие + диалог
     let projectCreated = null;
     while ( !projectCreated ) {
         await WelcomeScreen.show($stage);
@@ -383,11 +402,11 @@ ToolbarActions.init({
 });
 
 // --- проверяем URL на шаринг-параметры призагрузке страницы
-ShareLoader.checkUrl(
-    stage, 
-    layersPanel, 
-    switchLayerForTools
-);
+// ShareLoader.checkUrl(
+//     stage, 
+//     layersPanel, 
+//     switchLayerForTools
+// );
 
 // === Запуск ===
 

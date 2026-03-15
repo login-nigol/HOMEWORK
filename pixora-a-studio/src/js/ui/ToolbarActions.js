@@ -40,13 +40,14 @@ export class ToolbarActions {
                     break;
 
                 // --- загрузка проекта
-                case 'load':
+                case 'load': {
                     const loaded = await StorageService.load( stage );
                     if ( loaded ) {
                         layersPanel.render();
                         switchLayerForTools(stage.activeLayer)
                     }
                     break;
+                }
 
                 // --- новый проект
                 case 'new':

@@ -115,7 +115,7 @@ export class StorageService {
                 
                 // загружаем base64 картинку обратно в canvas
                 const img = new Image();
-                console.log('загружен:', data.id, data.type, img.width, img.height);
+                // console.log('загружен:', data.id, data.type, img.width, img.height);
 
                 img.onload = () => {
 
