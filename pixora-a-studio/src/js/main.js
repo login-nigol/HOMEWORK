@@ -23,6 +23,7 @@ import { CanvasDialog } from "./ui/CanvasDialog.js";
 import { WelcomeScreen } from "./ui/WelcomeScreen.js";
 import { Logo } from "./ui/Logo.js";
 import { ToolbarActions } from "./ui/ToolbarActions.js";
+import { GestureHandler } from "./ui/GestureHandler.js";
 
 // core-модули
 import { Stage } from "./core/renderer/Stage.js";
@@ -408,6 +409,18 @@ TransformHandler.init(
     stage,
     $rotateLeftBtn, $rotateRightBtn,
     $scaleUpBtn, $scaleDownBtn
+);
+
+// === Жесты на тачскрине (pan + pitch-scale) ===
+new GestureHandler(
+    $stageStack,
+    // onZoom - получаем новый зум, применяем с ограничениями
+    (newZoom) => {
+        zoomLevel = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, newZoom));
+        applyZoom();
+    },
+    // getZoom - возвращаем текущий зум
+    () => zoomLevel
 );
 
 // === Обработчики: кнопок тулбара через делегирование
