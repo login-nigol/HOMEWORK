@@ -58,9 +58,15 @@ export class GestureHandler {
 
             // когда второй палец - блокируем рисование
             if ( this._pointers.size === 2 ) {
-                e.stopImmediatePropagation();
+                // симулируем pointerup чтобы ToolBase остановил рисование
+                el.dispatchEvent(new PointerEvent('pointerup', { bubbles: false }));
+
+                // захватываем оба указателя - браузер перестаёт слать события в ToolBase
+                for ( const [id] of this._pointers ) {
+                    try { el.setPointerCapture(id); } catch {}
+                }
             }
-        });
+        }, { capture: true }); // перехватываем раньше ToolBase
 
         // pointermove - обрабатываем жест
         el.addEventListener('pointermove', (e) => {
@@ -108,11 +114,13 @@ export class GestureHandler {
 
             this._container.style.left = (this._initLeft + dx) + 'px';
             this._container.style.top  = (this._initTop  + dy) + 'px';
-        });
+        }, { capture: true });
 
         // pointerup/leave - убираем палец из Map
         const onEnd = (e) => {
             this._pointers.delete(e.pointerId);
+
+            try { el.releasePointerCapture(e.pointerId); } catch {}
 
             // сбрасываем жест когда пальцев меньше 2
             if ( this._pointers.size < 2 ) {
