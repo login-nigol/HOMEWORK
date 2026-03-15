@@ -8,7 +8,8 @@ import { ShareUi } from "../services/ShareUi.js";
 // ToolbarActions - обработка всех действий тулбара через делегирование
 export class ToolbarActions {
 
-    static init({ stage, sound, history, layersPanel, switchLayerForTools, createNewProject }) {
+    static init({ stage, sound, history, layersPanel, switchLayerForTools,
+        createNewProject, getInstallPrompt, setInstallPrompt }) {
 
         document.addEventListener('click', async (e) => {
             // ищем ближайший элемент с data-action
@@ -36,6 +37,20 @@ export class ToolbarActions {
                         if ( error.name === 'AbortError' ) return;
                         alert('Ошиька: ' + error.message);
                     }
+                    break;
+                }
+
+                // установить ярлык
+                case 'install-app': {
+                    const prompt = getInstallPrompt();
+                    if ( !prompt ) return;
+                    prompt.prompt();
+                    const { outcome } = await prompt.userChoice;
+                    if ( outcome === 'accepted' ) {
+                        document.querySelector('[data-action="install-app"]')
+                            .setAttribute('hidden', '');
+                    }
+                    setInstallPrompt(null);
                     break;
                 }
 

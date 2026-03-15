@@ -1,0 +1,16 @@
+{
+    "name": "Pixsora A. Studio",
+    "short_name": "Pixora",
+    "description": "Графический редактор на Canvas",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4a909d",
+    "icons": [
+        {
+            "src": "./assets/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}

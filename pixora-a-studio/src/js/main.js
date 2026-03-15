@@ -34,6 +34,10 @@ import { MoveTool } from "./core/tools/MoveTool.js";
 import { SoundService } from "./services/SoundService.js";
 import { ProgressService } from "./services/ProgressService.js";
 
+// === PWA установка ===
+
+let _installPrompt = null; // сохраняем событие beforeinstallprompt
+
 // === Константы зума ===
 
 const ZOOM_STEP = 0.05; // шаг зума (5%)
@@ -175,6 +179,18 @@ const gallery = new GalleryUi(
     switchLayerForTools,
     switchTool
 );
+
+// === Обработчики: PWA установка ===
+
+// браузер сигнализирует что приложение можно установить
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); // не показываем автоматический баннер
+    _installPrompt = e; // сохраняем событие
+
+    // показываем кнопку установкии
+    document.querySelector('[data-action="install-app"]')
+        .removeAttribute('hidden');
+});
 
 // === Инициализация приложения ===
 
@@ -399,6 +415,8 @@ ToolbarActions.init({
     stage, sound, layersPanel,
     switchLayerForTools,
     createNewProject,
+    getInstallPrompt: () => _installPrompt, // getter
+    setInstallPrompt: (v) => { _installPrompt = v }, // setter
 });
 
 // --- проверяем URL на шаринг-параметры призагрузке страницы
